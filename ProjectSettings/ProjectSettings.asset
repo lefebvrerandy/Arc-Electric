@@ -552,7 +552,7 @@ PlayerSettings:
   webGLWasmStreaming: 0
   scriptingDefineSymbols:
     1: AURA_IN_PROJECT
-    7: AURA_IN_PROJECT
+    7: AURA_IN_PROJECT;AURA_IN_SCENEVIEW
   platformArchitecture: {}
   scriptingBackend: {}
   il2cppCompilerConfiguration: {}
