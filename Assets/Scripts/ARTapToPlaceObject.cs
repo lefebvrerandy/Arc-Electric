@@ -59,25 +59,29 @@ public class ARTapToPlaceObject : MonoBehaviour
 
     private void UpdatePlacementPost()
     {
-        var screenCenter = Camera.current.ViewportToScreenPoint(new Vector3(0.5f,0.5f));
-        var hits = new List<ARRaycastHit>();
-        arRaycastManager.Raycast(screenCenter, hits, UnityEngine.XR.ARSubsystems.TrackableType.Planes);
-
-        //DEBUG
-        if (hits.Count >= 1)
-            text.text = "YES";
-        else
-            text.text = "NO";
-        //DEBUG
-
-        placementPostIsValid = hits.Count > 0;
-        if (placementPostIsValid)
+        if (Camera.current != null)
         {
-            placementPose = hits[0].pose;
+            var screenCenter = Camera.current.ViewportToScreenPoint(new Vector3(0.5f, 0.5f));
+            var hits = new List<ARRaycastHit>();
+            arRaycastManager.Raycast(screenCenter, hits, UnityEngine.XR.ARSubsystems.TrackableType.Planes);
 
-            var cameraFoward = Camera.current.transform.forward;
-            var cameraBearing = new Vector3(cameraFoward.x, 0, cameraFoward.z).normalized;
-            placementPose.rotation = Quaternion.LookRotation(cameraBearing);
+            //DEBUG
+            if (hits.Count >= 1)
+                text.text = "YES";
+            else
+                text.text = "NO";
+            //DEBUG
+
+            placementPostIsValid = hits.Count > 0;
+            if (placementPostIsValid)
+            {
+                placementPose = hits[0].pose;
+
+                var cameraFoward = Camera.current.transform.forward;
+                var cameraBearing = new Vector3(cameraFoward.x, 0, cameraFoward.z).normalized;
+                placementPose.rotation = Quaternion.LookRotation(cameraBearing);
+            }
         }
+
     }
 }
