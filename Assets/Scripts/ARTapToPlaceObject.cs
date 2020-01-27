@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
-using UnityEngine.Experimental.XR;
+//using UnityEngine.Experimental.XR;
+using UnityEngine.XR.ARSubsystems;
 using System;
+using UnityEngine.UI;
 
 public class ARTapToPlaceObject : MonoBehaviour
 {
@@ -15,10 +17,15 @@ public class ARTapToPlaceObject : MonoBehaviour
     private Pose placementPose;
     private bool placementPostIsValid = false;
 
+
+    //DEBUG
+    public Text text;
+    //DEBUG
+
     void Start()
     {
         arOrigin = FindObjectOfType<ARSessionOrigin>();
-        arRaycastManager = FindObjectOfType<ARRaycastManager>();
+        arRaycastManager = arOrigin.GetComponent<ARRaycastManager>();
     }
 
     void Update()
@@ -55,6 +62,13 @@ public class ARTapToPlaceObject : MonoBehaviour
         var screenCenter = Camera.current.ViewportToScreenPoint(new Vector3(0.5f,0.5f));
         var hits = new List<ARRaycastHit>();
         arRaycastManager.Raycast(screenCenter, hits, UnityEngine.XR.ARSubsystems.TrackableType.Planes);
+
+        //DEBUG
+        if (hits.Count >= 1)
+            text.text = "YES";
+        else
+            text.text = "NO";
+        //DEBUG
 
         placementPostIsValid = hits.Count > 0;
         if (placementPostIsValid)
