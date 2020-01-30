@@ -9,8 +9,7 @@ using UnityEngine.XR.ARFoundation;
 
 public class PlacementWithDraggingDroppingController : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject placedPrefab;
+    public GameObject placedPrefab;
     [SerializeField]
     private Camera arCamera;
 
@@ -39,7 +38,7 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                 RaycastHit hitObject;
                 if (Physics.Raycast(ray, out hitObject))
                 {
-                    if (hitObject.transform.name.Contains("Sphere"))
+                    if (hitObject.transform.name.Contains("lamp"))
                     {
                         onTouchHold = true;
                     }
@@ -58,7 +57,28 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
 
             if (placedObject == null)
             {
-                placedObject = Instantiate(placedPrefab, hitPose.position, hitPose.rotation);
+                string selectedLight = "";
+                if (PlayerPrefs.GetString("Selected") == "")
+                    selectedLight = "Circle_lamp4";
+                else
+                    selectedLight = PlayerPrefs.GetString("Selected");
+
+                switch (selectedLight)
+                {
+                    case "Light1":
+                        selectedLight = "Circle_lamp4";
+                        break;
+                    case "Light2":
+                        selectedLight = "Circlelamp2";
+                        break;
+                    case "Light3":
+                        selectedLight = "Circlelamp3";
+                        break;
+                }
+
+                placedPrefab = Resources.Load<GameObject>("Lights/" + selectedLight);
+                if (placedPrefab != null)
+                    placedObject = Instantiate(placedPrefab, hitPose.position, hitPose.rotation);
             }
             else
             {
@@ -69,5 +89,11 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void DeleteLight()
+    {
+        if (placedPrefab != null)
+            Destroy(placedPrefab);
     }
 }
