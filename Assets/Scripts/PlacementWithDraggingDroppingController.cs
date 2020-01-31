@@ -51,7 +51,7 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
             }
         }
 
-        if (arRaycastManager.Raycast(touchPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon))
+        if (arRaycastManager.Raycast(touchPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon) && Input.touchCount > 0)
         {
             Pose hitPose = hits[0].pose;
 
@@ -59,25 +59,25 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
             {
                 string selectedLight = "";
                 if (PlayerPrefs.GetString("Selected") == "")
-                    selectedLight = "Circle_lamp4";
+                    selectedLight = "lamp1";
                 else
                     selectedLight = PlayerPrefs.GetString("Selected");
 
                 switch (selectedLight)
                 {
                     case "Light1":
-                        selectedLight = "Circle_lamp4";
+                        selectedLight = "lamp1";
                         break;
                     case "Light2":
-                        selectedLight = "Circlelamp2";
+                        selectedLight = "lamp2";
                         break;
                     case "Light3":
-                        selectedLight = "Circlelamp3";
+                        selectedLight = "lamp3";
                         break;
                 }
 
-                placedPrefab = Resources.Load<GameObject>("Lights/" + selectedLight);
-                if (placedPrefab != null)
+                //placedPrefab = Resources.Load<GameObject>("Lights/" + selectedLight);
+                //if (placedPrefab != null)
                     placedObject = Instantiate(placedPrefab, hitPose.position, hitPose.rotation);
             }
             else
@@ -94,6 +94,6 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
     public void DeleteLight()
     {
         if (placedPrefab != null)
-            Destroy(placedPrefab);
+            Destroy(placedObject);
     }
 }
