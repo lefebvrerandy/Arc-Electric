@@ -9,8 +9,7 @@ using UnityEngine.XR.ARFoundation;
 
 public class PlacementWithDraggingDroppingController : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject placedPrefab;
+    public GameObject placedPrefab;
     [SerializeField]
     private Camera arCamera;
 
@@ -39,7 +38,7 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                 RaycastHit hitObject;
                 if (Physics.Raycast(ray, out hitObject))
                 {
-                    if (hitObject.transform.name.Contains("Sphere"))
+                    if (hitObject.transform.name.Contains("lamp"))
                     {
                         onTouchHold = true;
                     }
@@ -52,13 +51,34 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
             }
         }
 
-        if (arRaycastManager.Raycast(touchPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon))
+        if (arRaycastManager.Raycast(touchPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon) && Input.touchCount > 0)
         {
             Pose hitPose = hits[0].pose;
 
             if (placedObject == null)
             {
-                placedObject = Instantiate(placedPrefab, hitPose.position, hitPose.rotation);
+                string selectedLight = "";
+                if (PlayerPrefs.GetString("Selected") == "")
+                    selectedLight = "lamp1";
+                else
+                    selectedLight = PlayerPrefs.GetString("Selected");
+
+                switch (selectedLight)
+                {
+                    case "Light1":
+                        selectedLight = "lamp1";
+                        break;
+                    case "Light2":
+                        selectedLight = "lamp2";
+                        break;
+                    case "Light3":
+                        selectedLight = "lamp3";
+                        break;
+                }
+
+                //placedPrefab = Resources.Load<GameObject>("Lights/" + selectedLight);
+                //if (placedPrefab != null)
+                    placedObject = Instantiate(placedPrefab, hitPose.position, hitPose.rotation);
             }
             else
             {
@@ -69,5 +89,11 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void DeleteLight()
+    {
+        if (placedPrefab != null)
+            Destroy(placedObject);
     }
 }
