@@ -6,9 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/RandyTestScene.unity
+    path: Assets/Scenes/RandyToyPlaneTutorial.unity
     guid: 07e446fefe36d90469ed0b00e5a0c708
+  - enabled: 0
+    path: Assets/Scenes/SampleScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 0
+    path: Assets/Scenes/MainScreen.unity
+    guid: 82a4a6062a4e40143a8d3a8465d10b20
+  - enabled: 0
+    path: Assets/Scenes/ARc-LightMain.unity
+    guid: ef8e9035fda1702408a8fe0d9f9a77dd
   - enabled: 1
-    path: Assets/Scenes/LucasTestScene.unity
-    guid: 4c704bee35168497b8b7826c18570f7a
+    path: Assets/Scenes/RandyDragAndDrop.unity
+    guid: 810817fe848d6994ea3a2f551522921b
   m_configObjects: {}
