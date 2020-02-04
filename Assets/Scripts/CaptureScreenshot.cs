@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using EasyMobile;
+using System;
 
 public class CaptureScreenshot : MonoBehaviour
 {
@@ -28,7 +29,17 @@ public class CaptureScreenshot : MonoBehaviour
 
         // The SaveScreenshot() method returns the path of the saved image
         // The provided file name will be added a ".png" extension automatically
-        string path = Sharing.SaveScreenshot("screenshot");
+        string filename = "ARc-Light_Screenshot" + DateTime.Now.Ticks;
+        string filePath = Sharing.ShareScreenshot(filename, "This is a sample message", "Hello");
+        //string path = Sharing.SaveScreenshot("screenshot");
+
+        // Share a saved image
+        // Suppose we have a "screenshot.png" image stored in the persistentDataPath,
+        // we'll construct its path first
+        //string stringPath = System.IO.Path.Combine(Application.persistentDataPath, path);
+
+        // Share the image with the path, a sample message and an empty subject
+        //Sharing.ShareImage(stringPath, "This is a sample message");
     }
 
     /*
