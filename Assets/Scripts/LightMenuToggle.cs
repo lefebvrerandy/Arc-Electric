@@ -25,6 +25,7 @@ public class LightMenuToggle : MonoBehaviour
 
     public void PanelToggle(GameObject panel)
     {
+        Debug.Log("Button Pressed!!!)");
         if (panel.activeInHierarchy)
         {
             panel.SetActive(false);
