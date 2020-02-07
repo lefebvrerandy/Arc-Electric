@@ -63,19 +63,6 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                 else
                     selectedLight = PlayerPrefs.GetString("Selected");
 
-                switch (selectedLight)
-                {
-                    case "Light1":
-                        selectedLight = "lamp1";
-                        break;
-                    case "Light2":
-                        selectedLight = "lamp2";
-                        break;
-                    case "Light3":
-                        selectedLight = "lamp3";
-                        break;
-                }
-
                 //placedPrefab = Resources.Load<GameObject>("Lights/" + selectedLight);
                 //if (placedPrefab != null)
                     placedObject = Instantiate(placedPrefab, hitPose.position, hitPose.rotation);
