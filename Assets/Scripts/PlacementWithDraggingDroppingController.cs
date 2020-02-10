@@ -50,9 +50,9 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                 onTouchHold = false;
             }
         }
-
-        if (arRaycastManager.Raycast(touchPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon) && Input.touchCount > 0)
-        {
+        //if (true)
+            if (arRaycastManager.Raycast(touchPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon) && Input.touchCount > 0)
+            {
             Pose hitPose = hits[0].pose;
 
             if (placedObject == null)
@@ -63,9 +63,16 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                 else
                     selectedLight = PlayerPrefs.GetString("Selected");
 
-                //placedPrefab = Resources.Load<GameObject>("Lights/" + selectedLight);
-                //if (placedPrefab != null)
-                    placedObject = Instantiate(placedPrefab, hitPose.position, hitPose.rotation);
+                placedPrefab = Resources.Load<GameObject>("Lights/" + selectedLight);
+
+
+                if (placedPrefab != null)
+                {
+                    var placedLocation = new Quaternion(hitPose.rotation.x, hitPose.rotation.y, hitPose.rotation.z, hitPose.rotation.w);
+                    placedObject = Instantiate(placedPrefab, hitPose.position, placedLocation);
+                    //var placedLocation = new Quaternion(hitPose.rotation.x, hitPose.rotation.y, hitPose.rotation.z - 180, hitPose.rotation.w);
+                    //placedObject = Instantiate(placedPrefab, hitPose.position, placedLocation);
+                }
             }
             else
             {
@@ -80,7 +87,15 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
 
     public void DeleteLight()
     {
-        if (placedPrefab != null)
+        if (placedObject != null)
             Destroy(placedObject);
+    }
+
+    public void FlipObject()
+    {
+        if (placedObject != null)
+        {
+            placedObject.transform.rotation = new Quaternion(placedObject.transform.rotation.x, placedObject.transform.rotation.y, placedObject.transform.rotation.z - 180, placedObject.transform.rotation.w);
+        }
     }
 }
