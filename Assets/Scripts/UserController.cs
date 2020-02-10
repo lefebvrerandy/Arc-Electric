@@ -16,6 +16,8 @@ public class UserController : MonoBehaviour
         {
             light.SetActive(false);
         }
+        Lights[0].SetActive(true);
+
     }
     public void SwitchSelected(string selectedName)
     {
