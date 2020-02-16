@@ -2313,7 +2313,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -4.7293653, y: -0.005587308}
+  m_AnchoredPosition: {x: -4.7293653, y: 0.008139676}
   m_SizeDelta: {x: 863.0002, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &930100928
@@ -2367,6 +2367,8 @@ GameObject:
   - component: {fileID: 950391479}
   - component: {fileID: 950391482}
   - component: {fileID: 950391483}
+  - component: {fileID: 950391485}
+  - component: {fileID: 950391484}
   m_Layer: 0
   m_Name: AR Session Origin
   m_TagString: Untagged
@@ -2444,6 +2446,32 @@ MonoBehaviour:
   placedPrefab: {fileID: 2806713473517645328, guid: f23a27881ed8a51469f69f5d96f8dddd,
     type: 3}
   arCamera: {fileID: 689331795}
+--- !u!114 &950391484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950391478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab0e80cee9cc1d44928bfe488dd1e2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PointCloudPrefab: {fileID: 3373518132218247067, guid: 5709941fdab4fd8458c98eb214305fa1,
+    type: 3}
+--- !u!114 &950391485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950391478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2fe46b79ca839e47aae7915f3a679fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &960980613
 GameObject:
   m_ObjectHideFlags: 0
@@ -4951,8 +4979,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1510909702}
   m_HandleRect: {fileID: 1510909701}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.9999914
+  m_Value: 0
+  m_Size: 0.99999726
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5904,7 +5932,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 596930342}
   m_HandleRect: {fileID: 596930341}
   m_Direction: 0
-  m_Value: 0.0054868837
+  m_Value: 0.0054763868
   m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -6390,6 +6418,7 @@ GameObject:
   - component: {fileID: 8706723718694028837}
   - component: {fileID: 8706723718694028836}
   - component: {fileID: 8706723718694028839}
+  - component: {fileID: 8706723718694028840}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -6414,6 +6443,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &8706723718694028840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8706723718694028838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f5130ea805d84045997bc58854e115f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8706723718771379806
 GameObject:
   m_ObjectHideFlags: 0

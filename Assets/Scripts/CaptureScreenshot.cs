@@ -34,7 +34,14 @@ public class CaptureScreenshot : MonoBehaviour
         // Wait till the last possible moment before screen rendering to hide the UI
         yield return null;
         // hide UI
-        GameObject.Find("Canvas").GetComponent<Canvas>().enabled = false;
+        //GameObject.FindGameObjectsWithTag("Canvas").GetComponent<Canvas>().enabled = false;
+
+        GameObject[] gameObjectArray = GameObject.FindGameObjectsWithTag("Canvas");
+
+        foreach (GameObject go in gameObjectArray)
+        {
+            go.GetComponent<Canvas>().enabled = false;
+        }
 
         // Wait until the end of frame
         yield return new WaitForEndOfFrame();
@@ -48,7 +55,12 @@ public class CaptureScreenshot : MonoBehaviour
         Debug.Log("filePath created: " + filePath);
 
         // Show UI after we're done
-        GameObject.Find("Canvas").GetComponent<Canvas>().enabled = true;
+        //GameObject.FindGameObjectsWithTag("Canvas").enabled = true;
+
+        foreach (GameObject go in gameObjectArray)
+        {
+            go.GetComponent<Canvas>().enabled = true;
+        }
 
     }
 
