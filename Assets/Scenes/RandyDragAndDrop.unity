@@ -757,6 +757,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AttemptUpdate: 1
+  m_MatchFrameRate: 1
 --- !u!4 &380273406
 Transform:
   m_ObjectHideFlags: 0
@@ -1854,8 +1855,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UseCustomMaterial: 0
   m_CustomMaterial: {fileID: 0}
-  m_UseCustomRendererAsset: 0
-  m_CustomRendererAsset: {fileID: 0}
 --- !u!114 &689331797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1882,12 +1881,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a2a9c34df4095f47b9ca8f975175f5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Device: 0
-  m_PoseSource: 6
-  m_PoseProviderComponent: {fileID: 0}
-  m_TrackingType: 0
-  m_UpdateType: 1
-  m_UseRelativeTransform: 1
 --- !u!4 &689331799
 Transform:
   m_ObjectHideFlags: 0
@@ -2313,7 +2306,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -4.7293653, y: 0.008139676}
+  m_AnchoredPosition: {x: -4.743945, y: 0.0101644825}
   m_SizeDelta: {x: 863.0002, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &930100928
@@ -2369,6 +2362,8 @@ GameObject:
   - component: {fileID: 950391483}
   - component: {fileID: 950391485}
   - component: {fileID: 950391484}
+  - component: {fileID: 950391487}
+  - component: {fileID: 950391486}
   m_Layer: 0
   m_Name: AR Session Origin
   m_TagString: Untagged
@@ -2472,6 +2467,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2fe46b79ca839e47aae7915f3a679fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &950391486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950391478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0865ed1da42853844860cbdf054fe047, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &950391487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950391478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afcab4e7938ae724a8a59ecac3580761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DestroyOnRemoval: 1
 --- !u!1 &960980613
 GameObject:
   m_ObjectHideFlags: 0
@@ -4979,7 +4999,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1510909702}
   m_HandleRect: {fileID: 1510909701}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 0.99999726
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -5932,7 +5952,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 596930342}
   m_HandleRect: {fileID: 596930341}
   m_Direction: 0
-  m_Value: 0.0054763868
+  m_Value: 0.0054941038
   m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
