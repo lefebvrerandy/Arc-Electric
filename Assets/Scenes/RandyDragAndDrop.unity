@@ -2061,8 +2061,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 0}
-  isGlobal: 0
+  sharedProfile: {fileID: 11400000, guid: 6f4067d2e0871c24e905cd99015cc150, type: 2}
+  isGlobal: 1
   blendDistance: 0
   weight: 1
   priority: 0
@@ -2081,7 +2081,7 @@ MonoBehaviour:
   volumeTrigger: {fileID: 689331799}
   volumeLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 0
   antialiasingMode: 0
@@ -2138,7 +2138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c520d478f3d2445429bd7ac9c92b03a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  postProcessLayer: {fileID: 0}
+  postProcessLayer: {fileID: 689331802}
   lightMeter: 0
   histogram: 0
   waveform: 0
@@ -2555,7 +2555,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -4.8206024, y: 0.0002373941}
+  m_AnchoredPosition: {x: -4.8206024, y: -0.0051341825}
   m_SizeDelta: {x: 863.0002, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &930100928
@@ -5258,7 +5258,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1510909702}
   m_HandleRect: {fileID: 1510909701}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 0.9999945
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -5484,7 +5484,7 @@ Transform:
   - {fileID: 1723679017}
   - {fileID: 1910337965}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1898076152
 GameObject:
@@ -6714,7 +6714,7 @@ PrefabInstance:
     - target: {fileID: 3453015963285112914, guid: 7f31cca5c9c0f364390bb8112a20dd20,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3453015963285112914, guid: 7f31cca5c9c0f364390bb8112a20dd20,
         type: 3}
