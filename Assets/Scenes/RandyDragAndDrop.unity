@@ -2549,7 +2549,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -4.719646, y: 0.0042448468}
+  m_AnchoredPosition: {x: -4.7971597, y: 0.0050136726}
   m_SizeDelta: {x: 863.0002, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &930100928
@@ -2605,7 +2605,6 @@ GameObject:
   - component: {fileID: 950391483}
   - component: {fileID: 950391485}
   - component: {fileID: 950391484}
-  - component: {fileID: 950391487}
   - component: {fileID: 950391486}
   m_Layer: 0
   m_Name: AR Session Origin
@@ -2696,7 +2695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ab0e80cee9cc1d44928bfe488dd1e2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PointCloudPrefab: {fileID: 3373518132218247067, guid: 5709941fdab4fd8458c98eb214305fa1,
+  m_PointCloudPrefab: {fileID: 1854016325464908, guid: 595cd2fb454011740a1a499524393036,
     type: 3}
 --- !u!114 &950391485
 MonoBehaviour:
@@ -2719,22 +2718,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 950391478}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0865ed1da42853844860cbdf054fe047, type: 3}
+  m_Script: {fileID: 11500000, guid: 3b63d3ba5421bcd48be1a1954746c0b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &950391487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 950391478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afcab4e7938ae724a8a59ecac3580761, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_DestroyOnRemoval: 1
+  m_PlacedPrefab: {fileID: 1854016325464908, guid: 595cd2fb454011740a1a499524393036,
+    type: 3}
 --- !u!1 &960980613
 GameObject:
   m_ObjectHideFlags: 0
@@ -5370,8 +5358,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1510909702}
   m_HandleRect: {fileID: 1510909701}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.9999945
+  m_Value: 0
+  m_Size: 0.99999726
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6455,7 +6443,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 596930342}
   m_HandleRect: {fileID: 596930341}
   m_Direction: 0
-  m_Value: 0.005479039
+  m_Value: 0.005564934
   m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
