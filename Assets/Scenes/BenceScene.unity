@@ -2362,7 +2362,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -5.3438416, y: 0.000466092}
+  m_AnchoredPosition: {x: -5.3438416, y: 0.0067981957}
   m_SizeDelta: {x: 863.0002, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &930100928
@@ -3458,13 +3458,13 @@ MonoBehaviour:
     title: ON / OFF
   - color: {r: 0.20091248, g: 1, b: 0, a: 0}
     sprite: {fileID: 21300000, guid: 6b893814efaba4cb196da4fcb9cb10ca, type: 3}
-    title: 
+    title: Light Intensity
   - color: {r: 1, g: 0, b: 0.49922705, a: 0}
     sprite: {fileID: 21300000, guid: 6b893814efaba4cb196da4fcb9cb10ca, type: 3}
-    title: 
+    title: 4
   - color: {r: 0, g: 0.9892149, b: 1, a: 0}
     sprite: {fileID: 21300000, guid: 6b893814efaba4cb196da4fcb9cb10ca, type: 3}
-    title: 
+    title: 5
 --- !u!1 &1437898827
 GameObject:
   m_ObjectHideFlags: 0
@@ -4768,7 +4768,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1510909702}
   m_HandleRect: {fileID: 1510909701}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 0.9999945
   m_NumberOfSteps: 0
   m_OnValueChanged:
