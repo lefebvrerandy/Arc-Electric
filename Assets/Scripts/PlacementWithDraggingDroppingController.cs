@@ -9,10 +9,11 @@ using UnityEngine.XR.ARFoundation;
 
 public class PlacementWithDraggingDroppingController : MonoBehaviour
 {
-    public GameObject placedPrefab;
     [SerializeField]
     private Camera arCamera;
 
+
+    private GameObject placedPrefab;
     private GameObject placedObject;
     private Vector2 touchPosition = default;
     private ARRaycastManager arRaycastManager;

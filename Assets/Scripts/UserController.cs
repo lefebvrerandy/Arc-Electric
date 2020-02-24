@@ -6,25 +6,22 @@ using UnityEngine.UI;
 
 public class UserController : MonoBehaviour
 {
-    public Image image;
-
-    public GameObject[] Lights;
 
     private void Start()
     {
-        foreach(var light in Lights)
-        {
-            light.SetActive(false);
-        }
-        Lights[0].SetActive(true);
-
     }
-    public void SwitchSelected(string selectedName)
+
+    //*********************************************************************************************
+    //
+    //                                  Public Methods
+    //
+    //*********************************************************************************************
+    static public void SwitchSelected(string selectedName, List<GameObject> lightPrefabsSelected)
     {
-        //image.sprite = Resources.Load<Sprite>("Images/" + selectedName);
-        foreach (var light in Lights)
+        foreach (var light in lightPrefabsSelected)
         {
-            if (light.name == selectedName)
+            string[] name = light.name.Split('(');
+            if (name[0] == selectedName)
                 light.SetActive(true);
             else
                 light.SetActive(false);
