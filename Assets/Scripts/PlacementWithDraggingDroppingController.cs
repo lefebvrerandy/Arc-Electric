@@ -35,7 +35,6 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
     private bool onTouchHold = false;
     private static List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
-
     /*
     *  METHOD       : Awake
     *  DESCRIPTION  : Get a reference to the ARRaycastManager component of the AR Session Origin object
