@@ -46,21 +46,6 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
         arRaycastManager = GetComponent<ARRaycastManager>();
     }
 
-    private void Start()
-    {
-        string selectedLight = "";
-        if (PlayerPrefs.GetString("Selected") == "")
-        {
-            selectedLight = "lamp1";
-        }
-        else
-        {
-            selectedLight = PlayerPrefs.GetString("Selected");
-        }
-        placedPrefab = Resources.Load<GameObject>("Lights/" + selectedLight);
-        placedObject = Instantiate(placedPrefab);
-    }
-
     /*
     *  METHOD       : Update
     *  DESCRIPTION  : For every update, get the users input, and either place, orient, or delete an AR object according to their actions

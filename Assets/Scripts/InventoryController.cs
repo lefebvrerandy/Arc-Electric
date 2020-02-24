@@ -87,7 +87,8 @@ public class InventoryController : MonoBehaviour
                 GameObject lightObject = Instantiate(newLight, item.transform);
 
                 // Set name of each item in List for the viewer
-                item.GetComponentInChildren<Text>().text = "Light " + i;
+                string[] nameOfLight = lightObject.name.Split('(');
+                item.GetComponentInChildren<Text>().text = nameOfLight[0];
 
                 // Set up the properties for each light
                 lightObject.transform.localScale = new Vector3(50f, 50f, 50f);
