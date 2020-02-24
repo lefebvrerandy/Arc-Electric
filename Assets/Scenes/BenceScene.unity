@@ -129,7 +129,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2117378702}
+  - component: {fileID: 4214797}
   - component: {fileID: 4214796}
   - component: {fileID: 4214795}
   - component: {fileID: 4214794}
@@ -202,6 +202,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4214793}
   m_Mesh: {fileID: 4300000, guid: 074f9dc296b32774987893e5284897cf, type: 3}
+--- !u!4 &4214797
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 3467585210009544680, guid: 192fc880647d5184abede95a78bd6885,
+    type: 3}
+  m_PrefabInstance: {fileID: 2117378701}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4214793}
+  m_LocalRotation: {x: 0.13052616, y: 0, z: 0, w: 0.9914449}
+  m_LocalPosition: {x: 0, y: 15, z: 0}
+  m_LocalScale: {x: 75, y: 75, z: 75}
+  m_Children: []
+  m_Father: {fileID: 661799871}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}
 --- !u!1 &11216652
 GameObject:
   m_ObjectHideFlags: 0
@@ -1660,7 +1675,7 @@ RectTransform:
   - {fileID: 11216655}
   - {fileID: 1504922677}
   - {fileID: 1455421611}
-  - {fileID: 2117378702}
+  - {fileID: 4214797}
   m_Father: {fileID: 674828136}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2362,7 +2377,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -5.3438416, y: 0.0067981957}
+  m_AnchoredPosition: {x: 5.7650785, y: 0.005212438}
   m_SizeDelta: {x: 863.0002, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &930100928
@@ -2494,8 +2509,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5168e03e50849a3419f6329b598184c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placedPrefab: {fileID: 2806713473517645328, guid: f23a27881ed8a51469f69f5d96f8dddd,
-    type: 3}
   arCamera: {fileID: 689331795}
 --- !u!114 &950391484
 MonoBehaviour:
@@ -5607,7 +5620,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 596930342}
   m_HandleRect: {fileID: 596930341}
   m_Direction: 0
-  m_Value: 0.00620524
+  m_Value: -0.006671315
   m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -5748,21 +5761,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 192fc880647d5184abede95a78bd6885, type: 3}
---- !u!4 &2117378702
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 3467585210009544680, guid: 192fc880647d5184abede95a78bd6885,
-    type: 3}
-  m_PrefabInstance: {fileID: 2117378701}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4214793}
-  m_LocalRotation: {x: 0.13052616, y: 0, z: 0, w: 0.9914449}
-  m_LocalPosition: {x: 0, y: 15, z: 0}
-  m_LocalScale: {x: 75, y: 75, z: 75}
-  m_Children: []
-  m_Father: {fileID: 661799871}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}
 --- !u!1 &2146188202
 GameObject:
   m_ObjectHideFlags: 0
@@ -6146,6 +6144,9 @@ MonoBehaviour:
   InventoryPanel: {fileID: 1693287706}
   inventoryAnim: {fileID: 1693287711}
   inventoryAnimbtn: {fileID: 8706723720525577951}
+  inventoryContentPanel: {fileID: 0}
+  inventoryTemplate: {fileID: 0}
+  HUDSelectedPanel: {fileID: 0}
 --- !u!95 &8706723720525577951
 Animator:
   serializedVersion: 3
