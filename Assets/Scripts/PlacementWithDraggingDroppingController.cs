@@ -46,6 +46,21 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
         arRaycastManager = GetComponent<ARRaycastManager>();
     }
 
+    private void Start()
+    {
+        string selectedLight = "";
+        if (PlayerPrefs.GetString("Selected") == "")
+        {
+            selectedLight = "lamp1";
+        }
+        else
+        {
+            selectedLight = PlayerPrefs.GetString("Selected");
+        }
+        placedPrefab = Resources.Load<GameObject>("Lights/" + selectedLight);
+        placedObject = Instantiate(placedPrefab);
+    }
+
     /*
     *  METHOD       : Update
     *  DESCRIPTION  : For every update, get the users input, and either place, orient, or delete an AR object according to their actions
@@ -112,6 +127,8 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                 {
                     var placedLocation = new Quaternion(hitPose.rotation.x, hitPose.rotation.y, hitPose.rotation.z, hitPose.rotation.w);
                     Debug.Log("Placing Light");
+                    placedPrefab.transform.localScale = new Vector3(1f, 1f, 1f);
+                    placedPrefab.transform.eulerAngles = new Vector3(0f, 0f, 0f);
                     placedObject = Instantiate(placedPrefab, hitPose.position, placedLocation);
                     Debug.Log("Light Placed");
                     //var placedLocation = new Quaternion(hitPose.rotation.x, hitPose.rotation.y, hitPose.rotation.z - 180, hitPose.rotation.w);
