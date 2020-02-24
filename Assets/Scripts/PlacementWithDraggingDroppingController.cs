@@ -35,8 +35,6 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
     private bool onTouchHold = false;
     private static List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
-    #endregion
-
 
     /*
     *  METHOD       : Awake
@@ -48,7 +46,6 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
     {
         arRaycastManager = GetComponent<ARRaycastManager>();
     }
-
 
     /*
     *  METHOD       : Update
@@ -115,7 +112,9 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                 if (placedPrefab != null)
                 {
                     var placedLocation = new Quaternion(hitPose.rotation.x, hitPose.rotation.y, hitPose.rotation.z, hitPose.rotation.w);
+                    Debug.Log("Placing Light");
                     placedObject = Instantiate(placedPrefab, hitPose.position, placedLocation);
+                    Debug.Log("Light Placed");
                     //var placedLocation = new Quaternion(hitPose.rotation.x, hitPose.rotation.y, hitPose.rotation.z - 180, hitPose.rotation.w);
                     //placedObject = Instantiate(placedPrefab, hitPose.position, placedLocation);
                 }
