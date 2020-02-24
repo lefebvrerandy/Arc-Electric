@@ -139,19 +139,4 @@ public class LightSettingController : MonoBehaviour
         }
     }
 
-
-    /*
-     *  METHOD       : ToggleLights
-     *  DESCRIPTION  : Toggles all lights on/off for each press of the UI button
-     *  PARAMETER    : NA
-     *  RETURNS      : NA 
-     */
-    public void ToggleLights()
-    {
-        foreach (Light light in LightsInScene)
-        {
-            light.enabled = !light.enabled;
-        }
-    }
-
 }//class
