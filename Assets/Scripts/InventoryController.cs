@@ -1,9 +1,20 @@
-﻿using System;
+﻿/*
+*  FILE          : InventoryController.cs
+*  PROJECT       : PROG 3220 - Systems Project
+*  PROGRAMMER    : Randy Lefebvre, Bence Karner, Lucas Roes, Kyle Horsley
+*  DESCRIPTION   : DEBUG
+*/
+
+
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/*
+*   NAME    : InventoryController
+*   PURPOSE : Responsible for controlling the UI 
+*/
 public class InventoryController : MonoBehaviour
 {
     public GameObject InventoryPanel;
