@@ -10,6 +10,7 @@
 */
 
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
@@ -19,27 +20,20 @@ using UnityEngine.XR.ARFoundation;
 *   NAME    : PlacementWithDraggingDroppingController
 *   PURPOSE : This class is used to detect planes, place, orient, and delete objects according to the users input
 */
+[RequireComponent(typeof(ARRaycastManager))]
 public class PlacementWithDraggingDroppingController : MonoBehaviour
 {
-    #region Properties
-
-    public GameObject placedPrefab;
-
     [SerializeField]
     private Camera arCamera;
 
+
+    private GameObject placedPrefab;
     private GameObject placedObject;
-
+    private GameObject[] clickedObjects;
     private Vector2 touchPosition = default;
-
     private ARRaycastManager arRaycastManager;
-
     private bool onTouchHold = false;
-
     private static List<ARRaycastHit> hits = new List<ARRaycastHit>();
-
-    #endregion
-
 
     /*
     *  METHOD       : Awake
@@ -52,7 +46,6 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
         arRaycastManager = GetComponent<ARRaycastManager>();
     }
 
-
     /*
     *  METHOD       : Update
     *  DESCRIPTION  : For every update, get the users input, and either place, orient, or delete an AR object according to their actions
@@ -64,16 +57,25 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
         //Check if the user touched the screen
         if (Input.touchCount > 0)
         {
+            //Get reference to the touch
             Touch touch = Input.GetTouch(0);
             touchPosition = touch.position;
-
             if (touch.phase == TouchPhase.Began)
             {
-
                 Ray ray = arCamera.ScreenPointToRay(touch.position);
                 RaycastHit hitObject;
                 if (Physics.Raycast(ray, out hitObject))
                 {
+                    var selection = hitObject.transform;
+                    var selectionRenderer = selection.GetComponent<Renderer>();
+                    selectionRenderer.material.color = Color.red;
+                    //var clickedObject = hitObject.transform.GetComponent<GameObject>();
+                    //bool lightSelected = clickedObject != null && clickedObject.tag == "LightFixture";
+                    //if (clickedObject != null)
+                    //{
+                    //    ToggleLight(clickedObject);
+                    //}
+
                     if (hitObject.transform.name.Contains("lamp"))
                     {
                         onTouchHold = true;
@@ -109,7 +111,11 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                 if (placedPrefab != null)
                 {
                     var placedLocation = new Quaternion(hitPose.rotation.x, hitPose.rotation.y, hitPose.rotation.z, hitPose.rotation.w);
+                    Debug.Log("Placing Light");
+                    placedPrefab.transform.localScale = new Vector3(1f, 1f, 1f);
+                    placedPrefab.transform.eulerAngles = new Vector3(0f, 0f, 0f);
                     placedObject = Instantiate(placedPrefab, hitPose.position, placedLocation);
+                    Debug.Log("Light Placed");
                     //var placedLocation = new Quaternion(hitPose.rotation.x, hitPose.rotation.y, hitPose.rotation.z - 180, hitPose.rotation.w);
                     //placedObject = Instantiate(placedPrefab, hitPose.position, placedLocation);
                 }
@@ -120,9 +126,33 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                 {
                     placedObject.transform.position = hitPose.position;
                     placedObject.transform.rotation = hitPose.rotation;
+
+                    
+                    //DEBUG BRING UP THE RADIAL MENU FOR THE SELECTED OBJECT
                 }
             }
         }
+    }
+
+
+    /*
+    *  METHOD       : ToggleLight
+    *  DESCRIPTION  : Toggles the AR light on or off when clicked by the user
+    *  PARAMETER    : NA
+    *  RETURNS      : NA
+    */
+    private void ToggleLight(GameObject clickedObject)
+    {
+        //var lights = clickedObject.GetComponentsInChildren(typeof(Light));
+        clickedObject.SetActive(false);
+        //if (clickedObject.activeSelf == true )
+        //{
+        //    clickedObject.SetActive(false);
+        //}
+        //else
+        //{
+        //    clickedObject.SetActive(true);
+        //}
     }
 
 
