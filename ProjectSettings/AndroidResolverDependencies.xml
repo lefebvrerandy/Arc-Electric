@@ -22,7 +22,7 @@
   </files>
   <settings>
     <setting name="androidAbis" value="armeabi-v7a" />
-    <setting name="bundleId" value="com.ArcSet.ArcElectric" />
+    <setting name="bundleId" value="com.DefaultCompany.ArcElectric" />
     <setting name="explodeAars" value="True" />
     <setting name="gradleBuildEnabled" value="True" />
     <setting name="gradleTemplateEnabled" value="False" />
