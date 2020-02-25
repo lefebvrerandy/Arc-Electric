@@ -13,12 +13,18 @@ GameObject:
   - component: {fileID: 8098058948481534843}
   - component: {fileID: 7683200532260875656}
   - component: {fileID: 6894756427594637677}
+<<<<<<< Updated upstream
   - component: {fileID: 8752889184592466516}
   - component: {fileID: 9192552392975995495}
   - component: {fileID: 3775412786045399748}
   - component: {fileID: 9143440711197738078}
   m_Layer: 0
   m_Name: ARPlaneVisualizer
+=======
+  - component: {fileID: 3775412786045399748}
+  m_Layer: 0
+  m_Name: ARPlaneVisualizer 1
+>>>>>>> Stashed changes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,6 +92,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8159433630615787790}
   m_Mesh: {fileID: 0}
+<<<<<<< Updated upstream
 --- !u!114 &8752889184592466516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,6 +118,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bff676646bc70174491c89d18537aa80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+=======
+>>>>>>> Stashed changes
 --- !u!23 &3775412786045399748
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -129,7 +138,10 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 6eab03a14570797429a252ff140a2070, type: 2}
+<<<<<<< Updated upstream
   - {fileID: 2100000, guid: ce135df293c64a747a5d7c0620434413, type: 2}
+=======
+>>>>>>> Stashed changes
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -150,6 +162,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+<<<<<<< Updated upstream
 --- !u!95 &9143440711197738078
 Animator:
   serializedVersion: 3
@@ -169,3 +182,5 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+=======
+>>>>>>> Stashed changes

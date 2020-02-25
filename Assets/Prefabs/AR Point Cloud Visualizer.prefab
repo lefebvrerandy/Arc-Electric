@@ -9,10 +9,17 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4459255792954120}
+<<<<<<< Updated upstream
   - component: {fileID: 114674181514608572}
   - component: {fileID: 1618403046961071210}
   - component: {fileID: 6330811170839875356}
   - component: {fileID: 5892113551314056564}
+=======
+  - component: {fileID: 198296754606205776}
+  - component: {fileID: 199567844588220584}
+  - component: {fileID: 114674181514608572}
+  - component: {fileID: 8912962096497265950}
+>>>>>>> Stashed changes
   m_Layer: 0
   m_Name: AR Point Cloud Visualizer
   m_TagString: Untagged
@@ -34,6 +41,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< Updated upstream
 --- !u!114 &114674181514608572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48,6 +56,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DestroyOnRemoval: 1
 --- !u!198 &1618403046961071210
+=======
+--- !u!198 &198296754606205776
+>>>>>>> Stashed changes
 ParticleSystem:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58,7 +69,11 @@ ParticleSystem:
   lengthInSec: 5
   simulationSpeed: 1
   stopAction: 0
+<<<<<<< Updated upstream
   cullingMode: 1
+=======
+  cullingMode: 0
+>>>>>>> Stashed changes
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
@@ -120,9 +135,15 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+<<<<<<< Updated upstream
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
+=======
+  moveWithTransform: 0
+  moveWithCustomTransform: {fileID: 0}
+  scalingMode: 1
+>>>>>>> Stashed changes
   randomSeed: 0
   InitialModule:
     serializedVersion: 3
@@ -299,7 +320,11 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
+<<<<<<< Updated upstream
       scalar: 0.02
+=======
+      scalar: 1
+>>>>>>> Stashed changes
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -673,7 +698,11 @@ ParticleSystem:
         m_RotationOrder: 4
   ShapeModule:
     serializedVersion: 6
+<<<<<<< Updated upstream
     enabled: 0
+=======
+    enabled: 1
+>>>>>>> Stashed changes
     type: 4
     angle: 25
     length: 5
@@ -4705,7 +4734,11 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+<<<<<<< Updated upstream
 --- !u!199 &6330811170839875356
+=======
+--- !u!199 &199567844588220584
+>>>>>>> Stashed changes
 ParticleSystemRenderer:
   serializedVersion: 6
   m_ObjectHideFlags: 0
@@ -4717,6 +4750,7 @@ ParticleSystemRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+<<<<<<< Updated upstream
   m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
@@ -4724,6 +4758,15 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 343541fc8dfa9434291c58c28fa94cfa, type: 2}
+=======
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_RenderingLayerMask: 4294967295
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+>>>>>>> Stashed changes
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -4736,7 +4779,11 @@ ParticleSystemRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+<<<<<<< Updated upstream
   m_StitchLightmapSeams: 1
+=======
+  m_StitchLightmapSeams: 0
+>>>>>>> Stashed changes
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -4768,7 +4815,10 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+<<<<<<< Updated upstream
 --- !u!114 &5892113551314056564
+=======
+--- !u!114 &114674181514608572
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4777,6 +4827,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 1854016325464908}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afcab4e7938ae724a8a59ecac3580761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DestroyOnRemoval: 1
+--- !u!114 &8912962096497265950
+>>>>>>> Stashed changes
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854016325464908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+<<<<<<< Updated upstream
   m_Script: {fileID: 11500000, guid: a7b3f1b9d18541c4c936380e3a882b4a, type: 3}
+=======
+  m_Script: {fileID: 11500000, guid: 468ea6c98cd64494abbc2c2f34d6cde2, type: 3}
+>>>>>>> Stashed changes
   m_Name: 
   m_EditorClassIdentifier: 
