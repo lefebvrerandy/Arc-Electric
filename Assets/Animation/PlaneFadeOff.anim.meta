@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Animation/PlaneFadeOff.anim.meta
 guid: e093520550bce424ea3038847cf00e60
 NativeFormatImporter:
+=======
+guid: c74ed02fe525b55419d2a8fa02167ba7
+folderAsset: yes
+DefaultImporter:
+>>>>>>> 92d7c6969431f4703ccc2cb53c1d5302154b4b94:Assets/FlexibleColorPicker/ExampleScene.meta
   externalObjects: {}
   mainObjectFileID: 0
   userData: 
