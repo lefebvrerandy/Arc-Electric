@@ -23,4 +23,6 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/BenceScene.unity
     guid: 072c976d333b75041b48c8575b03b5f3
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: da6c65cb88446844391934d77fa3a465,
+      type: 2}
