@@ -75,6 +75,9 @@ public class InventoryController : MonoBehaviour
             // This is a fail safe incase we dont load anything in.
             if (newItem != null)
             {
+                // Name the light. This will be displayed to the user later
+                newItem.name = "Light " + i;
+
                 // Create the new light using the prefab list
                 GameObject newLight = light;
                 newLight.transform.eulerAngles = new Vector3(15f, 0f, 0f);
@@ -84,7 +87,7 @@ public class InventoryController : MonoBehaviour
                 GameObject lightObject = Instantiate(newLight, item.transform);
 
                 // Set name of each item in List for the viewer
-                item.GetComponentInChildren<Text>().text = newLight.name;
+                item.GetComponentInChildren<Text>().text = "Light " + i;
 
                 // Set up the properties for each light
                 lightObject.transform.localScale = new Vector3(50f, 50f, 50f);
