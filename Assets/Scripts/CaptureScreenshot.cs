@@ -13,7 +13,6 @@ public class CaptureScreenshot : MonoBehaviour
     // Start is called before the first frame update
     IEnumerator Start()
     {
-        Debug.Log("In Start method");
         camButton = GetComponent<Button>();
         // listen for button press
         camButton.onClick.AddListener(() => SS());

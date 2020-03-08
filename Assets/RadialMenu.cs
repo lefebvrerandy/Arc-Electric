@@ -1,68 +1,123 @@
-﻿
-//https://www.youtube.com/watch?v=WzQdc2rAdZc
-//https://www.youtube.com/watch?v=HOOGIZu4nxo
-//https://www.youtube.com/watch?v=XvgUzjXW2Jk
+﻿/*
+*  FILE         : RadialMenu.cs
+*  PROJECT      : PROG3220-Systems Project
+*  PROGRAMMER   : Bence Karner
+*  DESCRIPTION  : Sole responsibility is to contain the RadialMenu class
+*  REFERENCES   : The following code was taken from a series of online tutorials, and altered to suit the needs of the project
+*   Board To Bits Games. (Nov 6, 2015). Unity Tutorial: Radial Menu (Part 1) from Board to Bits [Video file]. Retrieved Feb 24, 2020, from https://www.youtube.com/watch?v=WzQdc2rAdZc
+*   Board To Bits Games. (Nov 6, 2015). Unity Tutorial: Radial Menu (Part 2) from Board to Bits [Video file]. Retrieved Feb 24, 2020, from https://www.youtube.com/watch?v=HOOGIZu4nxo
+*   Board To Bits Games. (Nov 6, 2015). Unity Tutorial: Radial Menu (Part 3) from Board to Bits [Video file]. Retrieved Feb 24, 2020, from https://www.youtube.com/watch?v=XvgUzjXW2Jk
+*   Board To Bits Games. (Nov 6, 2015). Unity Tutorial: Radial Menu (Part 4) from Board to Bits [Video file]. Retrieved Feb 24, 2020, from https://www.youtube.com/watch?v=vPeCGO1miMk
+*/
 
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-
-
+/// <summary>
+/// Controls the location of where the radial menu buttons are instantiated, and deletes the menu items when they're no longer selected
+/// </summary>
 public class RadialMenu : MonoBehaviour
 {
-    public RadialButton buttonPrefab;   //UI button to create when the menu is created
-    public RadialButton selectedButton; //Tracks the selected button
-    public int offsetDistance;
 
-    public void  Awake()
+    /// <summary>
+    /// UI text element that will display the name of the menu
+    /// </summary>
+    public Text menuLabel;
+
+    /// <summary>
+    /// Game object to instantiate as a menu item
+    /// </summary>
+    public RadialButton buttonPrefab;
+
+    /// <summary>
+    /// Reference to the currently selected button in the menu
+    /// </summary>
+    public RadialButton selectedButton;
+
+    /// <summary>
+    ///  Begin the process of spawning menu items
+    /// </summary>
+    /// <param name="rmc"> Activated instance of the menu controller </param>
+    public void SpawnButtons(RadialMenuController rmc)
     {
-        //If not set in the inspector, default the offsetDistance
-        if(offsetDistance == null || offsetDistance < 1)
-        {
-            offsetDistance = 150;
-        }
+        StartCoroutine(AnimateButtons(rmc));
     }
 
-    public void SpawnButtons(RadialMenuController menuController)
+    /// <summary>
+    /// Spawn the menu items in a circle around the point that was clicked on the game object
+    /// </summary>
+    /// <param name="rmc"> Activated instance of the menu controller </param>
+    IEnumerator AnimateButtons (RadialMenuController rmc)
     {
-        //Create a new button for each of the defined menu items in the controller
+        const int offsetDistance = 140;
+        const float waitTime = 0.06f;
         int itemNumber = 0;
-        foreach (var item in menuController.menuItems)
+        foreach (var item in rmc.menuItems)
         {
-            RadialButton newButton = Instantiate(buttonPrefab) as RadialButton;
-            newButton.transform.SetParent(transform, false);
+            RadialButton menuButton = Instantiate(buttonPrefab) as RadialButton;
+            menuButton.transform.SetParent(transform, false);
 
             //Get the angle of each menu item, in the circle
-            float theta = (2 * Mathf.PI / menuController.menuItems.Length) * itemNumber;
+            float theta = (2 * Mathf.PI / rmc.menuItems.Length) * itemNumber++;
             float xPos = Mathf.Sin(theta);
             float yPos = Mathf.Cos(theta);
 
-            //Our new button is currently set to the center of the menu (i.e. where the user clicked),
-            //  so we're going to offset it's location to form a circle around the click location
-            newButton.transform.localPosition = new Vector3(xPos, yPos, 0f) * offsetDistance;
+            //Adjust each items location in a circle based on the total count of items that will be displayed
+            menuButton.transform.localPosition = new Vector3(xPos, yPos, 0f) * offsetDistance;
 
             //Style the buttons as set in the inspector for the menuController
-            newButton.background.color = item.color;
-            newButton.icon.sprite = item.sprite;
-            newButton.title = item.title;
-
-            //Associate the button to the menu where it was created
-            newButton.parentMenu = this;
-
-            //Increment to the new menu item
-            itemNumber++;
+            menuButton.circle.color = item.color;
+            menuButton.icon.sprite = item.sprite;
+            menuButton.title = item.title;
+            menuButton.parentMenu = this;
+            menuButton.Anim();
+            yield return new WaitForSeconds(waitTime);
         }
     }
 
-
-    private void Update ()
+    /// <summary>
+    /// Activate the selected menu item, and delete the menu
+    /// </summary>
+    void Update()
     {
-
-        //Once the left mouse button is released, delete the radial menu
-        if(Input.GetMouseButtonUp(0))
+        //Respond to mouse up, or finger up event
+        if (Input.GetMouseButtonUp(0))
         {
+            var lightFixture = GameObject.FindGameObjectWithTag("SelectedLight");
+
+            if (selectedButton)
+            {
+                var light = lightFixture.GetComponent<Light>();
+                switch (selectedButton.title)
+                {
+                    case "ToggleLight":
+                        light.enabled = !light.enabled;
+                        break;
+
+                    case "ChangeColor":
+                        Instantiate(Resources.Load("Assets/Prefab/ColorPicker"));
+                        break;
+
+                    case "DeleteLight":
+                        Destroy(lightFixture);
+                        break;
+
+                    case "AdjustRange":
+                        //Instantiate();
+                        //light.range
+                        break;
+
+                    default:
+                        break;
+                }
+            }
             Destroy(gameObject);
+
+            if(lightFixture != null)
+            {
+                lightFixture.tag = "LightFixture";
+            }
         }
     }
 }
