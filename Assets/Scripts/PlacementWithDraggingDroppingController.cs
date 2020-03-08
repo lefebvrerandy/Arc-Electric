@@ -57,8 +57,6 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
         {
             selectedLight = PlayerPrefs.GetString("Selected");
         }
-        placedPrefab = Resources.Load<GameObject>("Lights/" + selectedLight);
-        placedObject = Instantiate(placedPrefab);
     }
 
     /*
