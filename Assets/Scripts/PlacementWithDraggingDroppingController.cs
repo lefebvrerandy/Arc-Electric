@@ -101,7 +101,7 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                 onTouchHold = false;
             }
         }
-        //if (true)
+        
         if (arRaycastManager.Raycast(touchPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon) && Input.touchCount > 0)
         {
             Pose hitPose = hits[0].pose;
