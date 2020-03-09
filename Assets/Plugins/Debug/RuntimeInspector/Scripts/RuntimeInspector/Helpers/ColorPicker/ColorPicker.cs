@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace RuntimeInspectorNamespace
@@ -18,21 +17,6 @@ namespace RuntimeInspectorNamespace
 				}
 
 				return m_instance;
-			}
-		}
-
-		public GameObject parentObject; 
-
-		private Color color;
-		public Color GetColor
-		{
-			get
-			{
-				color.r = float.Parse(rInput.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
-				color.g = float.Parse(gInput.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
-				color.b = float.Parse(bInput.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
-				color.a = float.Parse(aInput.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
-				return color;
 			}
 		}
 
@@ -137,11 +121,7 @@ namespace RuntimeInspectorNamespace
 
 		public void Close()
 		{
-			//Pass the rgba values to the associated game object
-			var light = parentObject.GetComponent<Light>();
-			light.color = GetColor;
-
-			onColorChanged = null;	
+			onColorChanged = null;
 			gameObject.SetActive( false );
 		}
 
@@ -173,9 +153,7 @@ namespace RuntimeInspectorNamespace
 			alphaSlider.Color = color;
 
 			if( onColorChanged != null )
-			{
-				onColorChanged(color);
-			}
+				onColorChanged( color );
 		}
 
 		private void OnAlphaChanged( float alpha )
