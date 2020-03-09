@@ -10,6 +10,7 @@
 *   Board To Bits Games. (Nov 6, 2015). Unity Tutorial: Radial Menu (Part 4) from Board to Bits [Video file]. Retrieved Feb 24, 2020, from https://www.youtube.com/watch?v=vPeCGO1miMk
 */
 
+using RuntimeInspectorNamespace;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -50,7 +51,7 @@ public class RadialMenu : MonoBehaviour
     /// <param name="rmc"> Activated instance of the menu controller </param>
     IEnumerator AnimateButtons (RadialMenuController rmc)
     {
-        const int offsetDistance = 140;
+        const int offsetDistance = 150;
         const float waitTime = 0.06f;
         int itemNumber = 0;
         foreach (var item in rmc.menuItems)
@@ -96,7 +97,9 @@ public class RadialMenu : MonoBehaviour
                         break;
 
                     case "ChangeColor":
-                        Instantiate(Resources.Load("Assets/Prefab/ColorPicker"));
+                        var colorpickerPrefab = Instantiate(Resources.Load("ColorPicker")) as GameObject;
+                        var colorpickerComponent = colorpickerPrefab.GetComponent<ColorPicker>();
+                        colorpickerComponent.parentObject = lightFixture;
                         break;
 
                     case "DeleteLight":
@@ -104,8 +107,27 @@ public class RadialMenu : MonoBehaviour
                         break;
 
                     case "AdjustRange":
-                        //Instantiate();
-                        //light.range
+                        //Display the range slider
+                        //var sliderPrefab = Instantiate(Resources.Load("RangeSlider")) as GameObject;
+
+                        ////Add the slider script to the light fixture
+                        //var sliderScript = lightFixture.AddComponent(typeof(AdjustLightRange)) as AdjustLightRange;
+
+                        //Register the OnValueChanged event of the slider to the lights range
+                        //var sliderComponent = sliderPrefab.GetComponentInChildren<Slider>();
+                        //sliderComponent.maxValue = 20;
+                        //sliderComponent.minValue = 0;
+                        //sliderComponent.value = light.range;
+                        //sliderComponent.wholeNumbers = true;
+                        //sliderComponent.onValueChanged.AddListener(sliderScript.AdjustRange);
+                        break;
+
+                    case "RANDY1":
+                        Debug.Log("RANDY1 selected");
+                        break;
+
+                    case "RANDY2":
+                        Debug.Log("RANDY2 selected");
                         break;
 
                     default:
