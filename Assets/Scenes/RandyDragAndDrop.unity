@@ -2205,7 +2205,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 6.7325516, y: 0.0056263465}
+  m_AnchoredPosition: {x: 6.7325516, y: 0.0058014914}
   m_SizeDelta: {x: 863.0002, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &930100928
@@ -3637,7 +3637,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1780831883}
   m_HandleRect: {fileID: 0}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 0.9999945
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -5295,6 +5295,7 @@ MonoBehaviour:
   inventoryTemplate: {fileID: 2680312744450772870, guid: 0dd94c9d5ae5b9e409a1ee5c2698bcfe,
     type: 3}
   HUDSelectedPanel: {fileID: 661799870}
+  InventoryFolder: {fileID: 0}
 --- !u!114 &8706723720525577944
 MonoBehaviour:
   m_ObjectHideFlags: 0
