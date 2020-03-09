@@ -8,6 +8,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,18 +31,14 @@ public class InventoryController : MonoBehaviour
 
     public GameObject HUDSelectedPanel;
 
+    public GameObject InventoryFolder;
+
     private List<GameObject> lightPrefabs = new List<GameObject>();
     private List<GameObject> lightPrefabsSelected = new List<GameObject>();
-    private List<GameObject> instantiatedLightObjectsInventorypanel = new List<GameObject>();
+    private static List<GameObject> instantiatedLightObjectsInventorypanel = new List<GameObject>();
 
     private void Start()
     {
-
-        LoadLightsFromResources();
-        LoadInventoryPanel();
-        LoadHudPanel();
-
-        CleanUpHUD();
         InventoryPanel.SetActive(false);
     }
 
@@ -51,10 +48,10 @@ public class InventoryController : MonoBehaviour
     //
     //*********************************************************************************************
 
-    public void LoadLightsFromResources()
+    public void LoadLightsFromResources(string folder)
     {
         // Load all the lights in the Resources/Lights folder
-        var LightsObject = Resources.LoadAll("Lights", typeof(GameObject));
+        var LightsObject = Resources.LoadAll("Lights/" + folder, typeof(GameObject));
         foreach (var lightObject in LightsObject)
         {
             GameObject lightPrefab = lightObject as GameObject;
@@ -64,10 +61,8 @@ public class InventoryController : MonoBehaviour
 
     private void LoadInventoryPanel()
     {
-        int i = 0;
         foreach (var light in lightPrefabs)
         {
-            i++;
             var test = lightPrefabs.Count;
             // Start creating the new Inventory item
             GameObject newItem = inventoryTemplate;
@@ -88,55 +83,67 @@ public class InventoryController : MonoBehaviour
 
                 // Set up the properties for each light
                 lightObject.transform.localScale = new Vector3(50f, 50f, 50f);
-                //lightObject.SetActive(true);
+                
                 lightObject.name = newLight.name;
-                lightObject.SetActive(false);
+                lightObject.SetActive(true);
 
                 // Set up event handlers to each light
                 string name = newLight.name;
-                item.GetComponent<Button>().onClick.AddListener(() => UserController.SwitchSelected(newLight.name, lightPrefabsSelected));
+                item.GetComponent<Button>().onClick.AddListener(() => UserController.SwitchSelected(newLight.name/*, lightPrefabsSelected*/));
                 instantiatedLightObjectsInventorypanel.Add(lightObject);
             }
         }
     }
 
-    private void CleanUpHUD()
-    {
-        // Disable all lights at launch
-        foreach (var light in lightPrefabsSelected)
-        {
-            light.SetActive(false);
-        }
+//DELETING HUD      //private void CleanUpHUD()
+    //{
+    //    // Disable all lights at launch
+    //    foreach (var light in lightPrefabsSelected)
+    //    {
+    //        light.SetActive(false);
+    //    }
 
 
-        // Find the last used light and place that in the HUD
-        if (PlayerPrefs.GetString("Selected") == "" || PlayerPrefs.GetString("Selected") == null)
-        {
-            lightPrefabsSelected[0].SetActive(true);
-            PlayerPrefs.SetString("Selected", lightPrefabsSelected[0].name);
-        }
-        else
-        {
-            foreach (var light in lightPrefabsSelected)
-            {
-                string[] name = light.name.Split('(');
-                if (name[0] == PlayerPrefs.GetString("Selected"))
-                {
-                    light.SetActive(true);
-                }
-            }
-        }
-    }
+    //    // Find the last used light and place that in the HUD
+    //    if (PlayerPrefs.GetString("Selected") == "" || PlayerPrefs.GetString("Selected") == null)
+    //    {
+    //        lightPrefabsSelected[0].SetActive(true);
+    //        PlayerPrefs.SetString("Selected", lightPrefabsSelected[0].name);
+    //    }
+    //    else
+    //    {
+    //        foreach (var light in lightPrefabsSelected)
+    //        {
+    //            string[] name = light.name.Split('(');
+    //            if (name[0] == PlayerPrefs.GetString("Selected"))
+    //            {
+    //                light.SetActive(true);
+    //            }
+    //        }
+    //    }
+    //}
 
-    private void LoadHudPanel()
-    {
-        foreach (var light in lightPrefabs)
-        {
-            GameObject newLight = light;
-            newLight.transform.localScale = new Vector3(50f, 50f, 50f);
-            lightPrefabsSelected.Add(Instantiate(newLight, HUDSelectedPanel.transform));
-        }
-    }
+    //DELETING HUD    //private void LoadHudPanel()
+    //{
+    //    // Clear all old data except the currently selected object before creating new data
+    //    lightPrefabsSelected.Clear();
+    //    foreach (Transform child in HUDSelectedPanel.transform)
+    //    {
+    //        string selectedLight = PlayerPrefs.GetString("Selected") + "(Clone)";
+    //        if (child.name != selectedLight)
+    //            Destroy(child.gameObject);
+    //    }
+
+    //    // Get a list of all the possible lights
+    //    foreach (var light in lightPrefabs)
+    //    {
+    //        GameObject newLight = light;
+    //        newLight.transform.localScale = new Vector3(50f, 50f, 50f);
+
+    //        lightPrefabsSelected.Add(Instantiate(newLight, HUDSelectedPanel.transform));
+
+    //    }
+    //}
 
     private void OpenInventory()
     {
@@ -164,7 +171,8 @@ public class InventoryController : MonoBehaviour
         }
         foreach(var light in instantiatedLightObjectsInventorypanel)
         {
-            light.SetActive(true);
+            if (light != null)
+                light.SetActive(true);
         }
     }
 
@@ -207,6 +215,69 @@ public class InventoryController : MonoBehaviour
         if (inventoryAnim.GetBool("open"))
             CloseInventory();
         else
+        {
+            // Enable folder buttons and child old inventory items
+            foreach (Transform child in inventoryContentPanel.transform)
+            {
+                if (child.gameObject.name.Contains("Clone"))
+                {
+                    Destroy(child.gameObject);
+                }
+                else
+                {
+                    child.gameObject.SetActive(true);
+                }
+            }
+
             OpenInventory();
+        }
+    }
+
+    public void LoadLights(string folder)
+    {
+        // Clear any lights that are currently stored before loading new lights
+        lightPrefabs.Clear();
+        instantiatedLightObjectsInventorypanel.Clear();
+
+        switch (folder)
+        {
+            case "Ceiling":
+                LoadLightsFromResources("Ceiling");
+                break;
+            case "Floor":
+                LoadLightsFromResources("Floor");
+                break;
+            case "Wall":
+                LoadLightsFromResources("Wall");
+                break;
+        }
+
+        // Disable folder buttons
+        foreach (Transform child in inventoryContentPanel.transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+
+        LoadInventoryPanel();
+//DELETING HUD        //LoadHudPanel();
+        //CleanUpHUD();
+    }
+
+    public static GameObject GetSelectedLight(string name)
+    {
+        //  Find the selected light from the list, given the name
+        GameObject newLight = instantiatedLightObjectsInventorypanel.Where(obj => obj.name == name).SingleOrDefault();
+        if (newLight != null)
+        {
+            // Strip off (Clone)
+            string[] stripClone = newLight.name.Split('(');
+            newLight.name = stripClone[0];
+
+            // Create that new GameObject and return it
+            GameObject newInstantiatedLight = Instantiate(newLight);
+            return newInstantiatedLight;
+        }
+        else
+            return null;
     }
 }

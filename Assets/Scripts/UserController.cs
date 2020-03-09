@@ -16,16 +16,16 @@ public class UserController : MonoBehaviour
     //                                  Public Methods
     //
     //*********************************************************************************************
-    static public void SwitchSelected(string selectedName, List<GameObject> lightPrefabsSelected)
+    static public void SwitchSelected(string selectedName/*, List<GameObject> lightPrefabsSelected*/)
     {
-        foreach (var light in lightPrefabsSelected)
-        {
-            string[] name = light.name.Split('(');
-            if (name[0] == selectedName)
-                light.SetActive(true);
-            else
-                light.SetActive(false);
-        }
+        //foreach (var light in lightPrefabsSelected)
+        //{
+        //    string[] name = light.name.Split('(');
+        //    if (name[0] == selectedName)
+        //        light.SetActive(true);
+        //    else
+        //        light.SetActive(false);
+        //}
         PlayerPrefs.SetString("Selected", selectedName);
     }
 }
