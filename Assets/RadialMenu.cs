@@ -51,7 +51,7 @@ public class RadialMenu : MonoBehaviour
     /// <param name="rmc"> Activated instance of the menu controller </param>
     IEnumerator AnimateButtons (RadialMenuController rmc)
     {
-        const int offsetDistance = 140;
+        const int offsetDistance = 150;
         const float waitTime = 0.06f;
         int itemNumber = 0;
         foreach (var item in rmc.menuItems)
@@ -120,8 +120,14 @@ public class RadialMenu : MonoBehaviour
                         //sliderComponent.value = light.range;
                         //sliderComponent.wholeNumbers = true;
                         //sliderComponent.onValueChanged.AddListener(sliderScript.AdjustRange);
+                        break;
 
+                    case "RANDY1":
+                        Debug.Log("RANDY1 selected");
+                        break;
 
+                    case "RANDY2":
+                        Debug.Log("RANDY2 selected");
                         break;
 
                     default:
