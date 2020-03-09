@@ -2205,7 +2205,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 6.7457037, y: 0.008343419}
+  m_AnchoredPosition: {x: 6.7325516, y: 0.0056263465}
   m_SizeDelta: {x: 863.0002, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &930100928
@@ -3637,8 +3637,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1780831883}
   m_HandleRect: {fileID: 0}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 0.99999213
+  m_Value: 1
+  m_Size: 0.9999945
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4304,7 +4304,7 @@ GameObject:
   - component: {fileID: 2052733299}
   - component: {fileID: 2052733298}
   m_Layer: 0
-  m_Name: LightFixture
+  m_Name: InteractiveObject
   m_TagString: LightFixture
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4558,7 +4558,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 596930342}
   m_HandleRect: {fileID: 596930341}
   m_Direction: 0
-  m_Value: -0.0078007593
+  m_Value: -0.0077830786
   m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
