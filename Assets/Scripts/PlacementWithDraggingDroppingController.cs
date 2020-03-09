@@ -110,33 +110,39 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
 
             if (placedObject == null)
             {
+                // Check if a light is select, or default to the basic ceiling lamp
                 string selectedLight = "";
                 if (PlayerPrefs.GetString("Selected") == "")
                 {
-                    selectedLight = "lamp1";
+                    selectedLight = "Circle_lamp3 + Point Light 1";
                 }
                 else
                 {
                     selectedLight = PlayerPrefs.GetString("Selected");
                 }
 
-                placedPrefab = Resources.Load<GameObject>("Lights/" + selectedLight);
-
+                // Get the selected light game object
+                placedPrefab = InventoryController.GetSelectedLight(selectedLight);
 
                 if (placedPrefab != null)
                 {
+                    // Create a new Quaternion with the hitPose. This will be where the user clicks (MUST BE ON A PLANE FOR HIT TO REGISTER)
                     var placedLocation = new Quaternion(hitPose.rotation.x, hitPose.rotation.y, hitPose.rotation.z, hitPose.rotation.w);
-                    Debug.Log("Placing Light");
+                    
+                    // Lets make sure the scale is set to 1, 1, 1 just incase it was messed up somewhere
                     placedPrefab.transform.localScale = new Vector3(1f, 1f, 1f);
                     placedPrefab.transform.eulerAngles = new Vector3(0f, 0f, 0f);
                     placedObject = Instantiate(placedPrefab, hitPose.position, placedLocation);
-                    Debug.Log("Light Placed");
-                    //var placedLocation = new Quaternion(hitPose.rotation.x, hitPose.rotation.y, hitPose.rotation.z - 180, hitPose.rotation.w);
-                    //placedObject = Instantiate(placedPrefab, hitPose.position, placedLocation);
+                    placedObject.SetActive(true);
+
+                    // Destroy the returned object from InventoryController.GetSelectedLight() since we dont need it anymore
+                    Destroy(placedPrefab);
+                    
                 }
             }
             else
             {
+                // This handles the drag and drop
                 if (onTouchHold)
                 {
                     placedObject.transform.position = hitPose.position;
