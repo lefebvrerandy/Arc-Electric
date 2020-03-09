@@ -61,8 +61,10 @@ public class InventoryController : MonoBehaviour
 
     private void LoadInventoryPanel()
     {
+        int i = 0;
         foreach (var light in lightPrefabs)
         {
+            i++;
             var test = lightPrefabs.Count;
             // Start creating the new Inventory item
             GameObject newItem = inventoryTemplate;
