@@ -31,8 +31,6 @@ public class InventoryController : MonoBehaviour
 
     public GameObject HUDSelectedPanel;
 
-    public GameObject InventoryFolder;
-
     private List<GameObject> lightPrefabs = new List<GameObject>();
     private List<GameObject> lightPrefabsSelected = new List<GameObject>();
     private static List<GameObject> instantiatedLightObjectsInventorypanel = new List<GameObject>();
@@ -61,10 +59,8 @@ public class InventoryController : MonoBehaviour
 
     private void LoadInventoryPanel()
     {
-        int i = 0;
         foreach (var light in lightPrefabs)
         {
-            i++;
             var test = lightPrefabs.Count;
             // Start creating the new Inventory item
             GameObject newItem = inventoryTemplate;
@@ -72,9 +68,6 @@ public class InventoryController : MonoBehaviour
             // This is a fail safe incase we dont load anything in.
             if (newItem != null)
             {
-                // Name the light. This will be displayed to the user later
-                newItem.name = "Light " + i;
-
                 // Create the new light using the prefab list
                 GameObject newLight = light;
                 newLight.transform.eulerAngles = new Vector3(15f, 0f, 0f);
@@ -84,7 +77,7 @@ public class InventoryController : MonoBehaviour
                 GameObject lightObject = Instantiate(newLight, item.transform);
 
                 // Set name of each item in List for the viewer
-                item.GetComponentInChildren<Text>().text = "Light " + i;
+                item.GetComponentInChildren<Text>().text = newLight.name;
 
                 // Set up the properties for each light
                 lightObject.transform.localScale = new Vector3(50f, 50f, 50f);
