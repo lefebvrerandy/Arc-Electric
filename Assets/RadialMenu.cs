@@ -51,7 +51,7 @@ public class RadialMenu : MonoBehaviour
     /// <param name="rmc"> Activated instance of the menu controller </param>
     IEnumerator AnimateButtons (RadialMenuController rmc)
     {
-        const int offsetDistance = 150;
+        const int offsetDistance = 140;
         const float waitTime = 0.06f;
         int itemNumber = 0;
         foreach (var item in rmc.menuItems)

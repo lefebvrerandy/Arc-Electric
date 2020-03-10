@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,7 +20,6 @@ namespace RuntimeInspectorNamespace
 				return m_instance;
 			}
 		}
-
 		public GameObject parentObject; 
 
 		private Color color;
@@ -35,7 +34,6 @@ namespace RuntimeInspectorNamespace
 				return color;
 			}
 		}
-
 #pragma warning disable 0649
 		[SerializeField]
 		private Image panel;
