@@ -48,10 +48,11 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
 
     private void Start()
     {
+        // Default the users selected light to our basic light.
         string selectedLight = "";
         if (PlayerPrefs.GetString("Selected") == "")
         {
-            selectedLight = "lamp1";
+            selectedLight = "Circle_lamp3 + Point Light 1";
         }
         else
         {
@@ -101,8 +102,15 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                 onTouchHold = false;
             }
         }
+
+        // If we are clicking a plane, let drop the object
         if (arRaycastManager.Raycast(touchPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon) && Input.touchCount > 0)
         {
+            // Lets first check to see if the user is clicking on a UI element. 
+            //  If they are, lets break out of this method and not place the object
+            if (gameObject.CompareTag("UserInterface"))
+                return;
+
             Pose hitPose = hits[0].pose;
 
             if (placedObject == null)
