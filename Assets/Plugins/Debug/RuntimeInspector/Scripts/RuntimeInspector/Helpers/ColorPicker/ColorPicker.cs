@@ -1,4 +1,4 @@
-using System.Globalization;
+﻿using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +20,7 @@ namespace RuntimeInspectorNamespace
 				return m_instance;
 			}
 		}
+
 		public GameObject parentObject; 
 
 		private Color color;
@@ -34,6 +35,7 @@ namespace RuntimeInspectorNamespace
 				return color;
 			}
 		}
+
 #pragma warning disable 0649
 		[SerializeField]
 		private Image panel;
@@ -78,11 +80,6 @@ namespace RuntimeInspectorNamespace
 		protected override void Awake()
 		{
 			base.Awake();
-
-			if (parentObject == null)
-			{
-				parentObject = new GameObject();
-			}
 
 			rInput.Initialize();
 			gInput.Initialize();
@@ -142,11 +139,7 @@ namespace RuntimeInspectorNamespace
 		{
 			//Pass the rgba values to the associated game object
 			var light = parentObject.GetComponent<Light>();
-			if(light != null)
-			{
-				light.color = GetColor;
-			}
-
+			light.color = GetColor;
 
 			onColorChanged = null;	
 			gameObject.SetActive( false );
