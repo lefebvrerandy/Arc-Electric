@@ -7,6 +7,9 @@ public class DeleteObject : MonoBehaviour
     [SerializeField]
     public GameObject ObjectToDestroy;
 
+    /// <summary>
+    /// Deletes the referenced object
+    /// </summary>
     public void DestroyGameObject()
     {
         if(ObjectToDestroy == null)
