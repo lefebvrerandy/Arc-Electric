@@ -16,7 +16,7 @@ using UnityEngine.XR.ARFoundation;
 
 
 /*
-*   NAME    : LightEstimation
+*   NAME    : LightEstimation 
 *   PURPOSE : Uses the recently received light estimation information for the physical environment
 *             as observed by an AR device, in order to adjust the AR shadows, and surface visuals
 */
