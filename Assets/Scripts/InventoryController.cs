@@ -78,17 +78,19 @@ public class InventoryController : MonoBehaviour
             {
                 // Create the new light using the prefab list
                 GameObject newLight = light;
-                newLight.transform.eulerAngles = new Vector3(15f, 0f, 0f);
+
+                // Adjust the rotation of the light
+                newLight.transform.eulerAngles = new Vector3(0f, 0f, 0f);
 
                 // Instantiate and set the parent
                 GameObject item = Instantiate(newItem, inventoryContentPanel.transform);
                 GameObject lightObject = Instantiate(newLight, item.transform);
 
                 // Set name of each item in List for the viewer
-                item.GetComponentInChildren<Text>().text = newLight.name;
+                //item.GetComponentInChildren<Text>().text = newLight.name;
 
                 // Set up the properties for each light
-                lightObject.transform.localScale = new Vector3(50f, 50f, 50f);
+                lightObject.transform.localScale = new Vector3(10f, 10f, 10f);
                 
                 lightObject.name = newLight.name;
                 lightObject.SetActive(true);
