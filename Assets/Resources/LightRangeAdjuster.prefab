@@ -954,7 +954,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1912336501394176}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9b936ee46322154dadea647aa6d8a72, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cac1e0762c36384cb15a01c10b56f64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ObjectToDestroy: {fileID: 1912336501394176}
@@ -967,7 +967,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1912336501394176}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04a4d48fdb19cb74396a80a56db6a3c9, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f508fcaf7f4737499a46fc60d1d93dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lightFixture: {fileID: 1912336501394176}
@@ -980,7 +980,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1912336501394176}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe36c34e6d6e2ca4ebd44f493521beb0, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f937e067ff15d34283b07a589fee979, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rmc: {fileID: 0}
@@ -1423,7 +1423,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5262664753189623626}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42a39ca4a4f241743bb65dfcec31e5d7, type: 3}
+  m_Script: {fileID: 11500000, guid: 89204fe5e89cf9841a866879a8f8432c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 5262664753189623626}
