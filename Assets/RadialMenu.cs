@@ -2,7 +2,7 @@
 *  FILE         : RadialMenu.cs
 *  PROJECT      : PROG3220-Systems Project
 *  PROGRAMMER   : Bence Karner
-*  DESCRIPTION  : Sole responsibility is to contain the RadialMenu class
+*  DESCRIPTION  : This file contains the RadialMenu class
 *  REFERENCES   : The following code was taken from a series of online tutorials, and altered to suit the needs of the project
 *   Board To Bits Games. (Nov 6, 2015). Unity Tutorial: Radial Menu (Part 1) from Board to Bits [Video file]. Retrieved Feb 24, 2020, from https://www.youtube.com/watch?v=WzQdc2rAdZc
 *   Board To Bits Games. (Nov 6, 2015). Unity Tutorial: Radial Menu (Part 2) from Board to Bits [Video file]. Retrieved Feb 24, 2020, from https://www.youtube.com/watch?v=HOOGIZu4nxo
@@ -14,6 +14,7 @@ using RuntimeInspectorNamespace;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering.PostProcessing;
 
 /// <summary>
 /// Controls the location of where the radial menu buttons are instantiated, and deletes the menu items when they're no longer selected
@@ -49,9 +50,9 @@ public class RadialMenu : MonoBehaviour
     /// Spawn the menu items in a circle around the point that was clicked on the game object
     /// </summary>
     /// <param name="rmc"> Activated instance of the menu controller </param>
-    IEnumerator AnimateButtons (RadialMenuController rmc)
+    private IEnumerator AnimateButtons (RadialMenuController rmc)
     {
-        const int offsetDistance = 140;
+        const int offsetDistance = 155;
         const float waitTime = 0.06f;
         int itemNumber = 0;
         foreach (var item in rmc.menuItems)
@@ -78,15 +79,19 @@ public class RadialMenu : MonoBehaviour
     }
 
     /// <summary>
-    /// Activate the selected menu item, and delete the menu
+    /// Performs the following tasks: 
+    /// *   Activates the selected menu item
+    /// *   Disables the radial menu until the selected item is closed
+    /// *   Deletes the menu upon releasing the button
+    /// *   Reverts the selected lights tag
     /// </summary>
-    void Update()
+    private void Update()
     {
         //Respond to mouse up, or finger up event
         if (Input.GetMouseButtonUp(0))
         {
             var lightFixture = GameObject.FindGameObjectWithTag("SelectedLight");
-
+            RadialMenuController radialMenuController = lightFixture.GetComponent<RadialMenuController>() as RadialMenuController;
             if (selectedButton)
             {
                 var light = lightFixture.GetComponent<Light>();
@@ -98,6 +103,14 @@ public class RadialMenu : MonoBehaviour
 
                     case "ChangeColor":
                         var colorpickerPrefab = Instantiate(Resources.Load("ColorPicker")) as GameObject;
+
+                        //Disable the radial menu until the window is closed
+                        var menuSignalScript = colorpickerPrefab.GetComponent<MenuSignal>();
+                        radialMenuController.menuEnabled = false;
+                        menuSignalScript.rmc = radialMenuController;
+
+    
+                        //Set the light to change in the submenu
                         var colorpickerComponent = colorpickerPrefab.GetComponent<ColorPicker>();
                         colorpickerComponent.parentObject = lightFixture;
                         break;
@@ -107,27 +120,40 @@ public class RadialMenu : MonoBehaviour
                         break;
 
                     case "AdjustRange":
-                        //Display the range slider
-                        //var sliderPrefab = Instantiate(Resources.Load("RangeSlider")) as GameObject;
+                        var lraPrefab = Instantiate(Resources.Load("LightRangeAdjuster")) as GameObject;
+                        
+                        //Disable the radial menu until the window is closed
+                        menuSignalScript = lraPrefab.GetComponent<MenuSignal>();
+                        radialMenuController.menuEnabled = false;
+                        menuSignalScript.rmc = radialMenuController;
+                        
 
-                        ////Add the slider script to the light fixture
-                        //var sliderScript = lightFixture.AddComponent(typeof(AdjustLightRange)) as AdjustLightRange;
-
-                        //Register the OnValueChanged event of the slider to the lights range
-                        //var sliderComponent = sliderPrefab.GetComponentInChildren<Slider>();
-                        //sliderComponent.maxValue = 20;
-                        //sliderComponent.minValue = 0;
-                        //sliderComponent.value = light.range;
-                        //sliderComponent.wholeNumbers = true;
-                        //sliderComponent.onValueChanged.AddListener(sliderScript.AdjustRange);
+                        //Set the light to change its range with the slider component
+                        var rangeScript = lraPrefab.GetComponent<AdjustLightRange>();
+                        rangeScript.lightFixture = lightFixture;
                         break;
 
-                    case "RANDY1":
-                        Debug.Log("RANDY1 selected");
+                    case "FlipLight":
+                        lightFixture.transform.rotation = new Quaternion(lightFixture.transform.rotation.x, lightFixture.transform.rotation.y, lightFixture.transform.rotation.z - 180, lightFixture.transform.rotation.w);
                         break;
 
-                    case "RANDY2":
-                        Debug.Log("RANDY2 selected");
+                    case "CameraOptions":
+                        var postProcessingPrefab = Instantiate(Resources.Load("PostProcessingAdjuster")) as GameObject;
+
+                        //Disable the radial menu until the window is closed
+                        menuSignalScript = postProcessingPrefab.GetComponent<MenuSignal>();
+                        radialMenuController.menuEnabled = false;
+                        menuSignalScript.rmc = radialMenuController;
+
+                        var ARCamera = GameObject.FindGameObjectWithTag("MainCamera");
+                        var postProcessVolume = ARCamera.GetComponent<PostProcessVolume>();
+
+                        //Set the lights to change when any of the three post processing effect sliders are changed
+                        var bloomSliderScript = postProcessingPrefab.GetComponent<AdjustBloom>();
+                        bloomSliderScript.ppv = postProcessVolume;
+
+                        var ambientOcclusionSliderScript = postProcessingPrefab.GetComponent<AdjustAmbientOcclusion>();
+                        ambientOcclusionSliderScript.ppv = postProcessVolume;
                         break;
 
                     default:

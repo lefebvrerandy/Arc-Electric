@@ -148,6 +148,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuLabel: {fileID: 1215327281446037560}
-  buttonPrefab: {fileID: 4976920411084445884, guid: 246101e5309a93a48980b49daaba0582,
+  buttonPrefab: {fileID: 4976920411084445884, guid: 2b805884bbc11a74b8df565d12ebb1d2,
     type: 3}
   selectedButton: {fileID: 0}
