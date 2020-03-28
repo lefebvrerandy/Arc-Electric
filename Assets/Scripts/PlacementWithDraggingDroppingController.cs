@@ -40,7 +40,7 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
     private List<GameObject> LightList = new List<GameObject>();
 
     // We'll use these to get the current lights name
-    private bool haveLight; 
+    private bool haveLight;
     private GameObject heldObject;
 
     // Used to keep the dropping of a light to once a second
@@ -48,8 +48,8 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
 
     private string selectedLight = "";
 
-    [SerializeField]
-    private Text DEBUGMENU;
+    //[SerializeField]
+    //private Text DEBUGMENU;
 
     private int amountOfPlacedLights;
 
@@ -67,7 +67,7 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
     private void Start()
     {
         // Default the users selected light to our basic light.
-        
+
         if (PlayerPrefs.GetString("Selected") == "")
         {
             selectedLight = "Circle_lamp3 + Point Light 1";
@@ -118,10 +118,10 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
             {
                 Ray ray = arCamera.ScreenPointToRay(touch.position);
                 RaycastHit hitObject;
-                
+
                 if (Physics.Raycast(ray, out hitObject))
                 {
-                    DEBUGMENU.text = hitObject.transform.name;
+                    //DEBUGMENU.text = hitObject.transform.name;
                     var selection = hitObject.transform;
                     var selectionRenderer = selection.GetComponent<Renderer>();
                     selectionRenderer.material.color = Color.red;
@@ -138,14 +138,14 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                     if ((hitObject.transform.CompareTag("UserInterface")))
                     //if (hitObject.transform.gameObject.CompareTag("UserInterface"))
                     {
-                        DEBUGMENU.text = "Touched UserInterface";
+                        //DEBUGMENU.text = "Touched UserInterface";
                         canDropLight = false;
                         return;
                     }
                     // If we are hitting an object
                     else if (hitObject.transform.name.Contains("lamp"))
                     {
-                        DEBUGMENU.text = "Touched Light";
+                        //DEBUGMENU.text = "Touched Light";
                         canDropLight = false;
                         onTouchHold = true;
 
@@ -164,7 +164,7 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                     // If we are hitting an placable area
                     else if (arRaycastManager.Raycast(touchPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon))
                     {
-                        DEBUGMENU.text = "Touched Placeable Plane";
+                        //DEBUGMENU.text = "Touched Placeable Plane";
                         canDropLight = true;
                     }
                 }
@@ -183,7 +183,7 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                     canDropLight = false;
 
 
-                    if (arRaycastManager.Raycast(touchPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon) 
+                    if (arRaycastManager.Raycast(touchPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon)
                         && placedObject == null)
                     {
                         Pose hitPose = hits[0].pose;
@@ -192,6 +192,14 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                         canDropLight = false;
 
                         // Get the selected light game object
+                        if (PlayerPrefs.GetString("Selected") == "")
+                        {
+                            selectedLight = "Circle_lamp3 + Point Light 1";
+                        }
+                        else
+                        {
+                            selectedLight = PlayerPrefs.GetString("Selected");
+                        }
                         placedPrefab = InventoryController.GetSelectedLight(selectedLight);
 
                         if (placedPrefab != null)
@@ -218,8 +226,8 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
             }
 
             // This is used to move the object, but only if we are currently holding one
-            if (onTouchHold 
-                && arRaycastManager.Raycast(touchPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon) 
+            if (onTouchHold
+                && arRaycastManager.Raycast(touchPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon)
                 && Input.touchCount > 0)
             {
                 Pose hitPose = hits[0].pose;
@@ -263,7 +271,7 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
     public void DeleteLight()
     {
         foreach (var item in LightList)
-        { 
+        {
             Destroy(item);
         }
         LightList.Clear();
