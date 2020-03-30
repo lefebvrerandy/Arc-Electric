@@ -109,6 +109,19 @@ public class RadialMenuController : MonoBehaviour
         else if (touch.phase == TouchPhase.Moved && parentGameObject != null)
         {
 
+            ////Raycast at the location of the touch
+            //Ray touchRay = GenerateTouchRay(Input.GetTouch(0).position);
+            //RaycastHit hit;
+
+            ////Determine if an object was hit by the raycast
+            //if (Physics.Raycast(touchRay.origin, touchRay.direction, out hit))
+            //{
+            //    //Get a reference to the touched object
+            //    var selectedObject = hit.transform.gameObject;
+
+
+            //    Debug.Log($"Touchphase.Moved raycase target: {selectedObject}");
+            //}
         }
 
         //No longer touching the screen

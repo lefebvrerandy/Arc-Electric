@@ -98,6 +98,8 @@ public class RadialButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         parentMenu.selectedButton = this;
         defaultColor = circle.color;
         circle.color = Color.white;
+
+        Debug.Log($"OnPointerEnter: {this.title}");
     }
 
 
@@ -106,7 +108,9 @@ public class RadialButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     /// </summary>
     public void OnPointerExit(PointerEventData eventData)
     {
-        parentMenu.selectedButton = null;
+        //parentMenu.selectedButton = null;
         circle.color = defaultColor;
+
+        Debug.Log("OnPointerExit");
     }
 }

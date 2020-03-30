@@ -87,11 +87,20 @@ public class RadialMenu : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        //Respond to mouse up, or finger up event
-        if (Input.GetMouseButtonUp(0))
+        //Was the screen touched?
+        if (Input.touchCount < 1)
         {
+            return;
+        }
+
+        var touch = Input.GetTouch(0);
+        if (touch.phase == TouchPhase.Ended)
+        {
+            //Debug.Log($"selected button is {selectedButton.title}");
+
             var lightFixture = GameObject.FindGameObjectWithTag("SelectedLight");
             RadialMenuController radialMenuController = lightFixture.GetComponent<RadialMenuController>() as RadialMenuController;
+
             if (selectedButton)
             {
                 var light = lightFixture.GetComponent<Light>();
@@ -109,7 +118,7 @@ public class RadialMenu : MonoBehaviour
                         radialMenuController.menuEnabled = false;
                         menuSignalScript.rmc = radialMenuController;
 
-    
+
                         //Set the light to change in the submenu
                         var colorpickerComponent = colorpickerPrefab.GetComponent<ColorPicker>();
                         colorpickerComponent.parentObject = lightFixture;
@@ -121,12 +130,12 @@ public class RadialMenu : MonoBehaviour
 
                     case "AdjustRange":
                         var lraPrefab = Instantiate(Resources.Load("LightRangeAdjuster")) as GameObject;
-                        
+
                         //Disable the radial menu until the window is closed
                         menuSignalScript = lraPrefab.GetComponent<MenuSignal>();
                         radialMenuController.menuEnabled = false;
                         menuSignalScript.rmc = radialMenuController;
-                        
+
 
                         //Set the light to change its range with the slider component
                         var rangeScript = lraPrefab.GetComponent<AdjustLightRange>();
@@ -162,7 +171,7 @@ public class RadialMenu : MonoBehaviour
             }
             Destroy(gameObject);
 
-            if(lightFixture != null)
+            if (lightFixture != null)
             {
                 lightFixture.tag = "LightFixture";
             }
