@@ -96,14 +96,11 @@ public class RadialMenu : MonoBehaviour
         var touch = Input.GetTouch(0);
         if (touch.phase == TouchPhase.Ended)
         {
-            //Debug.Log($"selected button is {selectedButton.title}");
-
             var lightFixture = GameObject.FindGameObjectWithTag("SelectedLight");
             RadialMenuController radialMenuController = lightFixture.GetComponent<RadialMenuController>() as RadialMenuController;
-
             if (selectedButton)
             {
-                var light = lightFixture.GetComponent<Light>();
+                var light = lightFixture.GetComponentInChildren<Light>();
                 switch (selectedButton.title)
                 {
                     case "ToggleLight":

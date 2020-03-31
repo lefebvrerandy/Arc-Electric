@@ -40,7 +40,7 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
     private List<GameObject> LightList = new List<GameObject>();
 
     // We'll use these to get the current lights name
-    private bool haveLight; 
+    private bool haveLight;
     private GameObject heldObject;
 
     // Used to keep the dropping of a light to once a second
@@ -67,7 +67,7 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
     private void Start()
     {
         // Default the users selected light to our basic light.
-        
+
         if (PlayerPrefs.GetString("Selected") == "")
         {
             selectedLight = "Circle_lamp3 + Point Light 1";
@@ -118,7 +118,7 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
             {
                 Ray ray = arCamera.ScreenPointToRay(touch.position);
                 RaycastHit hitObject;
-                
+
                 if (Physics.Raycast(ray, out hitObject))
                 {
                     //DEBUGMENU.text = hitObject.transform.name;
@@ -136,6 +136,7 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                     // Lets first check to see if the user is clicking on a UI element. 
                     //  If they are, lets break out of this method and not place the object
                     if ((hitObject.transform.CompareTag("UserInterface")))
+                    //if (hitObject.transform.gameObject.CompareTag("UserInterface"))
                     {
                         //DEBUGMENU.text = "Touched UserInterface";
                         canDropLight = false;
@@ -182,7 +183,7 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                     canDropLight = false;
 
 
-                    if (arRaycastManager.Raycast(touchPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon) 
+                    if (arRaycastManager.Raycast(touchPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon)
                         && placedObject == null)
                     {
                         Pose hitPose = hits[0].pose;
@@ -204,7 +205,7 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                         if (placedPrefab != null)
                         {
                             // Create a new Quaternion with the hitPose. This will be where the user clicks (MUST BE ON A PLANE FOR HIT TO REGISTER)
-                            var placedLocation = new Quaternion(hitPose.rotation.x, hitPose.rotation.y, hitPose.rotation.z-180, hitPose.rotation.w);
+                            var placedLocation = new Quaternion(hitPose.rotation.x, hitPose.rotation.y, hitPose.rotation.z, hitPose.rotation.w);
 
                             amountOfPlacedLights++;
 
@@ -225,8 +226,8 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
             }
 
             // This is used to move the object, but only if we are currently holding one
-            if (onTouchHold 
-                && arRaycastManager.Raycast(touchPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon) 
+            if (onTouchHold
+                && arRaycastManager.Raycast(touchPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon)
                 && Input.touchCount > 0)
             {
                 Pose hitPose = hits[0].pose;
@@ -270,7 +271,7 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
     public void DeleteLight()
     {
         foreach (var item in LightList)
-        { 
+        {
             Destroy(item);
         }
         LightList.Clear();

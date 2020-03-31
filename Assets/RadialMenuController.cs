@@ -60,16 +60,16 @@ public class RadialMenuController : MonoBehaviour
     /// <summary>
     /// Mark the parent object as selected, and spawn the radial menu when the item is clicked
     /// </summary>
-    private void OnMouseDown()
-    {
-        if(!menuEnabled || !mouseEnabled)
-        {
-            return;
-        }
+    //private void OnMouseDown()
+    //{
+    //    if(!menuEnabled || !mouseEnabled)
+    //    {
+    //        return;
+    //    }
         
-        parentGameObject.tag = "SelectedLight";
-        RadialMenuSpawner.instance.SpawnMenu(this);
-    }
+    //    parentGameObject.tag = "SelectedLight";
+    //    RadialMenuSpawner.instance.SpawnMenu(this);
+    //}
 
 
     /// <summary>
@@ -99,31 +99,13 @@ public class RadialMenuController : MonoBehaviour
             if (Physics.Raycast(touchRay.origin, touchRay.direction, out hit))
             {
                 //Get a reference to the touched object
-                parentGameObject = hit.transform.gameObject;
+                //parentGameObject = hit.transform.gameObject;
+                parentGameObject = gameObject;
+                Debug.Log($"ParentGameObject: {parentGameObject}");
                 parentGameObject.tag = "SelectedLight";
                 RadialMenuSpawner.instance.SpawnMenu(this);
             }
         }
-
-        //Dragging finger across the screen
-        else if (touch.phase == TouchPhase.Moved && parentGameObject != null)
-        {
-
-            ////Raycast at the location of the touch
-            //Ray touchRay = GenerateTouchRay(Input.GetTouch(0).position);
-            //RaycastHit hit;
-
-            ////Determine if an object was hit by the raycast
-            //if (Physics.Raycast(touchRay.origin, touchRay.direction, out hit))
-            //{
-            //    //Get a reference to the touched object
-            //    var selectedObject = hit.transform.gameObject;
-
-
-            //    Debug.Log($"Touchphase.Moved raycase target: {selectedObject}");
-            //}
-        }
-
         //No longer touching the screen
         else if (touch.phase == TouchPhase.Ended && parentGameObject != null)
         {

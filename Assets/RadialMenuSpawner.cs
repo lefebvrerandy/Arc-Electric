@@ -10,6 +10,7 @@
 *   Board To Bits Games. (Nov 6, 2015). Unity Tutorial: Radial Menu (Part 4) from Board to Bits [Video file]. Retrieved Feb 24, 2020, from https://www.youtube.com/watch?v=vPeCGO1miMk
 */
 
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -43,7 +44,7 @@ public class RadialMenuSpawner : MonoBehaviour
     /// <param name="rmc"> Menu controller attached to the selected game object</param>
     public void SpawnMenu(RadialMenuController rmc)
     {
-        RadialMenu radialMenu = Instantiate(menuPrefab) as RadialMenu;
+         RadialMenu radialMenu = Instantiate(menuPrefab) as RadialMenu;
 
         //Disable the worldPositionStays option
         //     i.e. Do not allow the parent-relative position, scale and rotation to be modified such that

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5282252018307094595}
   - component: {fileID: 5282252018308192899}
   - component: {fileID: -1846112607954148381}
+  - component: {fileID: 6765616355690645393}
   m_Layer: 0
   m_Name: Square_lamp10 + Point Light 1
   m_TagString: Untagged
@@ -26,14 +27,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5282252018310382659}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.57240367, y: 7.949417, z: -0.3813913}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6227927114740564035}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5282252018307094595
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -93,6 +94,42 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.9207945, y: 0.18322644, z: 1.9207945}
   m_Center: {x: 0.000000029802322, y: -0.09103063, z: 0}
+--- !u!114 &6765616355690645393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5282252018310382659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03a0d98f9aa1ac94587fe022a908ba12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentGameObject: {fileID: 0}
+  menuEnabled: 1
+  mouseEnabled: 1
+  touchEnabled: 1
+  menuTitle: Settings
+  menuItems:
+  - color: {r: 1, g: 1, b: 1, a: 0}
+    sprite: {fileID: 21300000, guid: 6fea72ae97d570643acb05a41b28942d, type: 3}
+    title: DeleteLight
+  - color: {r: 1, g: 1, b: 1, a: 0}
+    sprite: {fileID: 21300000, guid: 02495815a359341499fa856684061da6, type: 3}
+    title: ToggleLight
+  - color: {r: 1, g: 1, b: 1, a: 0}
+    sprite: {fileID: 21300000, guid: 6155f5a7bb539174c8d87d03c455c007, type: 3}
+    title: ChangeColor
+  - color: {r: 1, g: 1, b: 1, a: 0}
+    sprite: {fileID: 21300000, guid: f756c48c827138048930f8ee42a520d2, type: 3}
+    title: AdjustRange
+  - color: {r: 1, g: 1, b: 1, a: 0}
+    sprite: {fileID: 21300000, guid: 2ee3e9537f4136b42a1389ad02e9630d, type: 3}
+    title: FlipLight
+  - color: {r: 1, g: 1, b: 1, a: 0}
+    sprite: {fileID: 21300000, guid: 95c99b63d0645e54498497ab983d8736, type: 3}
+    title: CameraOptions
 --- !u!1 &6277103228147239127
 GameObject:
   m_ObjectHideFlags: 0
