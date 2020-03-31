@@ -438,6 +438,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+      - m_Target: {fileID: 5549471025153032686}
+        m_MethodName: EnableLightPlacement
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1909667528820462759}
         m_MethodName: DestroyGameObject
         m_Mode: 1
@@ -832,6 +843,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+      - m_Target: {fileID: 5549471025153032686}
+        m_MethodName: EnableLightPlacement
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1909667528820462759}
         m_MethodName: DestroyGameObject
         m_Mode: 1
@@ -858,6 +880,7 @@ GameObject:
   - component: {fileID: 1909667528820462759}
   - component: {fileID: 1270239850}
   - component: {fileID: 1823222189}
+  - component: {fileID: 5549471025153032686}
   m_Layer: 5
   m_Name: LightRangeAdjuster
   m_TagString: Untagged
@@ -970,7 +993,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f508fcaf7f4737499a46fc60d1d93dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightFixture: {fileID: 1912336501394176}
+  lightFixture: {fileID: 0}
 --- !u!114 &1823222189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -984,6 +1007,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rmc: {fileID: 0}
+--- !u!114 &5549471025153032686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912336501394176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 682ad7c3395cc464ba6ce85b57dd9590, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &757812446058910972
 GameObject:
   m_ObjectHideFlags: 0

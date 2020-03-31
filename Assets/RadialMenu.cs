@@ -93,85 +93,123 @@ public class RadialMenu : MonoBehaviour
             return;
         }
 
+        //Only activate the menu once they lift their finger off the screen
         var touch = Input.GetTouch(0);
-        if (touch.phase == TouchPhase.Ended)
+        if (touch.phase != TouchPhase.Ended)
         {
-            var lightFixture = GameObject.FindGameObjectWithTag("SelectedLight");
-            RadialMenuController radialMenuController = lightFixture.GetComponent<RadialMenuController>() as RadialMenuController;
-            if (selectedButton)
+            return;
+        }
+
+        var lightFixture = GameObject.FindGameObjectWithTag("SelectedLight");
+        Debug.Log($"LightFixture is: {lightFixture.name}");
+
+
+        RadialMenuController radialMenuController = GameObject.Find("LightRadialMenuController").GetComponent<RadialMenuController>() as RadialMenuController;
+        Debug.Log($"Selected Button is: {selectedButton.title}");
+        if (selectedButton)
+        {
+            var light = lightFixture.GetComponentInChildren<Light>() as Light;
+            Debug.Log($"Light Component is: {light}");
+            switch (selectedButton.title)
             {
-                var light = lightFixture.GetComponentInChildren<Light>();
-                switch (selectedButton.title)
-                {
-                    case "ToggleLight":
-                        light.enabled = !light.enabled;
-                        break;
+                case "ToggleLight":
+                    light.enabled = !light.enabled;
+                    break;
 
-                    case "ChangeColor":
-                        var colorpickerPrefab = Instantiate(Resources.Load("ColorPicker")) as GameObject;
+                case "ChangeColor":
+                    var colorpickerPrefab = Instantiate(Resources.Load("ColorPicker")) as GameObject;
 
-                        //Disable the radial menu until the window is closed
-                        var menuSignalScript = colorpickerPrefab.GetComponent<MenuSignal>();
-                        radialMenuController.menuEnabled = false;
-                        menuSignalScript.rmc = radialMenuController;
+                    //Disable the radial menu until the window is closed
+                    var menuSignalScript = colorpickerPrefab.GetComponent<MenuSignal>();
+                    radialMenuController.menuEnabled = false;
+                    menuSignalScript.rmc = radialMenuController;
 
 
-                        //Set the light to change in the submenu
-                        var colorpickerComponent = colorpickerPrefab.GetComponent<ColorPicker>();
-                        colorpickerComponent.parentObject = lightFixture;
-                        break;
+                    //Set the light to change in the submenu
+                    var colorpickerComponent = colorpickerPrefab.GetComponent<ColorPicker>();
+                    colorpickerComponent.light = light;
+                    break;
 
-                    case "DeleteLight":
-                        Destroy(lightFixture);
-                        break;
+                case "DeleteLight":
+                    Destroy(lightFixture);
+                    break;
 
-                    case "AdjustRange":
-                        var lraPrefab = Instantiate(Resources.Load("LightRangeAdjuster")) as GameObject;
+                case "AdjustRange":
+                    var lraPrefab = Instantiate(Resources.Load("LightRangeAdjuster")) as GameObject;
 
-                        //Disable the radial menu until the window is closed
-                        menuSignalScript = lraPrefab.GetComponent<MenuSignal>();
-                        radialMenuController.menuEnabled = false;
-                        menuSignalScript.rmc = radialMenuController;
+                    //Disable the radial menu until the window is closed
+                    menuSignalScript = lraPrefab.GetComponent<MenuSignal>();
+                    radialMenuController.menuEnabled = false;
+                    menuSignalScript.rmc = radialMenuController;
 
 
-                        //Set the light to change its range with the slider component
-                        var rangeScript = lraPrefab.GetComponent<AdjustLightRange>();
-                        rangeScript.lightFixture = lightFixture;
-                        break;
+                    //Set the light to change its range with the slider component
+                    var rangeScript = lraPrefab.GetComponent<AdjustLightRange>();
+                    rangeScript.light = light;
+                    break;
 
-                    case "FlipLight":
-                        lightFixture.transform.rotation = new Quaternion(lightFixture.transform.rotation.x, lightFixture.transform.rotation.y, lightFixture.transform.rotation.z - 180, lightFixture.transform.rotation.w);
-                        break;
+                case "FlipLight":
+                    lightFixture.transform.rotation = new Quaternion(lightFixture.transform.rotation.x, lightFixture.transform.rotation.y, lightFixture.transform.rotation.z - 180, lightFixture.transform.rotation.w);
+                    break;
 
-                    case "CameraOptions":
-                        var postProcessingPrefab = Instantiate(Resources.Load("PostProcessingAdjuster")) as GameObject;
+                case "CameraOptions":
+                    var postProcessingPrefab = Instantiate(Resources.Load("PostProcessingAdjuster")) as GameObject;
 
-                        //Disable the radial menu until the window is closed
-                        menuSignalScript = postProcessingPrefab.GetComponent<MenuSignal>();
-                        radialMenuController.menuEnabled = false;
-                        menuSignalScript.rmc = radialMenuController;
+                    //Disable the radial menu until the window is closed
+                    menuSignalScript = postProcessingPrefab.GetComponent<MenuSignal>();
+                    radialMenuController.menuEnabled = false;
+                    menuSignalScript.rmc = radialMenuController;
 
-                        var ARCamera = GameObject.FindGameObjectWithTag("MainCamera");
-                        var postProcessVolume = ARCamera.GetComponent<PostProcessVolume>();
+                    var ARCamera = GameObject.FindGameObjectWithTag("MainCamera");
+                    var postProcessVolume = ARCamera.GetComponent<PostProcessVolume>();
 
-                        //Set the lights to change when any of the three post processing effect sliders are changed
-                        var bloomSliderScript = postProcessingPrefab.GetComponent<AdjustBloom>();
-                        bloomSliderScript.ppv = postProcessVolume;
+                    //Set the lights to change when any of the three post processing effect sliders are changed
+                    var bloomSliderScript = postProcessingPrefab.GetComponent<AdjustBloom>();
+                    bloomSliderScript.ppv = postProcessVolume;
 
-                        var ambientOcclusionSliderScript = postProcessingPrefab.GetComponent<AdjustAmbientOcclusion>();
-                        ambientOcclusionSliderScript.ppv = postProcessVolume;
-                        break;
+                    var ambientOcclusionSliderScript = postProcessingPrefab.GetComponent<AdjustAmbientOcclusion>();
+                    ambientOcclusionSliderScript.ppv = postProcessVolume;
+                    break;
 
-                    default:
-                        break;
-                }
+
+                case "DragLight":
+                    PlacementWithDraggingDroppingController.EnableLightDrag = true;
+                    break;
+
+
+                case "RotateLight":
+                    //lraPrefab = Instantiate(Resources.Load("LightRangeAdjuster")) as GameObject;
+
+                    ////Disable the radial menu until the window is closed
+                    //menuSignalScript = lraPrefab.GetComponent<MenuSignal>();
+                    //radialMenuController.menuEnabled = false;
+                    //menuSignalScript.rmc = radialMenuController;
+
+
+                    ////Set the light to change its range with the slider component
+                    //rangeScript = lraPrefab.GetComponent<AdjustLightRange>();
+                    //rangeScript.light = light;
+                    break;
+
+                default:
+                    break;
             }
+        }
+        else
+        {
+            PlacementWithDraggingDroppingController.EnableLightPlacement = true;
+        }
+           
+
+        if (lightFixture != null)
+        {
+            lightFixture.tag = "LightFixture";
+        }
+
+        var radialMenuInstances = GameObject.FindObjectsOfType<RadialMenu>();
+        foreach (var rmi in radialMenuInstances)
+        {
             Destroy(gameObject);
-
-            if (lightFixture != null)
-            {
-                lightFixture.tag = "LightFixture";
-            }
         }
     }
 }

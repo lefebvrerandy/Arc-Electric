@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1288823368112129162}
   - component: {fileID: 3715657140646546972}
   - component: {fileID: 2347512387390616856}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -284,8 +284,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8650278617802634486}
   - component: {fileID: 182146688363870627}
-  - component: {fileID: 4333709131351095886}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall_lamp1 + Spot Light 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -322,39 +321,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4333709131351095886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8650278617803122902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03a0d98f9aa1ac94587fe022a908ba12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentGameObject: {fileID: 0}
-  menuEnabled: 1
-  mouseEnabled: 1
-  touchEnabled: 1
-  menuTitle: Settings
-  menuItems:
-  - color: {r: 1, g: 1, b: 1, a: 0}
-    sprite: {fileID: 21300000, guid: 6fea72ae97d570643acb05a41b28942d, type: 3}
-    title: DeleteLight
-  - color: {r: 1, g: 1, b: 1, a: 0}
-    sprite: {fileID: 21300000, guid: 02495815a359341499fa856684061da6, type: 3}
-    title: ToggleLight
-  - color: {r: 1, g: 1, b: 1, a: 0}
-    sprite: {fileID: 21300000, guid: 6155f5a7bb539174c8d87d03c455c007, type: 3}
-    title: ChangeColor
-  - color: {r: 1, g: 1, b: 1, a: 0}
-    sprite: {fileID: 21300000, guid: f756c48c827138048930f8ee42a520d2, type: 3}
-    title: AdjustRange
-  - color: {r: 1, g: 1, b: 1, a: 0}
-    sprite: {fileID: 21300000, guid: 2ee3e9537f4136b42a1389ad02e9630d, type: 3}
-    title: FlipLight
-  - color: {r: 1, g: 1, b: 1, a: 0}
-    sprite: {fileID: 21300000, guid: 95c99b63d0645e54498497ab983d8736, type: 3}
-    title: CameraOptions

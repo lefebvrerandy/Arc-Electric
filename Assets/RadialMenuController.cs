@@ -19,7 +19,7 @@ using UnityEngine;
 /// </summary>
 public class RadialMenuController : MonoBehaviour
 {
-    public GameObject parentGameObject = null;
+    public GameObject SelectedLightFixture = null;
     public bool menuEnabled = true;
     public bool mouseEnabled = true;
     public bool touchEnabled = false;
@@ -67,7 +67,7 @@ public class RadialMenuController : MonoBehaviour
     //        return;
     //    }
         
-    //    parentGameObject.tag = "SelectedLight";
+    //    SelectedLightFixture.tag = "SelectedLight";
     //    RadialMenuSpawner.instance.SpawnMenu(this);
     //}
 
@@ -96,20 +96,21 @@ public class RadialMenuController : MonoBehaviour
             RaycastHit hit;
 
             //Determine if an object was hit by the raycast
-            if (Physics.Raycast(touchRay.origin, touchRay.direction, out hit))
+            //1 << LayerMask.NameToLayer("Light")
+            if (Physics.Raycast(touchRay.origin, touchRay.direction, out hit, Mathf.Infinity, (1<<8)))
             {
                 //Get a reference to the touched object
-                //parentGameObject = hit.transform.gameObject;
-                parentGameObject = gameObject;
-                Debug.Log($"ParentGameObject: {parentGameObject}");
-                parentGameObject.tag = "SelectedLight";
+                SelectedLightFixture = hit.transform.gameObject;
+                SelectedLightFixture.tag = "SelectedLight";
                 RadialMenuSpawner.instance.SpawnMenu(this);
+                PlacementWithDraggingDroppingController.EnableLightPlacement = false;
+                PlacementWithDraggingDroppingController.EnableLightDrag = false;
             }
         }
         //No longer touching the screen
-        else if (touch.phase == TouchPhase.Ended && parentGameObject != null)
+        else if (touch.phase == TouchPhase.Ended && SelectedLightFixture != null)
         {
-            parentGameObject = null;
+            SelectedLightFixture = null;
         }
     }
 

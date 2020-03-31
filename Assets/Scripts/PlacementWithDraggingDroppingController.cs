@@ -26,6 +26,10 @@ using UnityEngine.XR.ARFoundation;
 [RequireComponent(typeof(ARRaycastManager))]
 public class PlacementWithDraggingDroppingController : MonoBehaviour
 {
+
+    public static bool EnableLightPlacement = true;
+    public static bool EnableLightDrag = true;
+
     [SerializeField]
     private Camera arCamera;
 
@@ -204,22 +208,26 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
 
                         if (placedPrefab != null)
                         {
-                            // Create a new Quaternion with the hitPose. This will be where the user clicks (MUST BE ON A PLANE FOR HIT TO REGISTER)
-                            var placedLocation = new Quaternion(hitPose.rotation.x, hitPose.rotation.y, hitPose.rotation.z, hitPose.rotation.w);
 
-                            amountOfPlacedLights++;
+                            if(EnableLightPlacement)
+                            {
+                                // Create a new Quaternion with the hitPose. This will be where the user clicks (MUST BE ON A PLANE FOR HIT TO REGISTER)
+                                var placedLocation = new Quaternion(hitPose.rotation.x, hitPose.rotation.y, hitPose.rotation.z, hitPose.rotation.w);
 
-                            // Lets make sure the scale is set to 1, 1, 1 just incase it was messed up somewhere
-                            placedPrefab.transform.localScale = new Vector3(1f, 1f, 1f);
-                            placedPrefab.transform.eulerAngles = new Vector3(0f, 0f, 0f);
-                            placedObject = Instantiate(placedPrefab, hitPose.position, placedLocation);
-                            placedObject.name = placedPrefab.name + amountOfPlacedLights;
-                            placedObject.SetActive(true);
-                            LightList.Add(placedObject);
-                            placedObject = null;
+                                amountOfPlacedLights++;
 
-                            // Destroy the returned object from InventoryController.GetSelectedLight() since we dont need it anymore
-                            Destroy(placedPrefab);
+                                // Lets make sure the scale is set to 1, 1, 1 just incase it was messed up somewhere
+                                placedPrefab.transform.localScale = new Vector3(1f, 1f, 1f);
+                                placedPrefab.transform.eulerAngles = new Vector3(0f, 0f, 0f);
+                                placedObject = Instantiate(placedPrefab, hitPose.position, placedLocation);
+                                placedObject.name = placedPrefab.name + amountOfPlacedLights;
+                                placedObject.SetActive(true);
+                                LightList.Add(placedObject);
+                                placedObject = null;
+
+                                // Destroy the returned object from InventoryController.GetSelectedLight() since we dont need it anymore
+                                Destroy(placedPrefab);
+                            }
                         }
                     }
                 }
@@ -250,7 +258,7 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
     private void ToggleLight(GameObject clickedObject)
     {
         //var lights = clickedObject.GetComponentsInChildren(typeof(Light));
-        clickedObject.SetActive(false);
+        //clickedObject.SetActive(false);
         //if (clickedObject.activeSelf == true )
         //{
         //    clickedObject.SetActive(false);

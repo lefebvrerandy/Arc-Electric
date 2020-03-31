@@ -20,7 +20,7 @@ namespace RuntimeInspectorNamespace
 				return m_instance;
 			}
 		}
-		public GameObject parentObject; 
+		public Light light; 
 
 		private Color color;
 		public Color GetColor
@@ -79,13 +79,6 @@ namespace RuntimeInspectorNamespace
 		{
 			base.Awake();
 
-            if (parentObject == null)
-            {
-                parentObject = new GameObject();
-            }
-
-
-
             rInput.Initialize();
 			gInput.Initialize();
 			bInput.Initialize();
@@ -143,7 +136,6 @@ namespace RuntimeInspectorNamespace
 		public void Close()
 		{
 			//Pass the rgba values to the associated game object
-			var light = parentObject.GetComponent<Light>();
             if(light != null)
             {
                 light.color = GetColor;

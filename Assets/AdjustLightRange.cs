@@ -6,7 +6,7 @@
 /// </summary>
 public class AdjustLightRange : MonoBehaviour
 {
-    public GameObject lightFixture;
+    public Light light;
 
     /// <summary>
     /// Change the lights range to the provided argument
@@ -14,7 +14,6 @@ public class AdjustLightRange : MonoBehaviour
     /// <param name="value">New value for the light range</param>
     public void AdjustRange (float value)
     {
-        var light = lightFixture.GetComponent<Light>();
         light.range = value;
     }
 }
