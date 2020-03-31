@@ -48,8 +48,8 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
 
     private string selectedLight = "";
 
-    [SerializeField]
-    private Text DEBUGMENU;
+    //[SerializeField]
+    //private Text DEBUGMENU;
 
     private int amountOfPlacedLights;
 
@@ -121,7 +121,7 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                 
                 if (Physics.Raycast(ray, out hitObject))
                 {
-                    DEBUGMENU.text = hitObject.transform.name;
+                    //DEBUGMENU.text = hitObject.transform.name;
                     var selection = hitObject.transform;
                     var selectionRenderer = selection.GetComponent<Renderer>();
                     selectionRenderer.material.color = Color.red;
@@ -136,16 +136,15 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                     // Lets first check to see if the user is clicking on a UI element. 
                     //  If they are, lets break out of this method and not place the object
                     if ((hitObject.transform.CompareTag("UserInterface")))
-                    //if (hitObject.transform.gameObject.CompareTag("UserInterface"))
                     {
-                        DEBUGMENU.text = "Touched UserInterface";
+                        //DEBUGMENU.text = "Touched UserInterface";
                         canDropLight = false;
                         return;
                     }
                     // If we are hitting an object
                     else if (hitObject.transform.name.Contains("lamp"))
                     {
-                        DEBUGMENU.text = "Touched Light";
+                        //DEBUGMENU.text = "Touched Light";
                         canDropLight = false;
                         onTouchHold = true;
 
@@ -164,7 +163,7 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                     // If we are hitting an placable area
                     else if (arRaycastManager.Raycast(touchPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon))
                     {
-                        DEBUGMENU.text = "Touched Placeable Plane";
+                        //DEBUGMENU.text = "Touched Placeable Plane";
                         canDropLight = true;
                     }
                 }
@@ -192,12 +191,20 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                         canDropLight = false;
 
                         // Get the selected light game object
+                        if (PlayerPrefs.GetString("Selected") == "")
+                        {
+                            selectedLight = "Circle_lamp3 + Point Light 1";
+                        }
+                        else
+                        {
+                            selectedLight = PlayerPrefs.GetString("Selected");
+                        }
                         placedPrefab = InventoryController.GetSelectedLight(selectedLight);
 
                         if (placedPrefab != null)
                         {
                             // Create a new Quaternion with the hitPose. This will be where the user clicks (MUST BE ON A PLANE FOR HIT TO REGISTER)
-                            var placedLocation = new Quaternion(hitPose.rotation.x, hitPose.rotation.y, hitPose.rotation.z, hitPose.rotation.w);
+                            var placedLocation = new Quaternion(hitPose.rotation.x, hitPose.rotation.y, hitPose.rotation.z-180, hitPose.rotation.w);
 
                             amountOfPlacedLights++;
 
