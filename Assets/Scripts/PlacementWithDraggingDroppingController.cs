@@ -126,11 +126,6 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
 
                 if (Physics.Raycast(ray, out hitObject))
                 {
-                    //DEBUGMENU.text = hitObject.transform.name;
-                    var selection = hitObject.transform;
-                    var selectionRenderer = selection.GetComponent<Renderer>();
-                    selectionRenderer.material.color = Color.red;
-
                     /*
                      * Three options here. 
                      * a1. We can be touching an User Interface object
