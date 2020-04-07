@@ -19,23 +19,19 @@ using UnityEngine.EventSystems;
 /// Used to define the properties and behavior of the game objects assigned as buttons in the radial menu. 
 /// Responds to pointer enters/exits events, and controls how the button "animates" into the scene.
 /// </summary>
-public class RadialButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class RadialButton : MonoBehaviour
 {
     #region Properties
+
     /// <summary>
     /// UI Image element thats in the shape of a circle, and acts as a background of each menu item
     /// </summary>
-    public Image circle; 
-    
+    public Button button;
+
     /// <summary>
     /// Color of the menu items background
     /// </summary>
     public Image icon; 
-    
-    /// <summary>
-    /// Name of the menu item
-    /// </summary>
-    public string title; 
     
     /// <summary>
     /// Reference to the radial menu where the button has been instantiated
@@ -47,11 +43,9 @@ public class RadialButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     /// </summary>
     public float animSpeed;
 
-    /// <summary>
-    /// Default color of the buttons background, set in the OnPointerEnter, and OnPointerExit events
-    /// </summary>
-    private Color defaultColor;
+
     #endregion
+    #region PublicMethods
 
 
     /// <summary>
@@ -63,15 +57,18 @@ public class RadialButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     }
 
 
+    #endregion
+    #region PrivateMethods
+
+
     /// <summary>
     /// The buttons will "grow" in size, for the length of time specified by the AnimationLength property
     /// </summary>
     /// <returns></returns>
-    IEnumerator AnimateButtonIn()
+    private IEnumerator AnimateButtonIn()
     {
-        //Default the buttons size to zero
+        //Scale the button down to 0 upon instantiation
         transform.localScale = Vector3.zero;
-        
         
         float timer = 0f;
         while(timer < (1 / animSpeed))
@@ -90,23 +87,5 @@ public class RadialButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     }
 
 
-    /// <summary>
-    /// When the pointer goes over the button, set it as the selected item
-    /// </summary>
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        parentMenu.selectedButton = this;
-        defaultColor = circle.color;
-        circle.color = Color.white;
-    }
-
-
-    /// <summary>
-    /// When leaving the buttons space it is no longer labeled as selected
-    /// </summary>
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        //parentMenu.selectedButton = null;
-        circle.color = defaultColor;
-    }
-}
+    #endregion
+}//class

@@ -1,7 +1,7 @@
 ﻿/*
 *  FILE          : PlacementWithDraggingDroppingController.cs
 *  PROJECT       : PROG 3220 - Systems Project
-*  PROGRAMMER    : Randy Lefebvre, Bence Karner, Lucas Roes, Kyle Horsley
+*  PROGRAMMER    : Randy Lefebvre
 *  DESCRIPTION   : This file contains the placement controller, and the relevant code to control the applications UI
 *  REFERENCE     : Script format was copied and altered from the following sources,
 *  Valecillos. (2019). AR Foundation with Unity3d and Adding Dragging Functionality with 
@@ -126,9 +126,9 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                 if (Physics.Raycast(ray, out hitObject))
                 {
                     //DEBUGMENU.text = hitObject.transform.name;
-                    var selection = hitObject.transform;
-                    var selectionRenderer = selection.GetComponent<Renderer>();
-                    selectionRenderer.material.color = Color.red;
+                    //var selection = hitObject.transform;
+                    //var selectionRenderer = selection.GetComponent<Renderer>();
+                    //selectionRenderer.material.color = Color.red;
 
                     /*
                      * Three options here. 
@@ -209,7 +209,7 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                         if (placedPrefab != null)
                         {
 
-                            if(EnableLightPlacement)
+                            if (EnableLightPlacement)
                             {
                                 // Create a new Quaternion with the hitPose. This will be where the user clicks (MUST BE ON A PLANE FOR HIT TO REGISTER)
                                 var placedLocation = new Quaternion(hitPose.rotation.x, hitPose.rotation.y, hitPose.rotation.z, hitPose.rotation.w);
@@ -222,6 +222,9 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                                 placedObject = Instantiate(placedPrefab, hitPose.position, placedLocation);
                                 placedObject.name = placedPrefab.name + amountOfPlacedLights;
                                 placedObject.SetActive(true);
+
+                                Debug.Log($"placedObject.active is: {placedObject.active}");
+
                                 LightList.Add(placedObject);
                                 placedObject = null;
 
@@ -241,8 +244,11 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                 Pose hitPose = hits[0].pose;
                 if (heldObject != null && haveLight)
                 {
-                    heldObject.transform.position = hitPose.position;
-                    heldObject.transform.rotation = hitPose.rotation;
+                    if(EnableLightDrag)
+                    {
+                        heldObject.transform.position = hitPose.position;
+                        heldObject.transform.rotation = hitPose.rotation;
+                    }
                 }
             }
         }

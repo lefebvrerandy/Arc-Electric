@@ -10,206 +10,182 @@
 *   Board To Bits Games. (Nov 6, 2015). Unity Tutorial: Radial Menu (Part 4) from Board to Bits [Video file]. Retrieved Feb 24, 2020, from https://www.youtube.com/watch?v=vPeCGO1miMk
 */
 
-using RuntimeInspectorNamespace;
+using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Rendering.PostProcessing;
 
 /// <summary>
 /// Controls the location of where the radial menu buttons are instantiated, and deletes the menu items when they're no longer selected
 /// </summary>
 public class RadialMenu : MonoBehaviour
 {
+    #region Properties 
+
 
     /// <summary>
-    /// UI text element that will display the name of the menu
-    /// </summary>
-    public Text menuLabel;
-
-    /// <summary>
-    /// Game object to instantiate as a menu item
+    /// Prefab used to instantiate each of the radial menu buttons
     /// </summary>
     public RadialButton buttonPrefab;
 
-    /// <summary>
-    /// Reference to the currently selected button in the menu
-    /// </summary>
-    public RadialButton selectedButton;
+
+    #endregion
+    #region PublicMethods
+
 
     /// <summary>
     ///  Begin the process of spawning menu items
     /// </summary>
-    /// <param name="rmc"> Activated instance of the menu controller </param>
-    public void SpawnButtons(RadialMenuController rmc)
+    public void SpawnButtons()
     {
-        StartCoroutine(AnimateButtons(rmc));
+        StartCoroutine("AnimateButtons");
     }
 
     /// <summary>
-    /// Spawn the menu items in a circle around the point that was clicked on the game object
+    /// Spawn the menu items in a circle around the center of the menus position
     /// </summary>
-    /// <param name="rmc"> Activated instance of the menu controller </param>
-    private IEnumerator AnimateButtons (RadialMenuController rmc)
+    private IEnumerator AnimateButtons ()
     {
-        const int offsetDistance = 155;
+        const int offsetDistance = 180;
         const float waitTime = 0.06f;
         int itemNumber = 0;
-        foreach (var item in rmc.menuItems)
+
+        var menuItems = RadialMenuSpawner.instance.menuItems;
+        var lightFixture = RadialMenuSpawner.instance.SelectedLightFixture;
+        var lightComponent = lightFixture.GetComponentInChildren<Light>();
+        foreach (var item in menuItems)
         {
             RadialButton menuButton = Instantiate(buttonPrefab) as RadialButton;
             menuButton.transform.SetParent(transform, false);
+            switch (item.title)
+            {
+                case "DeleteLight":
+                    menuButton.button.onClick.AddListener(() => DestroyObject(lightFixture));
+                    break;
+
+                case "ToggleLight":
+                    menuButton.button.onClick.AddListener(() => ToggleLight(lightComponent));
+                    break;
+
+                case "LightDisplayMenu":
+                    menuButton.button.onClick.AddListener(() => OpenLightDisplayMenu(lightComponent));
+                    break;
+
+                case "LightPostProcessingMenu":
+                    menuButton.button.onClick.AddListener(() => OpenLightPostProcessingMenu());
+                    break;
+
+                case "LightRotationMenu":
+                    menuButton.button.onClick.AddListener(() => OpenLightRotationMenu(lightFixture));
+                    break;
+
+                case "FlipLight":
+                    menuButton.button.onClick.AddListener(() => FlipLight(lightFixture));
+                    break;
+
+                default:
+                    break;
+            }
+
 
             //Get the angle of each menu item, in the circle
-            float theta = (2 * Mathf.PI / rmc.menuItems.Length) * itemNumber++;
+            float theta = (2 * Mathf.PI / menuItems.Length) * itemNumber++;
             float xPos = Mathf.Sin(theta);
             float yPos = Mathf.Cos(theta);
+
 
             //Adjust each items location in a circle based on the total count of items that will be displayed
             menuButton.transform.localPosition = new Vector3(xPos, yPos, 0f) * offsetDistance;
 
-            //Style the buttons as set in the inspector for the menuController
-            menuButton.circle.color = item.color;
+
+            //Style the buttons as set in the inspector of the radial menu spawner
             menuButton.icon.sprite = item.sprite;
-            menuButton.title = item.title;
             menuButton.parentMenu = this;
             menuButton.Anim();
             yield return new WaitForSeconds(waitTime);
         }
     }
 
+
     /// <summary>
-    /// Performs the following tasks: 
-    /// *   Activates the selected menu item
-    /// *   Disables the radial menu until the selected item is closed
-    /// *   Deletes the menu upon releasing the button
-    /// *   Reverts the selected lights tag
+    /// Destroy the selected object
     /// </summary>
-    private void Update()
+    /// <param name="ObjectToDestroy"> Object that will be destroyed< /param>
+    private void DestroyObject(GameObject ObjectToDestroy)
     {
-        //Was the screen touched?
-        if (Input.touchCount < 1)
-        {
-            return;
-        }
-
-        //Only activate the menu once they lift their finger off the screen
-        var touch = Input.GetTouch(0);
-        if (touch.phase != TouchPhase.Ended)
-        {
-            return;
-        }
-
-        var lightFixture = GameObject.FindGameObjectWithTag("SelectedLight");
-        Debug.Log($"LightFixture is: {lightFixture.name}");
-
-
-        RadialMenuController radialMenuController = GameObject.Find("LightRadialMenuController").GetComponent<RadialMenuController>() as RadialMenuController;
-        Debug.Log($"Selected Button is: {selectedButton.title}");
-        if (selectedButton)
-        {
-            var light = lightFixture.GetComponentInChildren<Light>() as Light;
-            Debug.Log($"Light Component is: {light}");
-            switch (selectedButton.title)
-            {
-                case "ToggleLight":
-                    light.enabled = !light.enabled;
-                    break;
-
-                case "ChangeColor":
-                    var colorpickerPrefab = Instantiate(Resources.Load("ColorPicker")) as GameObject;
-
-                    //Disable the radial menu until the window is closed
-                    var menuSignalScript = colorpickerPrefab.GetComponent<MenuSignal>();
-                    radialMenuController.menuEnabled = false;
-                    menuSignalScript.rmc = radialMenuController;
-
-
-                    //Set the light to change in the submenu
-                    var colorpickerComponent = colorpickerPrefab.GetComponent<ColorPicker>();
-                    colorpickerComponent.light = light;
-                    break;
-
-                case "DeleteLight":
-                    Destroy(lightFixture);
-                    break;
-
-                case "AdjustRange":
-                    var lraPrefab = Instantiate(Resources.Load("LightRangeAdjuster")) as GameObject;
-
-                    //Disable the radial menu until the window is closed
-                    menuSignalScript = lraPrefab.GetComponent<MenuSignal>();
-                    radialMenuController.menuEnabled = false;
-                    menuSignalScript.rmc = radialMenuController;
-
-
-                    //Set the light to change its range with the slider component
-                    var rangeScript = lraPrefab.GetComponent<AdjustLightRange>();
-                    rangeScript.light = light;
-                    break;
-
-                case "FlipLight":
-                    lightFixture.transform.rotation = new Quaternion(lightFixture.transform.rotation.x, lightFixture.transform.rotation.y, lightFixture.transform.rotation.z - 180, lightFixture.transform.rotation.w);
-                    break;
-
-                case "CameraOptions":
-                    var postProcessingPrefab = Instantiate(Resources.Load("PostProcessingAdjuster")) as GameObject;
-
-                    //Disable the radial menu until the window is closed
-                    menuSignalScript = postProcessingPrefab.GetComponent<MenuSignal>();
-                    radialMenuController.menuEnabled = false;
-                    menuSignalScript.rmc = radialMenuController;
-
-                    var ARCamera = GameObject.FindGameObjectWithTag("MainCamera");
-                    var postProcessVolume = ARCamera.GetComponent<PostProcessVolume>();
-
-                    //Set the lights to change when any of the three post processing effect sliders are changed
-                    var bloomSliderScript = postProcessingPrefab.GetComponent<AdjustBloom>();
-                    bloomSliderScript.ppv = postProcessVolume;
-
-                    var ambientOcclusionSliderScript = postProcessingPrefab.GetComponent<AdjustAmbientOcclusion>();
-                    ambientOcclusionSliderScript.ppv = postProcessVolume;
-                    break;
-
-
-                case "DragLight":
-                    PlacementWithDraggingDroppingController.EnableLightDrag = true;
-                    break;
-
-
-                case "RotateLight":
-                    //lraPrefab = Instantiate(Resources.Load("LightRangeAdjuster")) as GameObject;
-
-                    ////Disable the radial menu until the window is closed
-                    //menuSignalScript = lraPrefab.GetComponent<MenuSignal>();
-                    //radialMenuController.menuEnabled = false;
-                    //menuSignalScript.rmc = radialMenuController;
-
-
-                    ////Set the light to change its range with the slider component
-                    //rangeScript = lraPrefab.GetComponent<AdjustLightRange>();
-                    //rangeScript.light = light;
-                    break;
-
-                default:
-                    break;
-            }
-        }
-        else
-        {
-            PlacementWithDraggingDroppingController.EnableLightPlacement = true;
-        }
-           
-
-        if (lightFixture != null)
-        {
-            lightFixture.tag = "LightFixture";
-        }
-
-        var radialMenuInstances = GameObject.FindObjectsOfType<RadialMenu>();
-        foreach (var rmi in radialMenuInstances)
-        {
-            Destroy(gameObject);
-        }
+        RadialMenuSpawner.instance.menuOpen = false;
+        Destroy(ObjectToDestroy);
+        Destroy(gameObject);
     }
-}
+
+
+    /// <summary>
+    /// Toggle a light component ON or OFF 
+    /// </summary>
+    /// <param name="light"> The light component to toggle </param>
+    private void ToggleLight(Light light)
+    {
+        RadialMenuSpawner.instance.menuOpen = false;
+        light.enabled = !light.enabled;
+        DestroyImmediate(gameObject);
+    }
+
+
+    /// <summary>
+    /// Flip the game object 180 deg along its y-axis
+    /// </summary>
+    /// <param name="lightFixture">The game object to flip </param>
+    private void FlipLight(GameObject lightFixture)
+    {
+        RadialMenuSpawner.instance.menuOpen = false;
+        lightFixture.transform.rotation = new Quaternion(lightFixture.transform.rotation.x, lightFixture.transform.rotation.y, lightFixture.transform.rotation.z - 180, lightFixture.transform.rotation.w);
+        Destroy(gameObject);
+    }
+
+
+    /// <summary>
+    /// Activate the LightDisplayMenu prefab
+    /// </summary>
+    /// <param name="lightComponent"> The light component that will be altered in the menu </param>
+    private void OpenLightDisplayMenu(Light lightComponent)
+    {
+        var lightDisplayMenu = GameObject.Find("LightDisplayMenu");
+
+        //Update the selected light, and set the slider starting values
+        var script = lightDisplayMenu.GetComponent<LightDisplayMenuScript>();
+        script.Light = lightComponent;
+        script.ConfigureSliders();
+
+        //Display the new menu, and destroy the radial menu
+        lightDisplayMenu.GetComponent<Canvas>().enabled = true;
+        Destroy(gameObject);
+    }
+
+
+    /// <summary>
+    /// Activate the LightPostProcessingMenu prefab
+    /// </summary>
+    private void OpenLightPostProcessingMenu()
+    {
+        var lightPostProcessingMenu = GameObject.Find("LightPostProcessingMenu");
+        lightPostProcessingMenu.GetComponent<Canvas>().enabled = true;
+        Destroy(gameObject);
+    }
+
+
+    /// <summary>
+    /// Activate the LightRotationMenu prefab
+    /// </summary>
+    /// <param name="lightFixture"> Game object to rotate in the menu </param>
+    private void OpenLightRotationMenu(GameObject lightFixture)
+    {
+        var lightRotationMenu = GameObject.Find("LightRotationMenu");
+        lightRotationMenu.GetComponent<Canvas>().enabled = true;
+        Destroy(gameObject);
+    }
+
+
+    #endregion
+    #region PrivateMethods
+
+    #endregion
+}//class
