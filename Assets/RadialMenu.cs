@@ -179,6 +179,14 @@ public class RadialMenu : MonoBehaviour
     private void OpenLightRotationMenu(GameObject lightFixture)
     {
         var lightRotationMenu = GameObject.Find("LightRotationMenu");
+
+
+        //Update the selected light, and set the slider starting values
+        var script = lightRotationMenu.GetComponent<LightRotationScript>();
+        script.lightFixture = lightFixture;
+        script.ConfigureSliders();
+
+
         lightRotationMenu.GetComponent<Canvas>().enabled = true;
         Destroy(gameObject);
     }

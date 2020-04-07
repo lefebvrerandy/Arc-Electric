@@ -21,7 +21,7 @@ public class LightDisplayMenuScript : MonoBehaviour
     /// <summary>
     /// Singleton instance of the class and accompanying prefab
     /// </summary>
-    public static LightDisplayMenuScript Instance { get; set; }
+    public static LightDisplayMenuScript instance { get; set; }
 
     /// <summary>
     /// Reference to the light component that can be changed using the script
@@ -58,7 +58,7 @@ public class LightDisplayMenuScript : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        Instance = this;
+        instance = this;
         selectedColor = Color.white;
 
         var uiColorPatchButtons = GameObject.FindGameObjectsWithTag("ColorPatch");
