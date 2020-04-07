@@ -1,7 +1,7 @@
 ﻿/*
 *  FILE          : PlacementWithDraggingDroppingController.cs
 *  PROJECT       : PROG 3220 - Systems Project
-*  PROGRAMMER    : Randy Lefebvre
+*  PROGRAMMER    : Randy Lefebvre, Bence Karner, Lucas Roes, Kyle Horsley
 *  DESCRIPTION   : This file contains the placement controller, and the relevant code to control the applications UI
 *  REFERENCE     : Script format was copied and altered from the following sources,
 *  Valecillos. (2019). AR Foundation with Unity3d and Adding Dragging Functionality with 
@@ -30,6 +30,7 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
     public static bool EnableLightPlacement = true;
     public static bool EnableLightDrag = true;
 
+
     [SerializeField]
     private Camera arCamera;
 
@@ -56,6 +57,8 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
     //private Text DEBUGMENU;
 
     private int amountOfPlacedLights;
+
+    private bool flip = true;
 
     /*
     *  METHOD       : Awake
@@ -139,8 +142,7 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
 
                     // Lets first check to see if the user is clicking on a UI element. 
                     //  If they are, lets break out of this method and not place the object
-                    if ((hitObject.transform.CompareTag("UserInterface")))
-                    //if (hitObject.transform.gameObject.CompareTag("UserInterface"))
+                    if (IsPointerOverUIObject())
                     {
                         //DEBUGMENU.text = "Touched UserInterface";
                         canDropLight = false;
@@ -208,29 +210,40 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
 
                         if (placedPrefab != null)
                         {
+                            Debug.Log(
+                                "Rotation = X: " + hitPose.rotation.x
+                                + "|Y: " + hitPose.rotation.y
+                                + "|Z: " + hitPose.rotation.z
+                                + "|W: " + hitPose.rotation.w);
 
-                            if (EnableLightPlacement)
+                            // Create a new Quaternion with the hitPose. This will be where the user clicks (MUST BE ON A PLANE FOR HIT TO REGISTER)
+                            var placedLocation = new Quaternion(hitPose.rotation.x, hitPose.rotation.y, hitPose.rotation.z - 180, hitPose.rotation.w);
+
+                            amountOfPlacedLights++;
+
+                            // Lets make sure the scale is set to 1, 1, 1 just incase it was messed up somewhere
+                            placedPrefab.transform.localScale = new Vector3(1f, 1f, 1f);
+                            placedObject = Instantiate(placedPrefab, hitPose.position, placedLocation);
+                            placedObject.name = placedPrefab.name + amountOfPlacedLights;
+
+                            // Determine if we are placing on the ceiling or floor
+                            if (hitPose.rotation.y == 0 && hitPose.rotation.x != 0)
                             {
-                                // Create a new Quaternion with the hitPose. This will be where the user clicks (MUST BE ON A PLANE FOR HIT TO REGISTER)
-                                var placedLocation = new Quaternion(hitPose.rotation.x, hitPose.rotation.y, hitPose.rotation.z, hitPose.rotation.w);
-
-                                amountOfPlacedLights++;
-
-                                // Lets make sure the scale is set to 1, 1, 1 just incase it was messed up somewhere
-                                placedPrefab.transform.localScale = new Vector3(1f, 1f, 1f);
-                                placedPrefab.transform.eulerAngles = new Vector3(0f, 0f, 0f);
-                                placedObject = Instantiate(placedPrefab, hitPose.position, placedLocation);
-                                placedObject.name = placedPrefab.name + amountOfPlacedLights;
-                                placedObject.SetActive(true);
-
-                                Debug.Log($"placedObject.active is: {placedObject.active}");
-
-                                LightList.Add(placedObject);
-                                placedObject = null;
-
-                                // Destroy the returned object from InventoryController.GetSelectedLight() since we dont need it anymore
-                                Destroy(placedPrefab);
+                                Debug.Log("Ceiling");
+                                placedObject.transform.eulerAngles = new Vector3(0f, -180f, 0f);
                             }
+                            else
+                            {
+                                Debug.Log("Floor");
+                                //placedObject.transform.eulerAngles = new Vector3(0f, 0f, 0f);
+                            }
+
+                            placedObject.SetActive(true);
+                            LightList.Add(placedObject);
+                            placedObject = null;
+
+                            // Destroy the returned object from InventoryController.GetSelectedLight() since we dont need it anymore
+                            Destroy(placedPrefab);
                         }
                     }
                 }
@@ -244,11 +257,8 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                 Pose hitPose = hits[0].pose;
                 if (heldObject != null && haveLight)
                 {
-                    if(EnableLightDrag)
-                    {
-                        heldObject.transform.position = hitPose.position;
-                        heldObject.transform.rotation = hitPose.rotation;
-                    }
+                    heldObject.transform.position = hitPose.position;
+                    heldObject.transform.rotation = hitPose.rotation;
                 }
             }
         }
@@ -264,7 +274,7 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
     private void ToggleLight(GameObject clickedObject)
     {
         //var lights = clickedObject.GetComponentsInChildren(typeof(Light));
-        //clickedObject.SetActive(false);
+        clickedObject.SetActive(false);
         //if (clickedObject.activeSelf == true )
         //{
         //    clickedObject.SetActive(false);
@@ -305,6 +315,18 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
         {
             placedObject.transform.rotation = new Quaternion(placedObject.transform.rotation.x, placedObject.transform.rotation.y, placedObject.transform.rotation.z - 180, placedObject.transform.rotation.w);
         }
+    }
+
+    //Fabian-mkv. (2015). IsPointerOverGameObject not working with touch input. Retrieved April 6, 2020, from
+    //https://answers.unity.com/questions/1115464/ispointerovergameobject-not-working-with-touch-inp.html
+    //https://drive.google.com/file/d/0B__1zp7jwQOKNVhFaGxhbWt5TVU/view
+    private bool IsPointerOverUIObject()
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
     }
 
 }//class

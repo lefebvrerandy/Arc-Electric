@@ -82,7 +82,9 @@ public class LightRotationScript : MonoBehaviour
         var yAxis = lightFixture.transform.rotation.eulerAngles.y;
         var zAxis = lightFixture.transform.rotation.eulerAngles.z;
         var rotationAngle = value - 180;
+        Debug.Log(rotationAngle);
         lightFixture.transform.rotation = Quaternion.Euler(rotationAngle, yAxis, zAxis);
+        Debug.Log(lightFixture.transform.rotation.eulerAngles.x);
     }
 
 
