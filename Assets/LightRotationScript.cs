@@ -42,8 +42,6 @@ public class LightRotationScript : MonoBehaviour
     [SerializeField] private Slider zAxisSlider;
 
 
-    private float previousDirection;
-
     #endregion
     #region MonoBehaviours
 
@@ -54,7 +52,6 @@ public class LightRotationScript : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        previousDirection = 0f;
     }
 
 
@@ -82,9 +79,22 @@ public class LightRotationScript : MonoBehaviour
         var yAxis = lightFixture.transform.rotation.eulerAngles.y;
         var zAxis = lightFixture.transform.rotation.eulerAngles.z;
         var rotationAngle = value - 180;
-        Debug.Log(rotationAngle);
-        lightFixture.transform.rotation = Quaternion.Euler(rotationAngle, yAxis, zAxis);
-        Debug.Log(lightFixture.transform.rotation.eulerAngles.x);
+        if(rotationAngle < 180)
+        {
+            rotationAngle = 360 - rotationAngle;
+            Debug.Log(rotationAngle);
+            lightFixture.transform.rotation = Quaternion.Euler(rotationAngle, yAxis, zAxis);
+            Debug.Log(lightFixture.transform.rotation.eulerAngles.x);
+        }
+        else
+        {
+            Debug.Log(rotationAngle);
+            lightFixture.transform.rotation = Quaternion.Euler(rotationAngle, yAxis, zAxis);
+            Debug.Log(lightFixture.transform.rotation.eulerAngles.x);
+        }
+        //Debug.Log(rotationAngle);
+        //lightFixture.transform.rotation = Quaternion.Euler(rotationAngle, yAxis, zAxis);
+        //Debug.Log(lightFixture.transform.rotation.eulerAngles.x);
     }
 
 
