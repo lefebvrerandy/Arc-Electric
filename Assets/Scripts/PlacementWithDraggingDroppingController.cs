@@ -30,10 +30,8 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
     public static bool EnableLightPlacement = true;
     public static bool EnableLightDrag = true;
 
-
     [SerializeField]
     private Camera arCamera;
-
 
     private GameObject placedPrefab;
     private GameObject placedObject;
@@ -129,9 +127,9 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                 if (Physics.Raycast(ray, out hitObject))
                 {
                     //DEBUGMENU.text = hitObject.transform.name;
-                    //var selection = hitObject.transform;
-                    //var selectionRenderer = selection.GetComponent<Renderer>();
-                    //selectionRenderer.material.color = Color.red;
+                    var selection = hitObject.transform;
+                    var selectionRenderer = selection.GetComponent<Renderer>();
+                    selectionRenderer.material.color = Color.red;
 
                     /*
                      * Three options here. 
@@ -258,7 +256,16 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                 if (heldObject != null && haveLight)
                 {
                     heldObject.transform.position = hitPose.position;
-                    heldObject.transform.rotation = hitPose.rotation;
+                    if (hitPose.rotation.y == 0 && hitPose.rotation.x != 0)
+                    {
+                        Debug.Log("Ceiling");
+                        placedObject.transform.eulerAngles = new Vector3(0f, -180f, 0f);
+                    }
+                    else
+                    {
+                        Debug.Log("Floor");
+                        //placedObject.transform.eulerAngles = new Vector3(0f, 0f, 0f);
+                    }
                 }
             }
         }
