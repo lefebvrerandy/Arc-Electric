@@ -18,16 +18,11 @@ public class DetectOutOfBounds : MonoBehaviour, IPointerClickHandler
 #pragma warning disable 649
 
 
-    #region Properties
-
-
     /// <summary>
     /// Time, in seconds, to wait until the user can place and move lights again
     /// </summary>
     [SerializeField] private float waitTimeSeconds;
 
-
-    #endregion
 
     /// <summary>
     /// Event that fires once the user clicks outside on the game object attached to this script. 

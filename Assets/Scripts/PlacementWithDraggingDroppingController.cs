@@ -115,6 +115,7 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
     private bool flip = true;
 
 
+
     #endregion
     #region MonoBehaviours
 
@@ -221,7 +222,7 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                         }
                     }
                 }
-                // If we are hitting an placable area
+                // If we are hitting a placeable area
                 else if (arRaycastManager.Raycast(touchPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon))
                 {
                     //DEBUGMENU.text = "Touched Placeable Plane";
@@ -275,7 +276,7 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
 
                         amountOfPlacedLights++;
 
-                        // Lets make sure the scale is set to 1, 1, 1 just incase it was messed up somewhere
+                        // Lets make sure the scale is set to 1, 1, 1 just in case it was messed up somewhere
                         placedPrefab.transform.localScale = new Vector3(1f, 1f, 1f);
                         placedObject = Instantiate(placedPrefab, hitPose.position, placedLocation);
                         placedObject.name = placedPrefab.name + amountOfPlacedLights;

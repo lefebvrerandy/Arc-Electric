@@ -17,7 +17,7 @@ using UnityEngine.EventSystems;
 
 /// <summary>
 /// Used to define the properties and behavior of the game objects assigned as buttons in the radial menu. 
-/// Responds to pointer enters/exits events, and controls how the button "animates" into the scene.
+/// Controls how the button "animates" into the scene.
 /// </summary>
 public class RadialButton : MonoBehaviour
 {

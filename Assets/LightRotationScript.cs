@@ -28,7 +28,6 @@ public class LightRotationScript : MonoBehaviour
         zAxis
     }
     
-
     #region Properties
 
     /// <summary>

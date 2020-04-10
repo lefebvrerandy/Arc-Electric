@@ -86,7 +86,7 @@ public class RadialMenuSpawner : MonoBehaviour
 
 
     /// <summary>
-    /// 
+    /// Start checking if the user performed a double click action
     /// </summary>
     private void Update()
     {
@@ -109,8 +109,6 @@ public class RadialMenuSpawner : MonoBehaviour
     }
 
 
-    #endregion
-    #region PublicMethods
     #endregion
     #region PrivateMethods
 
@@ -151,12 +149,35 @@ public class RadialMenuSpawner : MonoBehaviour
                         //Get a reference to the touched object
                         SelectedLightFixture = hit.transform.gameObject;
                         SpawnMenu();
+                        ShowSelectedLightPreview();
                         PlacementWithDraggingDroppingController.EnableLightPlacement = false;
                         PlacementWithDraggingDroppingController.EnableLightDrag = false;
                     }
                 }
             }
         }
+    }
+
+
+    /// <summary>
+    /// Spawn a model of the selected light as a preview
+    /// </summary>
+    private void ShowSelectedLightPreview()
+    {
+        return;
+        try
+        {
+            var selectedLight = PlayerPrefs.GetString("Selected");
+            var lightPrefab = InventoryController.GetSelectedLight(selectedLight);
+            if (lightPrefab != null)
+            {
+                lightPrefab.transform.localScale = new Vector3(1f, 1f, 1f);
+                var position = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+                var lightModel = Instantiate(lightPrefab, position, new Quaternion());
+                lightModel.SetActive(true);
+            }
+        }
+        catch (Exception e) { Debug.LogError(e.Message); }
     }
 
 
@@ -174,9 +195,6 @@ public class RadialMenuSpawner : MonoBehaviour
         radialMenu.transform.SetParent(transform, false);
         radialMenu.transform.position = new Vector2(Screen.width / 2, Screen.height / 2);
         radialMenu.SpawnButtons();
-
-        //Spawn a model of the selected light as a preview
-
     }
 
 

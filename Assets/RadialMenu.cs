@@ -15,7 +15,7 @@ using System.Collections;
 using UnityEngine;
 
 /// <summary>
-/// Controls the location of where the radial menu buttons are instantiated, and deletes the menu items when they're no longer selected
+/// Controls the location of where the radial menu buttons are instantiated, adds on click listeners to each menu button, and deletes the menu upon selection of a menu item
 /// </summary>
 public class RadialMenu : MonoBehaviour
 {
@@ -75,7 +75,7 @@ public class RadialMenu : MonoBehaviour
     /// </summary>
     public void SpawnButtons()
     {
-        StartCoroutine("AnimateButtons");
+        StartCoroutine("ConfigureButtons");
     }
 
 
@@ -86,7 +86,7 @@ public class RadialMenu : MonoBehaviour
     /// <summary>
     /// Spawn the menu items in a circle around the center of the menus position
     /// </summary>
-    private IEnumerator AnimateButtons ()
+    private IEnumerator ConfigureButtons ()
     {
         const int offsetDistance = 180;
         const float waitTime = 0.06f;
@@ -174,13 +174,14 @@ public class RadialMenu : MonoBehaviour
 
 
     /// <summary>
-    /// Flip the game object 180 deg along its y-axis
+    /// Flip the game object 180 deg along its Z-axis (i.e. it toggles between 
+    /// flipping the light on its head or its base)
     /// </summary>
     /// <param name="lightFixture">The game object to flip </param>
     private void FlipLight(GameObject lightFixture)
     {
         RadialMenuSpawner.instance.menuOpen = false;
-        lightFixture.transform.rotation = new Quaternion(lightFixture.transform.rotation.x, lightFixture.transform.rotation.y, lightFixture.transform.rotation.z - 180, lightFixture.transform.rotation.w);
+        lightFixture.transform.RotateAround(lightFixture.transform.position, Vector3.forward, 180f);
         Destroy(gameObject);
     }
 
