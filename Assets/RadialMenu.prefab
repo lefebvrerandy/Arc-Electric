@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 25ca462a9fb74fc4186d75889626b821, type: 2}
+  m_Material: {fileID: 2100000, guid: ad8e76537ee93b644aad102af1f094be, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
@@ -138,3 +138,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonPrefab: {fileID: 7668112455165300523, guid: 53c9ccaa6a136884da9eab9633b1e08c,
     type: 3}
+  LightDisplayMenu: {fileID: 0}
+  LightRotationMenu: {fileID: 0}
+  LightPostProcessingMenu: {fileID: 0}

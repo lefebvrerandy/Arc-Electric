@@ -201,7 +201,7 @@ public class RadialMenu : MonoBehaviour
         var detectOutofBoundsPrefab = LightDisplayMenu.transform.GetChild(0).gameObject;
         var menuPanel = detectOutofBoundsPrefab.transform.GetChild(0).gameObject;
         LightDisplayMenu.GetComponent<Canvas>().enabled = true;
-        LeanTween.moveY(menuPanel, 515, 0.8f).setEaseOutBack();
+        LeanTween.moveY(menuPanel, 500, 0.8f).setEaseOutBack();
         Destroy(gameObject);
     }
 
@@ -214,7 +214,7 @@ public class RadialMenu : MonoBehaviour
         var detectOutofBoundsPrefab = LightPostProcessingMenu.transform.GetChild(0).gameObject;
         var menuPanel = detectOutofBoundsPrefab.transform.GetChild(0).gameObject;
         LightPostProcessingMenu.GetComponent<Canvas>().enabled = true;
-        LeanTween.moveY(menuPanel, 585, 0.75f).setEaseOutBack();
+        LeanTween.moveY(menuPanel, 560, 0.75f).setEaseOutBack();
         Destroy(gameObject);
     }
 
@@ -236,7 +236,7 @@ public class RadialMenu : MonoBehaviour
         var detectOutofBoundsPrefab = LightRotationMenu.transform.GetChild(0).gameObject;
         var menuPanel = detectOutofBoundsPrefab.transform.GetChild(0).gameObject;
         LightRotationMenu.GetComponent<Canvas>().enabled = true;
-        LeanTween.moveY(menuPanel, 515, 0.8f).setEaseOutBack();
+        LeanTween.moveY(menuPanel, 500, 0.8f).setEaseOutBack();
         Destroy(gameObject);
     }
 

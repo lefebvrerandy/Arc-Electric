@@ -386,7 +386,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1912336501394176}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -454,6 +454,7 @@ MonoBehaviour:
   AlphaSlider: {fileID: 5211815517159823579}
   IntensitySlider: {fileID: 5892111011583997794}
   RangeSlider: {fileID: 5868433591327583870}
+  HideDistance: 0
 --- !u!1 &116647956914982468
 GameObject:
   m_ObjectHideFlags: 0

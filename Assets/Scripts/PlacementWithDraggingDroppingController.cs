@@ -353,11 +353,12 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
     {
         if (placedObject != null)
         {
-            placedObject.transform.rotation = new Quaternion(
-                placedObject.transform.rotation.x, 
-                placedObject.transform.rotation.y, 
-                placedObject.transform.rotation.z - 180, 
-                placedObject.transform.rotation.w);
+            placedObject.transform.RotateAround(placedObject.transform.position, Vector3.forward, 180f);
+            //placedObject.transform.rotation = new Quaternion(
+            //    placedObject.transform.rotation.x, 
+            //    placedObject.transform.rotation.y, 
+            //    placedObject.transform.rotation.z - 180, 
+            //    placedObject.transform.rotation.w);
         }
     }
 
