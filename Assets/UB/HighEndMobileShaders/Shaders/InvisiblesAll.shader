@@ -28,6 +28,7 @@ Shader "UB/InvisiblesAll"
             #include "Lighting.cginc"
             #include "AutoLight.cginc"
             #pragma multi_compile_fwdbase
+            #pragma multi_compile_fwdbase nolightmap
             
             fixed4 _Color;
             
@@ -59,7 +60,7 @@ Shader "UB/InvisiblesAll"
 
             fixed4 frag(v2f IN) : COLOR
             {
-                UNITY_LIGHT_ATTENUATION(atten, IN, IN.worldPos) //atten is builtIn :)
+                UNITY_LIGHT_ATTENUATION(atten, IN, IN.worldPos)
                 
                 float4 color = _Color;
                 color.a=(1-atten)*_Color.a;
@@ -109,7 +110,7 @@ Shader "UB/InvisiblesAll"
 
             fixed4 frag(v2f IN) : COLOR
             {
-                UNITY_LIGHT_ATTENUATION(atten, IN, IN.worldPos) //atten is builtIn :)
+                UNITY_LIGHT_ATTENUATION(atten, IN, IN.worldPos)
                 
                 return atten*_LightColor0;
             }
