@@ -3,7 +3,7 @@
 *  PROJECT      : PROG3220-Systems Project
 *  PROGRAMMER   : Bence Karner
 *  DESCRIPTION  : Sole responsibility is to contain the RadialMenuSpawner class
-*  REFERENCES   : The following code was adapted from the following:
+*  REFERENCES   : The following code was adapted from:
 *   Board To Bits Games. (Nov 6, 2015). Unity Tutorial: Radial Menu (Part 1) from Board to Bits [Video file]. Retrieved Feb 24, 2020, from https://www.youtube.com/watch?v=WzQdc2rAdZc
 *   Board To Bits Games. (Nov 6, 2015). Unity Tutorial: Radial Menu (Part 2) from Board to Bits [Video file]. Retrieved Feb 24, 2020, from https://www.youtube.com/watch?v=HOOGIZu4nxo
 *   Board To Bits Games. (Nov 6, 2015). Unity Tutorial: Radial Menu (Part 3) from Board to Bits [Video file]. Retrieved Feb 24, 2020, from https://www.youtube.com/watch?v=XvgUzjXW2Jk
@@ -13,7 +13,6 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary>
 /// Controller class for determining double taps, spawning the radial menu, it's buttons, and setting all related properties.
@@ -122,7 +121,6 @@ public class RadialMenuSpawner : MonoBehaviour
     /// ben-rasooli[username]. (2014). Single Tap/Double Tap script. Retrieved March 31, 2020, from
     /// https://forum.unity.com/threads/single-tap-double-tap-script.83794/
     /// </summary>
-    /// <returns></returns>
     private IEnumerator SingleOrDoubleTap()
     {
 
@@ -176,6 +174,9 @@ public class RadialMenuSpawner : MonoBehaviour
         radialMenu.transform.SetParent(transform, false);
         radialMenu.transform.position = new Vector2(Screen.width / 2, Screen.height / 2);
         radialMenu.SpawnButtons();
+
+        //Spawn a model of the selected light as a preview
+
     }
 
 

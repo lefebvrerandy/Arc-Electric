@@ -10,12 +10,9 @@
 */
 
 
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 
 
@@ -26,53 +23,118 @@ using UnityEngine.XR.ARFoundation;
 [RequireComponent(typeof(ARRaycastManager))]
 public class PlacementWithDraggingDroppingController : MonoBehaviour
 {
+#pragma warning disable 649
 
+    #region Properties
+    /// <summary>
+    /// 
+    /// </summary>
     public static bool EnableLightPlacement = true;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public static bool EnableLightDrag = true;
 
+    /// <summary>
+    /// 
+    /// </summary>
     [SerializeField]
     private Camera arCamera;
 
+    /// <summary>
+    /// 
+    /// </summary>
     private GameObject placedPrefab;
+
+    /// <summary>
+    /// 
+    /// </summary>
     private GameObject placedObject;
+
+    /// <summary>
+    /// 
+    /// </summary>
     private GameObject[] clickedObjects;
+
+    /// <summary>
+    /// 
+    /// </summary>
     private Vector2 touchPosition = default;
+
+    /// <summary>
+    /// 
+    /// </summary>
     private ARRaycastManager arRaycastManager;
+
+    /// <summary>
+    /// 
+    /// </summary>
     private bool onTouchHold = false;
+
+    /// <summary>
+    /// 
+    /// </summary>
     private static List<ARRaycastHit> hits = new List<ARRaycastHit>();
+
+    /// <summary>
+    /// 
+    /// </summary>
     private List<GameObject> LightList = new List<GameObject>();
 
+    /// <summary>
+    /// 
+    /// </summary>
     // We'll use these to get the current lights name
     private bool haveLight;
+
+    /// <summary>
+    /// 
+    /// </summary>
     private GameObject heldObject;
 
+    /// <summary>
+    /// 
+    /// </summary>
     // Used to keep the dropping of a light to once a second
     private bool canDropLight;
 
+    /// <summary>
+    /// 
+    /// </summary>
     private string selectedLight = "";
 
-    //[SerializeField]
-    //private Text DEBUGMENU;
-
+    /// <summary>
+    /// 
+    /// </summary>
     private int amountOfPlacedLights;
 
+    /// <summary>
+    /// 
+    /// </summary>
     private bool flip = true;
 
-    /*
-    *  METHOD       : Awake
-    *  DESCRIPTION  : Get a reference to the ARRaycastManager component of the AR Session Origin object
-    *  PARAMETER    : NA
-    *  RETURNS      : NA
-    */
+
+    #endregion
+    #region MonoBehaviours
+
+
+
+    /// <summary>
+    /// 
+    /// </summary>
     private void Awake()
     {
         arRaycastManager = GetComponent<ARRaycastManager>();
     }
 
+
+    /// <summary>
+    /// 
+    /// </summary>
     private void Start()
     {
         // Default the users selected light to our basic light.
-
         if (PlayerPrefs.GetString("Selected") == "")
         {
             selectedLight = "Circle_lamp3 + Point Light 1";
@@ -85,215 +147,193 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
         canDropLight = true;
     }
 
-    /*
-    *  METHOD       : Update
-    *  DESCRIPTION  : For every update, get the users input, and either place, orient, or delete an AR object according to their actions
-    *  PARAMETER    : NA
-    *  RETURNS      : NA
-    */
+
+    /// <summary>
+    /// 
+    /// </summary>  
     private void Update()
     {
-        //Check if the user touched the screen
-        if (Input.touchCount > 0)
+
+        if (Input.touchCount < 1)
         {
-            //Get reference to the touch
-            Touch touch = Input.GetTouch(0);
-            touchPosition = touch.position;
+            return;
+        }
 
-            /*
-             * Three options here:
-             * 1. The beginning of the touch
-             *      During the beginning of the press, we will find out what the user if pressing. This has three options as well:
-             *      a1. The user pressed a UI object
-             *          Here, we will just return
-             *      b2. The user is touching an already existing lamp
-             *          Here, we will let the user drag and move the lamp until they end the touch
-             *              We will need to get the location of the lamp
-             *      c3. The user is trying to place a lamp
-             *          Here, we will get the location they are trying to place
-             * 2. The end of the touch
-             *      During the end of the press, we have two options:
-             *      a4. If the user is placing, place the object at the location we've stored
-             *      b5. If the user is moving an object, we want to stop moving
-             * 3. The user is moving an object
-             *      Move the object
-             */
+        Touch touch = Input.GetTouch(0);
+        touchPosition = touch.position;
 
-            if (touch.phase == TouchPhase.Began)
+         /* Three options here:
+            * 1. The beginning of the touch
+            *      During the beginning of the press, we will find out what the user if pressing. This has three options as well:
+            *      a1. The user pressed a UI object
+            *          Here, we will just return
+            *      b2. The user is touching an already existing lamp
+            *          Here, we will let the user drag and move the lamp until they end the touch
+            *              We will need to get the location of the lamp
+            *      c3. The user is trying to place a lamp
+            *          Here, we will get the location they are trying to place
+            * 2. The end of the touch
+            *      During the end of the press, we have two options:
+            *      a4. If the user is placing, place the object at the location we've stored
+            *      b5. If the user is moving an object, we want to stop moving
+            * 3. The user is moving an object
+            *      Move the object
+            */
+
+        if (touch.phase == TouchPhase.Began)
+        {
+            Ray ray = arCamera.ScreenPointToRay(touch.position);
+            RaycastHit hitObject;
+
+            if (Physics.Raycast(ray, out hitObject))
             {
-                Ray ray = arCamera.ScreenPointToRay(touch.position);
-                RaycastHit hitObject;
+                /*
+                    * Three options here. 
+                    * a1. We can be touching an User Interface object
+                    * b2. We can be touching an already existing lamp
+                    * c3. We can be touching an empty plane
+                    */
 
-                if (Physics.Raycast(ray, out hitObject))
+                // Lets first check to see if the user is clicking on a UI element. 
+                //  If they are, lets break out of this method and not place the object
+                if (IsPointerOverUIObject())
                 {
-                    /*
-                     * Three options here. 
-                     * a1. We can be touching an User Interface object
-                     * b2. We can be touching an already existing lamp
-                     * c3. We can be touching an empty plane
-                     */
+                    //DEBUGMENU.text = "Touched UserInterface";
+                    canDropLight = false;
+                    return;
+                }
+                // If we are hitting an object
+                else if (hitObject.transform.name.Contains("lamp"))
+                {
+                    //DEBUGMENU.text = "Touched Light";
+                    canDropLight = false;
+                    onTouchHold = true;
 
-                    // Lets first check to see if the user is clicking on a UI element. 
-                    //  If they are, lets break out of this method and not place the object
-                    if (IsPointerOverUIObject())
+                    // We'll loop through the LightList and look for the selected light and store it
+                    //  this will be used to move this specific light later
+                    foreach (var item in LightList)
                     {
-                        //DEBUGMENU.text = "Touched UserInterface";
-                        canDropLight = false;
-                        return;
-                    }
-                    // If we are hitting an object
-                    else if (hitObject.transform.name.Contains("lamp"))
-                    {
-                        //DEBUGMENU.text = "Touched Light";
-                        canDropLight = false;
-                        onTouchHold = true;
-
-                        // We'll loop through the LightList and look for the selected light and store it
-                        //  this will be used to move this specific light later
-                        foreach (var item in LightList)
+                        if (hitObject.transform.name == item.name)
                         {
-                            if (hitObject.transform.name == item.name)
-                            {
-                                heldObject = item;
-                                haveLight = true;
-                                break;
-                            }
+                            heldObject = item;
+                            haveLight = true;
+                            break;
                         }
                     }
-                    // If we are hitting an placable area
-                    else if (arRaycastManager.Raycast(touchPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon))
-                    {
-                        //DEBUGMENU.text = "Touched Placeable Plane";
-                        canDropLight = true;
-                    }
+                }
+                // If we are hitting an placable area
+                else if (arRaycastManager.Raycast(touchPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon))
+                {
+                    //DEBUGMENU.text = "Touched Placeable Plane";
+                    canDropLight = true;
                 }
             }
+        }
 
-            if (touch.phase == TouchPhase.Ended)
+        else if (touch.phase == TouchPhase.Ended)
+        {
+            heldObject = null;
+            haveLight = false;
+            onTouchHold = false;
+
+            // If we are placing the object
+            if (canDropLight)
             {
-                heldObject = null;
-                haveLight = false;
-                onTouchHold = false;
+                // Instantly trigger to false to avoid multiple dropping
+                canDropLight = false;
 
-                // If we are placing the object
-                if (canDropLight)
+
+                if (arRaycastManager.Raycast(touchPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon)
+                    && placedObject == null)
                 {
-                    // Instantly trigger to false to avoid multiple dropping
+                    Pose hitPose = hits[0].pose;
+
+                    // Start the timer to dropping the light
                     canDropLight = false;
 
-
-                    if (arRaycastManager.Raycast(touchPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon)
-                        && placedObject == null)
+                    // Get the selected light game object
+                    if (PlayerPrefs.GetString("Selected") == "")
                     {
-                        Pose hitPose = hits[0].pose;
-
-                        // Start the timer to dropping the light
-                        canDropLight = false;
-
-                        // Get the selected light game object
-                        if (PlayerPrefs.GetString("Selected") == "")
-                        {
-                            selectedLight = "Circle_lamp3 + Point Light 1";
-                        }
-                        else
-                        {
-                            selectedLight = PlayerPrefs.GetString("Selected");
-                        }
-                        placedPrefab = InventoryController.GetSelectedLight(selectedLight);
-
-                        if (placedPrefab != null)
-                        {
-                            Debug.Log(
-                                "Rotation = X: " + hitPose.rotation.x
-                                + "|Y: " + hitPose.rotation.y
-                                + "|Z: " + hitPose.rotation.z
-                                + "|W: " + hitPose.rotation.w);
-
-                            // Create a new Quaternion with the hitPose. This will be where the user clicks (MUST BE ON A PLANE FOR HIT TO REGISTER)
-                            var placedLocation = new Quaternion(hitPose.rotation.x, hitPose.rotation.y, hitPose.rotation.z - 180, hitPose.rotation.w);
-
-                            amountOfPlacedLights++;
-
-                            // Lets make sure the scale is set to 1, 1, 1 just incase it was messed up somewhere
-                            placedPrefab.transform.localScale = new Vector3(1f, 1f, 1f);
-                            placedObject = Instantiate(placedPrefab, hitPose.position, placedLocation);
-                            placedObject.name = placedPrefab.name + amountOfPlacedLights;
-
-                            // Determine if we are placing on the ceiling or floor
-                            if (hitPose.rotation.y == 0 && hitPose.rotation.x != 0)
-                            {
-                                Debug.Log("Ceiling");
-                                placedObject.transform.eulerAngles = new Vector3(0f, -180f, 0f);
-                            }
-                            else
-                            {
-                                Debug.Log("Floor");
-                                //placedObject.transform.eulerAngles = new Vector3(0f, 0f, 0f);
-                            }
-
-                            placedObject.SetActive(true);
-                            LightList.Add(placedObject);
-                            placedObject = null;
-
-                            // Destroy the returned object from InventoryController.GetSelectedLight() since we dont need it anymore
-                            Destroy(placedPrefab);
-                        }
-                    }
-                }
-            }
-
-            // This is used to move the object, but only if we are currently holding one
-            if (onTouchHold
-                && arRaycastManager.Raycast(touchPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon)
-                && Input.touchCount > 0)
-            {
-                Pose hitPose = hits[0].pose;
-                if (heldObject != null && haveLight)
-                {
-                    heldObject.transform.position = hitPose.position;
-                    if (hitPose.rotation.y == 0 && hitPose.rotation.x != 0)
-                    {
-                        Debug.Log("Ceiling");
-                        placedObject.transform.eulerAngles = new Vector3(0f, -180f, 0f);
+                        selectedLight = "Circle_lamp3 + Point Light 1";
                     }
                     else
                     {
-                        Debug.Log("Floor");
-                        //placedObject.transform.eulerAngles = new Vector3(0f, 0f, 0f);
+                        selectedLight = PlayerPrefs.GetString("Selected");
                     }
+                    placedPrefab = InventoryController.GetSelectedLight(selectedLight);
+
+                    if (placedPrefab != null)
+                    {
+                        Debug.Log(
+                            "Rotation = X: " + hitPose.rotation.x
+                            + "|Y: " + hitPose.rotation.y
+                            + "|Z: " + hitPose.rotation.z
+                            + "|W: " + hitPose.rotation.w);
+
+                        // Create a new Quaternion with the hitPose. This will be where the user clicks (MUST BE ON A PLANE FOR HIT TO REGISTER)
+                        var placedLocation = new Quaternion(hitPose.rotation.x, hitPose.rotation.y, hitPose.rotation.z - 180, hitPose.rotation.w);
+
+                        amountOfPlacedLights++;
+
+                        // Lets make sure the scale is set to 1, 1, 1 just incase it was messed up somewhere
+                        placedPrefab.transform.localScale = new Vector3(1f, 1f, 1f);
+                        placedObject = Instantiate(placedPrefab, hitPose.position, placedLocation);
+                        placedObject.name = placedPrefab.name + amountOfPlacedLights;
+
+                        // Determine if we are placing on the ceiling or floor
+                        if (hitPose.rotation.y == 0 && hitPose.rotation.x != 0)
+                        {
+                            Debug.Log("Ceiling");
+                            placedObject.transform.eulerAngles = new Vector3(0f, -180f, 0f);
+                        }
+                        else
+                        {
+                            Debug.Log("Floor");
+                            //placedObject.transform.eulerAngles = new Vector3(0f, 0f, 0f);
+                        }
+
+                        placedObject.SetActive(true);
+                        LightList.Add(placedObject);
+                        placedObject = null;
+
+                        // Destroy the returned object from InventoryController.GetSelectedLight() since we dont need it anymore
+                        Destroy(placedPrefab);
+                    }
+                }
+            }
+        }
+
+        // This is used to move the object, but only if we are currently holding one
+        if (onTouchHold
+            && arRaycastManager.Raycast(touchPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon)
+            && Input.touchCount > 0)
+        {
+            Pose hitPose = hits[0].pose;
+            if (heldObject != null && haveLight)
+            {
+                heldObject.transform.position = hitPose.position;
+                if (hitPose.rotation.y == 0 && hitPose.rotation.x != 0)
+                {
+                    Debug.Log("Ceiling");
+                    placedObject.transform.eulerAngles = new Vector3(0f, -180f, 0f);
+                }
+                else
+                {
+                    Debug.Log("Floor");
+                    //placedObject.transform.eulerAngles = new Vector3(0f, 0f, 0f);
                 }
             }
         }
     }
 
 
-    /*
-    *  METHOD       : ToggleLight
-    *  DESCRIPTION  : Toggles the AR light on or off when clicked by the user
-    *  PARAMETER    : NA
-    *  RETURNS      : NA
-    */
-    private void ToggleLight(GameObject clickedObject)
-    {
-        //var lights = clickedObject.GetComponentsInChildren(typeof(Light));
-        clickedObject.SetActive(false);
-        //if (clickedObject.activeSelf == true )
-        //{
-        //    clickedObject.SetActive(false);
-        //}
-        //else
-        //{
-        //    clickedObject.SetActive(true);
-        //}
-    }
+    #endregion
+    #region PublicMethods
 
 
-    /*
-    *  METHOD       : DeleteLight
-    *  DESCRIPTION  : Removes the placed light from the scene
-    *  PARAMETER    : NA
-    *  RETURNS      : NA
-    */
+    /// <summary>
+    /// Delete every instantiated light in the scene
+    /// </summary>
     public void DeleteLight()
     {
         foreach (var item in LightList)
@@ -305,23 +345,44 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
     }
 
 
-    /*
-    *  METHOD       : FlipObject
-    *  DESCRIPTION  : Rotates the orientation of the placed object along it's Z axis by 180 deg
-    *  PARAMETER    : NA
-    *  RETURNS      : NA
-    */
+    /// <summary>
+    /// Flip the most recently placed light 180 deg along it's Z axis
+    /// </summary>
     public void FlipObject()
     {
         if (placedObject != null)
         {
-            placedObject.transform.rotation = new Quaternion(placedObject.transform.rotation.x, placedObject.transform.rotation.y, placedObject.transform.rotation.z - 180, placedObject.transform.rotation.w);
+            placedObject.transform.rotation = new Quaternion(
+                placedObject.transform.rotation.x, 
+                placedObject.transform.rotation.y, 
+                placedObject.transform.rotation.z - 180, 
+                placedObject.transform.rotation.w);
         }
     }
 
-    //Fabian-mkv. (2015). IsPointerOverGameObject not working with touch input. Retrieved April 6, 2020, from
-    //https://answers.unity.com/questions/1115464/ispointerovergameobject-not-working-with-touch-inp.html
-    //https://drive.google.com/file/d/0B__1zp7jwQOKNVhFaGxhbWt5TVU/view
+
+    #endregion
+    #region PrivateMethods
+
+
+    /// <summary>
+    /// Deactivates the selected object
+    /// </summary>
+    /// <param name="clickedObject"> Object to deactivate</param>
+    private void ToggleLight(GameObject clickedObject)
+    {
+        clickedObject.SetActive(false);
+    }
+
+
+    /// <summary>
+    /// Checks if the users last click location was on a UI element
+    /// References: 
+    /// Fabian-mkv. (2015). IsPointerOverGameObject not working with touch input. Retrieved April 6, 2020, from
+    /// https://answers.unity.com/questions/1115464/ispointerovergameobject-not-working-with-touch-inp.html
+    /// https://drive.google.com/file/d/0B__1zp7jwQOKNVhFaGxhbWt5TVU/view
+    /// </summary>
+    /// <returns>True if the user click on a UI element, false otherwise </returns>
     private bool IsPointerOverUIObject()
     {
         PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
@@ -331,4 +392,7 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
         return results.Count > 0;
     }
 
+
+    #endregion
+#pragma warning restore 649
 }//class

@@ -5,7 +5,6 @@
 *  DESCRIPTION  : This file contains the LightPostProcessingScript menu script, and is part of the Radial Menu system.
 */
 
-using System;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
@@ -13,6 +12,7 @@ using UnityEngine.UI;
 /// <summary>
 ///  Controller script for setting the cameras post processing effects, including the bloom, and ambient occlusion properties
 /// </summary>
+[RequireComponent(typeof(Canvas))]
 public class LightPostProcessingScript : MonoBehaviour
 {
     #region Properties
@@ -48,11 +48,15 @@ public class LightPostProcessingScript : MonoBehaviour
     /// </summary>
     private float minValue = 0;
 
-
     /// <summary>
     /// Maximal ppv intensity you can set in the inspector
     /// </summary>
     private float maxValue = 4;
+
+    /// <summary>
+    /// Used in the DetectOutOfBounds script to move the panel back to its hidden position off the screen
+    /// </summary>
+    public float HideDistance;
 
 
     #endregion

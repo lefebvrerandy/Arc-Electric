@@ -126,8 +126,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8359363304066750542}
-        m_MethodName: 
+      - m_Target: {fileID: 1375589924}
+        m_MethodName: RotateAlongY
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -588,8 +588,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8359363304066750542}
-        m_MethodName: 
+      - m_Target: {fileID: 1375589924}
+        m_MethodName: RotateAlongX
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -688,8 +688,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8359363304066750542}
-        m_MethodName: 
+      - m_Target: {fileID: 1375589924}
+        m_MethodName: RotateAlongZ
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2098,6 +2098,9 @@ MonoBehaviour:
   xAxisSlider: {fileID: 4346168775299615637}
   yAxisSlider: {fileID: 2720275739502928940}
   zAxisSlider: {fileID: 2698916914406767920}
+  prevXAxis: 0
+  prevYAxis: 0
+  prevZAxis: 0
 --- !u!1 &8360769384489208006
 GameObject:
   m_ObjectHideFlags: 0
@@ -2143,7 +2146,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 150}
+  m_AnchoredPosition: {x: 0, y: -160}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8580249656894448638
@@ -2212,7 +2215,7 @@ MonoBehaviour:
     m_Top: 10
     m_Bottom: 10
   m_ChildAlignment: 4
-  m_Spacing: 5
+  m_Spacing: 8
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1

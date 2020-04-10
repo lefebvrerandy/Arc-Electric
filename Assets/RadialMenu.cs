@@ -3,7 +3,7 @@
 *  PROJECT      : PROG3220-Systems Project
 *  PROGRAMMER   : Bence Karner
 *  DESCRIPTION  : This file contains the RadialMenu class
-*  REFERENCES   : The following code was taken from a series of online tutorials, and altered to suit the needs of the project
+*  REFERENCES   : The following code was adapted from:
 *   Board To Bits Games. (Nov 6, 2015). Unity Tutorial: Radial Menu (Part 1) from Board to Bits [Video file]. Retrieved Feb 24, 2020, from https://www.youtube.com/watch?v=WzQdc2rAdZc
 *   Board To Bits Games. (Nov 6, 2015). Unity Tutorial: Radial Menu (Part 2) from Board to Bits [Video file]. Retrieved Feb 24, 2020, from https://www.youtube.com/watch?v=HOOGIZu4nxo
 *   Board To Bits Games. (Nov 6, 2015). Unity Tutorial: Radial Menu (Part 3) from Board to Bits [Video file]. Retrieved Feb 24, 2020, from https://www.youtube.com/watch?v=XvgUzjXW2Jk
@@ -19,6 +19,8 @@ using UnityEngine;
 /// </summary>
 public class RadialMenu : MonoBehaviour
 {
+#pragma warning disable 649
+
     #region Properties 
 
 
@@ -26,6 +28,42 @@ public class RadialMenu : MonoBehaviour
     /// Prefab used to instantiate each of the radial menu buttons
     /// </summary>
     public RadialButton buttonPrefab;
+
+
+    /// <summary>
+    /// Ref to the light property menu prefab
+    /// </summary>
+    [SerializeField]
+    private GameObject LightDisplayMenu;
+
+
+    /// <summary>
+    /// Ref to the rotation menu prefab
+    /// </summary>
+    [SerializeField]
+    private GameObject LightRotationMenu;
+
+
+    /// <summary>
+    /// Ref to the post processing menu prefab
+    /// </summary>
+    [SerializeField]
+    private GameObject LightPostProcessingMenu;
+
+
+    #endregion
+    #region MonoBehaviours
+
+
+    /// <summary>
+    /// Get a ref to the prefabs for each menu item
+    /// </summary>
+    private void Start()
+    {
+        LightDisplayMenu = GameObject.Find("LightDisplayMenu");
+        LightRotationMenu = GameObject.Find("LightRotationMenu");
+        LightPostProcessingMenu = GameObject.Find("LightPostProcessingMenu");
+    }
 
 
     #endregion
@@ -39,6 +77,11 @@ public class RadialMenu : MonoBehaviour
     {
         StartCoroutine("AnimateButtons");
     }
+
+
+    #endregion
+    #region PrivateMethods
+
 
     /// <summary>
     /// Spawn the menu items in a circle around the center of the menus position
@@ -109,7 +152,7 @@ public class RadialMenu : MonoBehaviour
     /// <summary>
     /// Destroy the selected object
     /// </summary>
-    /// <param name="ObjectToDestroy"> Object that will be destroyed< /param>
+    /// <param name="ObjectToDestroy"> Object that will be destroyed </param>
     private void DestroyObject(GameObject ObjectToDestroy)
     {
         RadialMenuSpawner.instance.menuOpen = false;
@@ -148,15 +191,16 @@ public class RadialMenu : MonoBehaviour
     /// <param name="lightComponent"> The light component that will be altered in the menu </param>
     private void OpenLightDisplayMenu(Light lightComponent)
     {
-        var lightDisplayMenu = GameObject.Find("LightDisplayMenu");
-
         //Update the selected light, and set the slider starting values
-        var script = lightDisplayMenu.GetComponent<LightDisplayMenuScript>();
+        var script = LightDisplayMenu.GetComponent<LightDisplayMenuScript>();
         script.Light = lightComponent;
         script.ConfigureSliders();
 
-        //Display the new menu, and destroy the radial menu
-        lightDisplayMenu.GetComponent<Canvas>().enabled = true;
+        //Display the menu, play the animation/tween, and destroy the radial menu
+        var detectOutofBoundsPrefab = LightDisplayMenu.transform.GetChild(0).gameObject;
+        var menuPanel = detectOutofBoundsPrefab.transform.GetChild(0).gameObject;
+        LightDisplayMenu.GetComponent<Canvas>().enabled = true;
+        LeanTween.moveY(menuPanel, 515, 0.8f).setEaseOutBack();
         Destroy(gameObject);
     }
 
@@ -166,8 +210,10 @@ public class RadialMenu : MonoBehaviour
     /// </summary>
     private void OpenLightPostProcessingMenu()
     {
-        var lightPostProcessingMenu = GameObject.Find("LightPostProcessingMenu");
-        lightPostProcessingMenu.GetComponent<Canvas>().enabled = true;
+        var detectOutofBoundsPrefab = LightPostProcessingMenu.transform.GetChild(0).gameObject;
+        var menuPanel = detectOutofBoundsPrefab.transform.GetChild(0).gameObject;
+        LightPostProcessingMenu.GetComponent<Canvas>().enabled = true;
+        LeanTween.moveY(menuPanel, 585, 0.75f).setEaseOutBack();
         Destroy(gameObject);
     }
 
@@ -178,22 +224,22 @@ public class RadialMenu : MonoBehaviour
     /// <param name="lightFixture"> Game object to rotate in the menu </param>
     private void OpenLightRotationMenu(GameObject lightFixture)
     {
-        var lightRotationMenu = GameObject.Find("LightRotationMenu");
-
-
-        //Update the selected light, and set the slider starting values
-        var script = lightRotationMenu.GetComponent<LightRotationScript>();
+        //Update the selected light and configure the UI elements
+        var script = LightRotationMenu.GetComponent<LightRotationScript>();
         script.lightFixture = lightFixture;
+        script.GetObjectOrientation();
         script.ConfigureSliders();
 
 
-        lightRotationMenu.GetComponent<Canvas>().enabled = true;
+        //Get the screens bottom center point, and animate the panel upwards to be in view
+        var detectOutofBoundsPrefab = LightRotationMenu.transform.GetChild(0).gameObject;
+        var menuPanel = detectOutofBoundsPrefab.transform.GetChild(0).gameObject;
+        LightRotationMenu.GetComponent<Canvas>().enabled = true;
+        LeanTween.moveY(menuPanel, 515, 0.8f).setEaseOutBack();
         Destroy(gameObject);
     }
 
 
     #endregion
-    #region PrivateMethods
-
-    #endregion
+#pragma warning restore 649
 }//class

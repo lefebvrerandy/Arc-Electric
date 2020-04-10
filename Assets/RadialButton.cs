@@ -3,7 +3,7 @@
 *  PROJECT      : PROG3220-Systems Project
 *  PROGRAMMER   : Bence Karner
 *  DESCRIPTION  : Sole responsibility is to contain the RadialButton class
-*  REFERENCES   : The following code was taken from a series of online tutorials, and altered to suit the needs of the project
+*  REFERENCES   : The following code was taken from:
 *   Board To Bits Games. (Nov 6, 2015). Unity Tutorial: Radial Menu (Part 1) from Board to Bits [Video file]. Retrieved Feb 24, 2020, from https://www.youtube.com/watch?v=WzQdc2rAdZc
 *   Board To Bits Games. (Nov 6, 2015). Unity Tutorial: Radial Menu (Part 2) from Board to Bits [Video file]. Retrieved Feb 24, 2020, from https://www.youtube.com/watch?v=HOOGIZu4nxo
 *   Board To Bits Games. (Nov 6, 2015). Unity Tutorial: Radial Menu (Part 3) from Board to Bits [Video file]. Retrieved Feb 24, 2020, from https://www.youtube.com/watch?v=XvgUzjXW2Jk

@@ -10,11 +10,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Controller script for setting a lights color, alpha channel, range, and intensity.
+/// Controller script for setting a lights color, range, and intensity
 /// </summary>
 [RequireComponent(typeof(Canvas))]
 public class LightDisplayMenuScript : MonoBehaviour
 {
+#pragma warning disable 649
     #region Properties
 
 
@@ -47,8 +48,13 @@ public class LightDisplayMenuScript : MonoBehaviour
     /// 
     /// </summary>
     [SerializeField] private Slider RangeSlider;
-    
-    
+
+    /// <summary>
+    /// Y-axis distance from the anchor to the point where the panel is off the users screen
+    /// </summary>
+    public float HideDistance;
+
+
     #endregion
     #region MonoBehaviours
 
@@ -70,6 +76,7 @@ public class LightDisplayMenuScript : MonoBehaviour
             i++;
         }
     }
+
 
     #endregion
     #region PublicMethods
@@ -170,6 +177,7 @@ public class LightDisplayMenuScript : MonoBehaviour
         }
     }
 
+
     /// <summary>
     /// Save the selected color patch using the name of the color
     /// </summary>
@@ -181,92 +189,5 @@ public class LightDisplayMenuScript : MonoBehaviour
 
 
     #endregion
+#pragma warning restore 649
 }//class
-
-////BeeKeeper
-//colorPalette[0].buttonColor.color = new Color(246, 229, 141, 1.0f);
-//colorPalette[0].patchName = "BeeKeeper";
-
-////Turbo
-//colorPalette[1].buttonColor.color = new Color(249, 202, 36, 1.0f);
-//colorPalette[1].patchName = "Turbo";
-
-////SpicedNectarine
-//colorPalette[2].buttonColor.color = new Color(255, 190, 118, 1.0f);
-//colorPalette[2].patchName = "SpicedNectarine";
-
-////Qiuincejelly
-//colorPalette[3].buttonColor.color = new Color(240, 147, 43, 1.0f);
-//colorPalette[3].patchName = "Qiuincejelly";
-
-////PinkGlamour
-//colorPalette[4].buttonColor.color = new Color(255, 121, 121, 1.0f);
-//colorPalette[4].patchName = "PinkGlamour";
-
-////CarminePink
-//colorPalette[5].buttonColor.color = new Color(235, 77, 75, 1.0f);
-//colorPalette[5].patchName = "CarminePink";
-
-////JuneBud
-//colorPalette[6].buttonColor.color = new Color(186, 220, 88, 1.0f);
-//colorPalette[6].patchName = "";
-
-////PureApple
-//colorPalette[7].buttonColor.color = new Color(106, 176, 76, 1.0f);
-//colorPalette[7].patchName = "PureApple";
-
-////CoastalBreeze
-//colorPalette[8].buttonColor.color = new Color(223, 249, 251, 1.0f);
-//colorPalette[8].patchName = "CoastalBreeze";
-
-////HintOfIcePack
-//colorPalette[9].buttonColor.color = new Color(199, 236, 238, 1.0f);
-//colorPalette[9].patchName = "HintOfIcePack";
-
-////MiddleBlue
-//colorPalette[10].buttonColor.color = new Color(126, 214, 223, 1.0f);
-//colorPalette[10].patchName = "MiddleBlue";
-
-////GreenlandGreen
-//colorPalette[11].buttonColor.color = new Color(34, 166, 179, 1.0f);
-//colorPalette[11].patchName = "GreenlandGreen";
-
-////Heliotrope
-//colorPalette[12].buttonColor.color = new Color(224, 86, 253, 1.0f);
-//colorPalette[12].patchName = "Heliotrope";
-
-////SteelPink
-//colorPalette[13].buttonColor.color = new Color(190, 46, 221, 1.0f);
-//colorPalette[13].patchName = "SteelPink";
-
-////ExodusFruit
-//colorPalette[14].buttonColor.color = new Color(104, 109, 224, 1.0f);
-//colorPalette[14].patchName = "ExodusFruit";
-
-////Blurple
-//colorPalette[15].buttonColor.color = new Color(72, 52, 212, 1.0f);
-//colorPalette[15].patchName = "Blurple";
-
-////DeepKoamaru
-//colorPalette[16].buttonColor.color = new Color(48, 51, 107, 1.0f);
-//colorPalette[16].patchName = "DeepKoamaru";
-
-////DeepCove
-//colorPalette[17].buttonColor.color = new Color(19, 15, 64, 1.0f);
-//colorPalette[17].patchName = "DeepCove";
-
-////SoaringEagle
-//colorPalette[18].buttonColor.color = new Color(149, 175, 192, 1.0f);
-//colorPalette[18].patchName = "SoaringEagle";
-
-////WizardGrey
-//colorPalette[19].buttonColor.color = new Color(83, 92, 104, 1.0f);
-//colorPalette[19].patchName = "WizardGrey";
-
-////White
-//colorPalette[20].buttonColor.color = Color.white;
-//colorPalette[20].patchName = "White";
-
-////Black
-//colorPalette[21].buttonColor.color = Color.black;
-//colorPalette[21].patchName = "Black";

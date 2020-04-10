@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 /// </summary>
 public class DeleteOutOfBounds : MonoBehaviour, IPointerClickHandler
 {
+#pragma warning disable 649
 
     /// <summary>
     /// Time, in seconds, to wait until the user can place and move lights again
@@ -35,4 +36,6 @@ public class DeleteOutOfBounds : MonoBehaviour, IPointerClickHandler
         PlacementWithDraggingDroppingController.EnableLightPlacement = true;
         PlacementWithDraggingDroppingController.EnableLightDrag = true;
     }
+
+#pragma warning restore 649
 }
