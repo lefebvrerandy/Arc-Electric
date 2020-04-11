@@ -2177,7 +2177,7 @@ MonoBehaviour:
   volumeTrigger: {fileID: 689331799}
   volumeLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1280
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 0
   antialiasingMode: 0
@@ -2457,7 +2457,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9.14905, y: -0.0008600146}
+  m_AnchoredPosition: {x: 9.908066, y: -0.0008600146}
   m_SizeDelta: {x: 863.0002, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &930100928
@@ -4582,7 +4582,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -5165,7 +5165,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 596930342}
   m_HandleRect: {fileID: 596930341}
   m_Direction: 0
-  m_Value: -0.0106014805
+  m_Value: -0.011480974
   m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
