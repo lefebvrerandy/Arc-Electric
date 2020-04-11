@@ -110,7 +110,7 @@ public class RadialMenu : MonoBehaviour
                     break;
 
                 case "LightDisplayMenu":
-                    menuButton.button.onClick.AddListener(() => OpenLightDisplayMenu(lightComponent));
+                    menuButton.button.onClick.AddListener(() => OpenLightDisplayMenu(lightFixture, lightComponent));
                     break;
 
                 case "LightPostProcessingMenu":
@@ -190,11 +190,12 @@ public class RadialMenu : MonoBehaviour
     /// Activate the LightDisplayMenu prefab
     /// </summary>
     /// <param name="lightComponent"> The light component that will be altered in the menu </param>
-    private void OpenLightDisplayMenu(Light lightComponent)
+    private void OpenLightDisplayMenu(GameObject lightFixture, Light lightComponent)
     {
         //Update the selected light, and set the slider starting values
         var script = LightDisplayMenu.GetComponent<LightDisplayMenuScript>();
         script.Light = lightComponent;
+        script.LightFixture = lightFixture;
         script.ConfigureSliders();
 
         //Display the menu, play the animation/tween, and destroy the radial menu

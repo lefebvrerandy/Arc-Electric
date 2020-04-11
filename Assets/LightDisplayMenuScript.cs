@@ -25,6 +25,11 @@ public class LightDisplayMenuScript : MonoBehaviour
     public static LightDisplayMenuScript instance { get; set; }
 
     /// <summary>
+    /// Selected light fixture to alter
+    /// </summary>
+    public GameObject LightFixture { get; set; }
+
+    /// <summary>
     /// Reference to the light component that can be changed using the script
     /// </summary>
     public Light Light { get; set; }
@@ -35,17 +40,17 @@ public class LightDisplayMenuScript : MonoBehaviour
     private Color selectedColor;
 
     /// <summary>
-    /// 
+    /// UI slider element used to control the lights color alpha value
     /// </summary>
     [SerializeField] private Slider AlphaSlider;
 
     /// <summary>
-    /// 
+    /// UI slider element used to control the lights intensity property
     /// </summary>
     [SerializeField] private Slider IntensitySlider;
 
     /// <summary>
-    /// 
+    /// UI slider element used to control the lights range property
     /// </summary>
     [SerializeField] private Slider RangeSlider;
 
@@ -185,6 +190,12 @@ public class LightDisplayMenuScript : MonoBehaviour
     {
         selectedColor = buttonColor;
         Light.color = selectedColor;
+
+        //if(LightFixture != null)
+        //{
+        //    Material material = LightFixture.GetComponent<Renderer>().material;
+        //    material.SetColor("_EmissionColor", selectedColor);
+        //}
     }
 
 

@@ -25,21 +25,21 @@ public class DetectOutOfBounds : MonoBehaviour, IPointerClickHandler
     [SerializeField] private float waitTimeSeconds;
 
     /// <summary>
-    /// 
+    /// First object considered out of bounds
     /// </summary>
     [SerializeField] private GameObject outOfBounds;
 
     /// <summary>
-    /// 
+    /// Contains list of all objects hit by a raycast at the users touch position
     /// </summary>
-    private List<RaycastResult> results { get; set; }
+    private List<RaycastResult> raycastHits { get; set; }
 
     /// <summary>
-    /// 
+    /// Instantiate the properties
     /// </summary>
     private void Awake()
     {
-        results = new List<RaycastResult>();
+        raycastHits = new List<RaycastResult>();
     }
 
 
@@ -119,19 +119,19 @@ public class DetectOutOfBounds : MonoBehaviour, IPointerClickHandler
         PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
         var touch = Input.GetTouch(0);
         eventDataCurrentPosition.position = new Vector2(touch.position.x, touch.position.y);
-        results.Clear();
-        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
-        return results.Count > 0;
+        raycastHits.Clear();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, raycastHits);
+        return raycastHits.Count > 0;
     }
 
 
     /// <summary>
-    /// Get the topmost UI element hit by the raycast
+    /// Get the top most UI element hit by the raycast
     /// </summary>
     /// <returns>Name of the selected UI element </returns>
     private string GetSelectedUIObject()
     {
-        return results[0].gameObject.name;
+        return raycastHits[0].gameObject.name;
     }
 
 #pragma warning restore 649

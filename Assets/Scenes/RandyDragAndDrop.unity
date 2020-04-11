@@ -253,6 +253,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: testLamp
       objectReference: {fileID: 0}
+    - target: {fileID: 5091697777155333508, guid: 5974ac74e9f05fc4bbfcd05f7cda3e8d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5974ac74e9f05fc4bbfcd05f7cda3e8d, type: 3}
 --- !u!1 &188248000
