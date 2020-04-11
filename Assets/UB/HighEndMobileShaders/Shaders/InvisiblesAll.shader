@@ -28,7 +28,6 @@ Shader "UB/InvisiblesAll"
             #include "Lighting.cginc"
             #include "AutoLight.cginc"
             #pragma multi_compile_fwdbase
-            #pragma multi_compile_fwdbase nolightmap
             
             fixed4 _Color;
             
