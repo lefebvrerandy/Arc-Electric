@@ -153,7 +153,7 @@ public class LightDisplayMenuScript : MonoBehaviour
         if (Light != null)
         {
             const int minIntensity = 0;
-            const int maxIntensity = 10;
+            const int maxIntensity = 4;
             IntensitySlider.minValue = minIntensity;
             IntensitySlider.maxValue = maxIntensity;
             IntensitySlider.value = light.intensity;

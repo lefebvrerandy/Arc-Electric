@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -23,6 +24,24 @@ public class DetectOutOfBounds : MonoBehaviour, IPointerClickHandler
     /// </summary>
     [SerializeField] private float waitTimeSeconds;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    [SerializeField] private GameObject outOfBounds;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    private List<RaycastResult> results { get; set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    private void Awake()
+    {
+        results = new List<RaycastResult>();
+    }
+
 
     /// <summary>
     /// Event that fires once the user clicks outside on the game object attached to this script. 
@@ -30,6 +49,16 @@ public class DetectOutOfBounds : MonoBehaviour, IPointerClickHandler
     /// </summary>
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (!IsPointerOverUIObject())
+        {
+            return;
+        }
+
+        if(GetSelectedUIObject() != outOfBounds.name)
+        {
+            return;
+        }
+
         RadialMenuSpawner.instance.menuOpen = false;
         gameObject.transform.parent.gameObject.GetComponent<Canvas>().enabled = false;
         AnimateOut();
@@ -74,6 +103,35 @@ public class DetectOutOfBounds : MonoBehaviour, IPointerClickHandler
         yield return new WaitForSeconds(waitTimeSeconds);
         PlacementWithDraggingDroppingController.EnableLightPlacement = true;
         PlacementWithDraggingDroppingController.EnableLightDrag = true;
+    }
+
+
+    /// <summary>
+    /// Checks if the users last click location was on a UI element
+    /// References: 
+    /// Fabian-mkv. (2015). IsPointerOverGameObject not working with touch input. Retrieved April 6, 2020, from
+    /// https://answers.unity.com/questions/1115464/ispointerovergameobject-not-working-with-touch-inp.html
+    /// https://drive.google.com/file/d/0B__1zp7jwQOKNVhFaGxhbWt5TVU/view
+    /// </summary>
+    /// <returns>True if the user click on a UI element, false otherwise </returns>
+    private bool IsPointerOverUIObject()
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        var touch = Input.GetTouch(0);
+        eventDataCurrentPosition.position = new Vector2(touch.position.x, touch.position.y);
+        results.Clear();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
+    }
+
+
+    /// <summary>
+    /// Get the topmost UI element hit by the raycast
+    /// </summary>
+    /// <returns>Name of the selected UI element </returns>
+    private string GetSelectedUIObject()
+    {
+        return results[0].gameObject.name;
     }
 
 #pragma warning restore 649
