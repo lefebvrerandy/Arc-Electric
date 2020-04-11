@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 6249875106292222420}
   m_Layer: 8
   m_Name: Side_LampSmall  + Point Light 1
-  m_TagString: Untagged
+  m_TagString: Skinable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

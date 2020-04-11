@@ -8,9 +8,8 @@ TagManager:
   - LightFixture
   - SelectedLight
   - UserInterface
-  - AmbientOcclusionSlider
-  - BloomSlider
   - ColorPatch
+  - Skinable
   layers:
   - Default
   - TransparentFX

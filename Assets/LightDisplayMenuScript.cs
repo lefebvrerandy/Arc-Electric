@@ -191,11 +191,11 @@ public class LightDisplayMenuScript : MonoBehaviour
         selectedColor = buttonColor;
         Light.color = selectedColor;
 
-        //if(LightFixture != null)
-        //{
-        //    Material material = LightFixture.GetComponent<Renderer>().material;
-        //    material.SetColor("_EmissionColor", selectedColor);
-        //}
+        if (LightFixture != null && LightFixture.tag == "Skinable")
+        {
+            Material material = LightFixture.GetComponent<Renderer>().material;
+            material.SetColor("_EmissionColor", selectedColor);
+        }
     }
 
 
