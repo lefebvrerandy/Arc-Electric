@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: 2786941165562625529}
   - component: {fileID: 2786941165563592505}
   - component: {fileID: 6249875106292222420}
+  - component: {fileID: -2489391265275433295}
   m_Layer: 8
   m_Name: Side_LampSmall  + Point Light 1
   m_TagString: Skinable
@@ -184,3 +185,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.2787219, y: 0.85698295, z: 0.49027038}
   m_Center: {x: 0, y: 0, z: 0.23513159}
+--- !u!114 &-2489391265275433295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2786941165565780473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21418116c7752ca4cb04b9067343f8be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

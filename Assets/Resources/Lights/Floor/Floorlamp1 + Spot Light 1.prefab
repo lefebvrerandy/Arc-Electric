@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2547752565105385666}
   - component: {fileID: 2547752565104386562}
   - component: {fileID: 6373137345487716587}
+  - component: {fileID: -3203055045297044179}
   m_Layer: 8
   m_Name: Floorlamp1 + Spot Light 1
   m_TagString: Untagged
@@ -94,6 +95,18 @@ CapsuleCollider:
   m_Height: 13.608502
   m_Direction: 1
   m_Center: {x: 0.0000038146973, y: 6.733008, z: 0.00000008940697}
+--- !u!114 &-3203055045297044179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2547752565102197954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21418116c7752ca4cb04b9067343f8be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4089282736769951997
 GameObject:
   m_ObjectHideFlags: 0
