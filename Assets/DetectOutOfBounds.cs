@@ -92,6 +92,7 @@ public class DetectOutOfBounds : MonoBehaviour, IPointerClickHandler
         }
         var menuPanel = gameObject.transform.GetChild(0).gameObject;
         LeanTween.moveLocalY(menuPanel, -easeOutDistance, 0.1f).setEaseLinear();
+        menuPanel.transform.position = new Vector3(Screen.width / 2, menuPanel.transform.position.y, menuPanel.transform.position.z);
     }
 
 
