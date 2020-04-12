@@ -283,9 +283,10 @@ public class LightRotationScript : MonoBehaviour
                 break;
         }
 
-        //Apply the rotation
+        //Apply the rotation and save the new orientation to the object
         lightFixture.transform.rotation = Quaternion.Euler(prevXAxis, prevYAxis, prevZAxis);
-        Debug.Log(lightFixture.transform.rotation);
+        var orientationScript = lightFixture.GetComponent<Orientation>();
+        orientationScript.Angles = new Vector3(prevXAxis, prevYAxis, prevZAxis);
     }
 
 
@@ -302,7 +303,7 @@ public class LightRotationScript : MonoBehaviour
         }
         else
         {
-            xAxisSlider.value = prevXAxis;
+            xAxisSlider.value = Mathf.Abs(prevXAxis);
         }
     }
 
@@ -320,7 +321,7 @@ public class LightRotationScript : MonoBehaviour
         }
         else
         {
-            yAxisSlider.value = prevYAxis;
+            yAxisSlider.value = Mathf.Abs(prevYAxis);
         }
     }
 
@@ -338,7 +339,7 @@ public class LightRotationScript : MonoBehaviour
         }
         else
         {
-            zAxisSlider.value = prevZAxis;
+            zAxisSlider.value = Mathf.Abs(prevZAxis);
         }
     }
 
