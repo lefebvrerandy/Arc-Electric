@@ -10,6 +10,7 @@
 */
 
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -41,11 +42,6 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
     /// </summary>
     [SerializeField]
     private Camera arCamera;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    private GameObject placedPrefab;
 
     /// <summary>
     /// 
@@ -249,9 +245,6 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                 {
                     Pose hitPose = hits[0].pose;
 
-                    // Start the timer to dropping the light
-                    canDropLight = false;
-
                     // Get the selected light game object
                     if (PlayerPrefs.GetString("Selected") == "")
                     {
@@ -261,8 +254,8 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                     {
                         selectedLight = PlayerPrefs.GetString("Selected");
                     }
-                    placedPrefab = InventoryController.GetSelectedLight(selectedLight);
-
+                    Tuple<GameObject, string> foundTupleLightFolder = InventoryController.GetSelectedLight(selectedLight);
+                    GameObject placedPrefab = foundTupleLightFolder.Item1;
                     if (placedPrefab != null)
                     {
                         Debug.Log(
@@ -282,16 +275,81 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                         placedObject.name = placedPrefab.name + amountOfPlacedLights;
 
                         // Determine if we are placing on the ceiling or floor
-                        if (hitPose.rotation.y == 0 && hitPose.rotation.x != 0)
+                        switch(foundTupleLightFolder.Item2)
                         {
-                            Debug.Log("Ceiling");
-                            placedObject.transform.eulerAngles = new Vector3(0f, -180f, 0f);
+                            case "Ceiling":
+                                if (hitPose.rotation.y == 0 && hitPose.rotation.w == 0)
+                                {
+                                    // Ceiling
+                                    placedObject.transform.eulerAngles = new Vector3(0f, -180f, 0f);
+                                }
+                                else if (hitPose.rotation.x == 0 && hitPose.rotation.z == 0)
+                                {
+                                    // Floor
+                                    //placedObject.transform.eulerAngles = new Vector3(0f, 0f, 0f);
+                                }
+                                else
+                                {
+                                    // Wall - Dont place ceiling lights on the wall
+                                }
+                                break;
+
+
+                            case "Floor":
+                                if (hitPose.rotation.y == 0 && hitPose.rotation.w == 0)
+                                {
+                                    // Ceiling
+                                    //placedObject.transform.eulerAngles = new Vector3(0f, 0f, 0f);
+                                }
+                                else if (hitPose.rotation.x == 0 && hitPose.rotation.z == 0)
+                                {
+                                    // Floor
+                                    //placedObject.transform.eulerAngles = new Vector3(0f, 0f, 0f);
+                                    placedObject.transform.eulerAngles = new Vector3(0f, -180f, 0f);
+                                }
+                                else
+                                {
+                                    // Wall - Dont place floor lights on the wall
+                                }
+                                break;
+
+
+                            case "Wall":
+                                if (hitPose.rotation.y == 0 && hitPose.rotation.w == 0)
+                                {
+                                    // Ceiling
+                                    placedObject.transform.eulerAngles = new Vector3(0f, 0f, 0f);
+                                }
+                                else if (hitPose.rotation.x == 0 && hitPose.rotation.z == 0)
+                                {
+                                    // Floor
+                                    //placedObject.transform.eulerAngles = new Vector3(0f, 0f, 0f);
+                                }
+                                else
+                                {
+                                    // Wall
+                                }
+                                break;
+
+
+                            default:
+                                if (hitPose.rotation.y == 0 && hitPose.rotation.w == 0)
+                                {
+                                    // Ceiling
+                                    placedObject.transform.eulerAngles = new Vector3(0f, -180f, 0f);
+                                }
+                                else if (hitPose.rotation.x == 0 && hitPose.rotation.z == 0)
+                                {
+                                    // Floor
+                                    //placedObject.transform.eulerAngles = new Vector3(0f, 0f, 0f);
+                                }
+                                else
+                                {
+                                    // Wall
+                                }
+                                break;
                         }
-                        else
-                        {
-                            Debug.Log("Floor");
-                            //placedObject.transform.eulerAngles = new Vector3(0f, 0f, 0f);
-                        }
+
 
                         placedObject.SetActive(true);
                         LightList.Add(placedObject);

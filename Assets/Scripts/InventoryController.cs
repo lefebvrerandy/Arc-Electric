@@ -6,6 +6,7 @@
 */
 
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,9 +31,9 @@ public class InventoryController : MonoBehaviour
     public GameObject inventoryContentPanel;
     public GameObject inventoryTemplate;
 
-    private List<GameObject> lightPrefabs = new List<GameObject>();
+    private List<Tuple<GameObject, string>> lightPrefabs = new List<Tuple<GameObject, string>>();
     private List<GameObject> lightPrefabsSelected = new List<GameObject>();
-    private static List<GameObject> instantiatedLightObjectsInventorypanel = new List<GameObject>();
+    private static List<Tuple<GameObject, string>> instantiatedLightObjectsInventorypanel = new List<Tuple<GameObject, string>>();
 
     public static UnityEvent selectionChangedEvent;
 
@@ -61,7 +62,8 @@ public class InventoryController : MonoBehaviour
         foreach (var lightObject in LightsObject)
         {
             GameObject lightPrefab = lightObject as GameObject;
-            lightPrefabs.Add(lightPrefab);
+            var tuple = new Tuple<GameObject, string>(lightPrefab, folder);
+            lightPrefabs.Add(tuple);
         }
     }
 
@@ -69,7 +71,6 @@ public class InventoryController : MonoBehaviour
     {
         foreach (var light in lightPrefabs)
         {
-            var test = lightPrefabs.Count;
             // Start creating the new Inventory item
             GameObject newItem = inventoryTemplate;
 
@@ -77,7 +78,7 @@ public class InventoryController : MonoBehaviour
             if (newItem != null)
             {
                 // Create the new light using the prefab list
-                GameObject newLight = light;
+                GameObject newLight = light.Item1;
 
                 // Adjust the rotation of the light
                 newLight.transform.eulerAngles = new Vector3(0f, 0f, 0f);
@@ -87,18 +88,42 @@ public class InventoryController : MonoBehaviour
                 GameObject lightObject = Instantiate(newLight, item.transform);
 
                 // Set name of each item in List for the viewer
-                //item.GetComponentInChildren<Text>().text = newLight.name;
+                string[] splitName = newLight.name.Split('+');
+                splitName[0] = splitName[0].Replace('_', ' ');
+                item.GetComponentInChildren<Text>().text = splitName[0];
 
                 // Set up the properties for each light
-                lightObject.transform.localScale = new Vector3(10f, 10f, 10f);
-                
+                if (light.Item2 == "Ceiling")
+                {
+                    lightObject.transform.localScale = new Vector3(50f, 50f, 50f);
+                    lightObject.transform.eulerAngles = new Vector3(15f, 0f, 0f);
+                }
+                else if (light.Item2 == "Floor")
+                {
+                    lightObject.transform.localScale = new Vector3(50f, 10f, 10f);
+                    lightObject.transform.eulerAngles = new Vector3(0f, 0f, 0f);
+                    lightObject.transform.localPosition = new Vector3(lightObject.transform.localPosition.x, -93f, lightObject.transform.localPosition.z);
+                }
+                else if (light.Item2 == "Wall")
+                {
+                    lightObject.transform.localScale = new Vector3(50f, 50f, 50f);
+                    lightObject.transform.eulerAngles = new Vector3(180f, 0f, 0f);
+                    lightObject.transform.localPosition = new Vector3(lightObject.transform.localPosition.x, -41.5f, lightObject.transform.localPosition.z);
+                }
+                else
+                {
+                    lightObject.transform.localScale = new Vector3(50f, 50f, 50f);
+                    lightObject.transform.eulerAngles = new Vector3(15f, 0f, 0f);
+                }
+
                 lightObject.name = newLight.name;
                 lightObject.SetActive(true);
 
                 // Set up event handlers to each light
                 string name = newLight.name;
                 item.GetComponent<Button>().onClick.AddListener(() => UserController.SwitchSelected(newLight.name));
-                instantiatedLightObjectsInventorypanel.Add(lightObject);
+                var tuple = new Tuple<GameObject, string>(lightObject, light.Item2);
+                instantiatedLightObjectsInventorypanel.Add(tuple);
             }
         }
     }
@@ -130,7 +155,7 @@ public class InventoryController : MonoBehaviour
         foreach(var light in instantiatedLightObjectsInventorypanel)
         {
             if (light != null)
-                light.SetActive(true);
+                light.Item1.SetActive(true);
         }
     }
 
@@ -144,7 +169,7 @@ public class InventoryController : MonoBehaviour
         }
         foreach (var light in instantiatedLightObjectsInventorypanel)
         {
-            light.SetActive(false);
+            light.Item1.SetActive(false);
         }
     }
 
@@ -217,14 +242,22 @@ public class InventoryController : MonoBehaviour
         }
 
         LoadInventoryPanel();
-//DELETING HUD        //LoadHudPanel();
-        //CleanUpHUD();
     }
 
-    public static GameObject GetSelectedLight(string name)
+    public static Tuple<GameObject,string> GetSelectedLight(string name)
     {
         //  Find the selected light from the list, given the name
-        GameObject newLight = instantiatedLightObjectsInventorypanel.Where(obj => obj.name == name).SingleOrDefault();
+        GameObject newLight = new GameObject();
+        string folder = string.Empty;
+        foreach (var light in instantiatedLightObjectsInventorypanel)
+        {
+            if (light.Item1.name == name)
+            {
+                newLight = light.Item1;
+                folder = light.Item2;
+                break;
+            }
+        }
         if (newLight != null)
         {
             // Strip off (Clone)
@@ -233,7 +266,7 @@ public class InventoryController : MonoBehaviour
 
             // Create that new GameObject and return it
             GameObject newInstantiatedLight = Instantiate(newLight);
-            return newInstantiatedLight;
+            return new Tuple<GameObject, string>(newInstantiatedLight, folder);
         }
         else
             return null;
