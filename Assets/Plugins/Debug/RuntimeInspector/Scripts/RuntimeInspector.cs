@@ -234,8 +234,8 @@ namespace RuntimeInspectorNamespace
 			RuntimeInspectorUtils.IgnoredTransformsInHierarchy.Add( drawArea );
 			RuntimeInspectorUtils.IgnoredTransformsInHierarchy.Add( poolParent );
 
-			ColorPicker.Instance.Close();
-			ObjectReferencePicker.Instance.Close();
+			//ColorPicker.Instance.Close();
+			//ObjectReferencePicker.Instance.Close();
 		}
 
 		private void OnDestroy()
@@ -386,8 +386,8 @@ namespace RuntimeInspectorNamespace
 			m_inspectedObject = null;
 			scrollView.verticalNormalizedPosition = 1f;
 
-			ColorPicker.Instance.Close();
-			ObjectReferencePicker.Instance.Close();
+			//ColorPicker.Instance.Close();
+			//ObjectReferencePicker.Instance.Close();
 		}
 
 		public InspectorField CreateDrawerForType( Type type, Transform drawerParent, int depth, bool drawObjectsAsFields = true )

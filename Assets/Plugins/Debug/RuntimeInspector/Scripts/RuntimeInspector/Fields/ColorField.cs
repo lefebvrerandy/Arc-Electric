@@ -36,10 +36,10 @@ namespace RuntimeInspectorNamespace
 
 		private void ShowColorPicker( PointerEventData eventData )
 		{
-			if( isColor32 )
-				ColorPicker.Instance.Show( OnColorChanged, (Color32) Value );
-			else
-				ColorPicker.Instance.Show( OnColorChanged, (Color) Value );
+			//if( isColor32 )
+			//	ColorPicker.Instance.Show( OnColorChanged, (Color32) Value );
+			//else
+			//	ColorPicker.Instance.Show( OnColorChanged, (Color) Value );
 		}
 
 		private void OnColorChanged( Color32 color )

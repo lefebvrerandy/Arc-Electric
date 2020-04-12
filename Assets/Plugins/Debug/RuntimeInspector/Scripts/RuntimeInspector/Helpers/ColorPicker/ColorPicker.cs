@@ -13,8 +13,8 @@ namespace RuntimeInspectorNamespace
 			{
 				if( m_instance == null )
 				{
-					m_instance = Instantiate( Resources.Load<ColorPicker>( "RuntimeInspector/ColorPicker" ) );
-					m_instance.gameObject.SetActive( false );
+					//m_instance = Instantiate( Resources.Load<ColorPicker>( "RuntimeInspector/ColorPicker" ) );
+					//m_instance.gameObject.SetActive( false );
 				}
 
 				return m_instance;
@@ -75,41 +75,41 @@ namespace RuntimeInspectorNamespace
 		private Color initialValue;
 		private ColorWheelControl.OnColorChangedDelegate onColorChanged;
 
-		protected override void Awake()
-		{
-			base.Awake();
+		//protected override void Awake()
+		//{
+		//	base.Awake();
 
-            rInput.Initialize();
-			gInput.Initialize();
-			bInput.Initialize();
-			aInput.Initialize();
+  //          rInput.Initialize();
+		//	gInput.Initialize();
+		//	bInput.Initialize();
+		//	aInput.Initialize();
 
-			cancelButton.onClick.AddListener( Cancel );
-			okButton.onClick.AddListener( Close );
-		}
+		//	cancelButton.onClick.AddListener( Cancel );
+		//	okButton.onClick.AddListener( Close );
+		//}
 
-		void Start()
-		{
-			colorWheel.OnColorChanged += OnSelectedColorChanged;
-			alphaSlider.OnValueChanged += OnAlphaChanged;
+		//void Start()
+		//{
+		//	colorWheel.OnColorChanged += OnSelectedColorChanged;
+		//	alphaSlider.OnValueChanged += OnAlphaChanged;
 
-			rInput.DefaultEmptyValue = "0";
-			gInput.DefaultEmptyValue = "0";
-			bInput.DefaultEmptyValue = "0";
-			aInput.DefaultEmptyValue = "0";
+		//	rInput.DefaultEmptyValue = "0";
+		//	gInput.DefaultEmptyValue = "0";
+		//	bInput.DefaultEmptyValue = "0";
+		//	aInput.DefaultEmptyValue = "0";
 
-			rInput.Skin = Skin;
-			gInput.Skin = Skin;
-			bInput.Skin = Skin;
-			aInput.Skin = Skin;
+		//	rInput.Skin = Skin;
+		//	gInput.Skin = Skin;
+		//	bInput.Skin = Skin;
+		//	aInput.Skin = Skin;
 
-			rInput.OnValueChanged += OnRGBAChanged;
-			gInput.OnValueChanged += OnRGBAChanged;
-			bInput.OnValueChanged += OnRGBAChanged;
-			aInput.OnValueChanged += OnRGBAChanged;
+		//	rInput.OnValueChanged += OnRGBAChanged;
+		//	gInput.OnValueChanged += OnRGBAChanged;
+		//	bInput.OnValueChanged += OnRGBAChanged;
+		//	aInput.OnValueChanged += OnRGBAChanged;
 
-			OnSelectedColorChanged( colorWheel.Color );
-		}
+		//	OnSelectedColorChanged( colorWheel.Color );
+		//}
 
 		public void Show( ColorWheelControl.OnColorChangedDelegate onColorChanged, Color initialColor )
 		{

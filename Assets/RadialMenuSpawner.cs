@@ -165,19 +165,19 @@ public class RadialMenuSpawner : MonoBehaviour
     private void ShowSelectedLightPreview()
     {
         return;
-        try
-        {
-            var selectedLight = PlayerPrefs.GetString("Selected");
-            var lightPrefab = InventoryController.GetSelectedLight(selectedLight);
-            if (lightPrefab != null)
-            {
-                lightPrefab.transform.localScale = new Vector3(1f, 1f, 1f);
-                var position = new Vector3(Screen.width / 2, Screen.height / 2, 0);
-                var lightModel = Instantiate(lightPrefab, position, new Quaternion());
-                lightModel.SetActive(true);
-            }
-        }
-        catch (Exception e) { Debug.LogError(e.Message); }
+        //try
+        //{
+        //    var selectedLight = PlayerPrefs.GetString("Selected");
+        //    var lightPrefab = InventoryController.GetSelectedLight(selectedLight);
+        //    if (lightPrefab != null)
+        //    {
+        //        lightPrefab.transform.localScale = new Vector3(1f, 1f, 1f);
+        //        var position = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+        //        var lightModel = Instantiate(lightPrefab, position, new Quaternion());
+        //        lightModel.SetActive(true);
+        //    }
+        //}
+        //catch (Exception e) { Debug.LogError(e.Message); }
     }
 
 
