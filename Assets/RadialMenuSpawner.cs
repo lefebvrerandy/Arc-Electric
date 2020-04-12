@@ -2,7 +2,7 @@
 *  FILE         : RadialMenuSpawner.cs
 *  PROJECT      : PROG3220-Systems Project
 *  PROGRAMMER   : Bence Karner
-*  DESCRIPTION  : Sole responsibility is to contain the RadialMenuSpawner class
+*  DESCRIPTION  : Sole responsibility is to contain the RadialMenuSpawner class which is part of the radial menu system
 *  REFERENCES   : The following code was adapted from:
 *   Board To Bits Games. (Nov 6, 2015). Unity Tutorial: Radial Menu (Part 1) from Board to Bits [Video file]. Retrieved Feb 24, 2020, from https://www.youtube.com/watch?v=WzQdc2rAdZc
 *   Board To Bits Games. (Nov 6, 2015). Unity Tutorial: Radial Menu (Part 2) from Board to Bits [Video file]. Retrieved Feb 24, 2020, from https://www.youtube.com/watch?v=HOOGIZu4nxo

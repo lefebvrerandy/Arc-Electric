@@ -1,7 +1,7 @@
 ﻿/*
 *  FILE          : PlacementWithDraggingDroppingController.cs
 *  PROJECT       : PROG 3220 - Systems Project
-*  PROGRAMMER    : Randy Lefebvre, Bence Karner, Lucas Roes, Kyle Horsley
+*  PROGRAMMER    : Randy Lefebvre, Bence Karner
 *  DESCRIPTION   : This file contains the placement controller, and the relevant code to control the applications UI
 *  REFERENCE     : Script format was copied and altered from the following sources,
 *  Valecillos. (2019). AR Foundation with Unity3d and Adding Dragging Functionality with 

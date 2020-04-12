@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 namespace RuntimeInspectorNamespace
 {
+#pragma warning disable 649
 	public class ColorPicker : SkinnedWindow
 	{
 		private static ColorPicker m_instance;
@@ -217,4 +218,5 @@ namespace RuntimeInspectorNamespace
 			return false;
 		}
 	}
+#pragma warning restore 649
 }
