@@ -229,7 +229,9 @@ public class RadialMenu : MonoBehaviour
         //Update the selected light and configure the UI elements
         var script = LightRotationMenu.GetComponent<LightRotationScript>();
         script.lightFixture = lightFixture;
-        script.GetObjectOrientation();
+
+        var orientationScript = lightFixture.GetComponent<Orientation>();
+        script.SetPreviousOrientation(orientationScript.Angles);
         script.ConfigureSliders();
 
 

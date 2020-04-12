@@ -367,6 +367,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 188248000}
   m_CullTransparentMesh: 0
+--- !u!1 &338781646 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5984806655606223009, guid: 282ad90bab5898f4b83e9f4c793b073f,
+    type: 3}
+  m_PrefabInstance: {fileID: 7923678137386319887}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &341031131
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2502,7 +2508,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9.908066, y: -0.0008600146}
+  m_AnchoredPosition: {x: 10.481454, y: -0.0008600146}
   m_SizeDelta: {x: 863.0002, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &930100928
@@ -3303,6 +3309,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1545435939}
   m_CullTransparentMesh: 0
+--- !u!1 &1548384921 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8163937646921074016, guid: 754142c6ab181b04fab452b5a9df5803,
+    type: 3}
+  m_PrefabInstance: {fileID: 1723556847}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1558009257 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5091697777155333508, guid: 5974ac74e9f05fc4bbfcd05f7cda3e8d,
+    type: 3}
+  m_PrefabInstance: {fileID: 165200765}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1558009258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1558009257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21418116c7752ca4cb04b9067343f8be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1680119850
 GameObject:
   m_ObjectHideFlags: 0
@@ -3842,6 +3872,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7951634169883516208, guid: 754142c6ab181b04fab452b5a9df5803,
+        type: 3}
+      propertyPath: outOfBounds
+      value: 
+      objectReference: {fileID: 1548384921}
     - target: {fileID: 8359363304066750542, guid: 754142c6ab181b04fab452b5a9df5803,
         type: 3}
       propertyPath: m_Name
@@ -5216,7 +5251,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 596930342}
   m_HandleRect: {fileID: 596930341}
   m_Direction: 0
-  m_Value: -0.011480974
+  m_Value: -0.012145394
   m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -6072,6 +6107,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5484134051329992945, guid: 282ad90bab5898f4b83e9f4c793b073f,
+        type: 3}
+      propertyPath: outOfBounds
+      value: 
+      objectReference: {fileID: 338781646}
     - target: {fileID: 5739628871716049820, guid: 282ad90bab5898f4b83e9f4c793b073f,
         type: 3}
       propertyPath: m_AnchorMin.y

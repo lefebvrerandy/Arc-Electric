@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2039697988349811353}
   - component: {fileID: 2039697988350777433}
   - component: {fileID: 574062845543913308}
+  - component: {fileID: 3501185291889606287}
   m_Layer: 8
   m_Name: Square_lamp9 + Point Light 1
   m_TagString: Skinable
@@ -93,6 +94,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.9207945, y: 0.18322644, z: 1.9207945}
   m_Center: {x: 0.000000029802322, y: -0.09103063, z: 0}
+--- !u!114 &3501185291889606287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039697988348577433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21418116c7752ca4cb04b9067343f8be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2454126588601253286
 GameObject:
   m_ObjectHideFlags: 0

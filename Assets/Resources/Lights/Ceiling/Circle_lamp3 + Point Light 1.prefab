@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5091697777152262532}
   - component: {fileID: 5091697777153393476}
   - component: {fileID: 701894057657696250}
+  - component: {fileID: -6901425561884586870}
   m_Layer: 8
   m_Name: Circle_lamp3 + Point Light 1
   m_TagString: Skinable
@@ -93,6 +94,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.2
   m_Center: {x: 0.00000017881393, y: -0.9183437, z: 0}
+--- !u!114 &-6901425561884586870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5091697777155333508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21418116c7752ca4cb04b9067343f8be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7429135616348785129
 GameObject:
   m_ObjectHideFlags: 0

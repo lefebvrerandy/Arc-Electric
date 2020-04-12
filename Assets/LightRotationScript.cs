@@ -215,14 +215,14 @@ public class LightRotationScript : MonoBehaviour
 
 
     /// <summary>
-    /// Gets the localEulerAngles for the object, and sets the related properties
+    /// Sets the previous axis values for the object based on its orientation
     /// </summary>
-    public void GetObjectOrientation()
+    /// <param name="orientation"> Vector containing the 3D eugler values representing the objects orientation</param>
+    public void SetPreviousOrientation(Vector3 orientation)
     {
-        var vector = lightFixture.transform.localEulerAngles;
-        prevXAxis = Convert.ToInt32(vector.x);
-        prevYAxis = Convert.ToInt32(vector.y);
-        prevZAxis = Convert.ToInt32(vector.z);
+        prevXAxis = Convert.ToInt32(orientation.x);
+        prevYAxis = Convert.ToInt32(orientation.y);
+        prevZAxis = Convert.ToInt32(orientation.z);
     }
 
 
@@ -285,6 +285,7 @@ public class LightRotationScript : MonoBehaviour
 
         //Apply the rotation
         lightFixture.transform.rotation = Quaternion.Euler(prevXAxis, prevYAxis, prevZAxis);
+        Debug.Log(lightFixture.transform.rotation);
     }
 
 
