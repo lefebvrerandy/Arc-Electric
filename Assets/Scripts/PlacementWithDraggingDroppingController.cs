@@ -40,6 +40,11 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
     /// <summary>
     /// 
     /// </summary>
+    public ToastScript ToastMessage;
+
+    /// <summary>
+    /// 
+    /// </summary>
     [SerializeField]
     private Camera arCamera;
 
@@ -76,7 +81,7 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
     /// <summary>
     /// 
     /// </summary>
-    private List<GameObject> LightList = new List<GameObject>();
+    private static List<GameObject> LightList = new List<GameObject>();
 
     /// <summary>
     /// 
@@ -276,6 +281,8 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                         placedObject.layer = 8; // This is the Light Layer
 
                         // Determine if we are placing on the ceiling or floor
+                        bool needToDestroy = false;
+                        string invalidString = string.Empty;
                         switch (foundTupleLightFolder.Item2)
                         {
                             case "Ceiling":
@@ -292,6 +299,8 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                                 else
                                 {
                                     // Wall - Dont place ceiling lights on the wall
+                                    needToDestroy = true;
+                                    invalidString = "Cannot place CEILING LAMP on the WALL";
                                 }
                                 break;
 
@@ -300,7 +309,8 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                                 if (hitPose.rotation.y == 0 && hitPose.rotation.w == 0)
                                 {
                                     // Ceiling
-                                    //placedObject.transform.eulerAngles = new Vector3(0f, 0f, 0f);
+                                    needToDestroy = true;
+                                    invalidString = "Cannot place FLOOR LAMP on the CEILING";
                                 }
                                 else if (hitPose.rotation.x == 0 && hitPose.rotation.z == 0)
                                 {
@@ -311,6 +321,8 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                                 else
                                 {
                                     // Wall - Dont place floor lights on the wall
+                                    needToDestroy = true;
+                                    invalidString = "Cannot place FLOOR LAMP on the WALL";
                                 }
                                 break;
 
@@ -319,16 +331,19 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                                 if (hitPose.rotation.y == 0 && hitPose.rotation.w == 0)
                                 {
                                     // Ceiling
-                                    placedObject.transform.eulerAngles = new Vector3(0f, 0f, 0f);
+                                    needToDestroy = true;
+                                    invalidString = "Cannot place WALL LAMP on the CEILING";
                                 }
                                 else if (hitPose.rotation.x == 0 && hitPose.rotation.z == 0)
                                 {
                                     // Floor
-                                    //placedObject.transform.eulerAngles = new Vector3(0f, 0f, 0f);
+                                    needToDestroy = true;
+                                    invalidString = "Cannot place WALL LAMP on the FLOOR";
                                 }
                                 else
                                 {
                                     // Wall
+                                    placedObject.transform.eulerAngles = new Vector3(0f, 180f, 0f);
                                 }
                                 break;
 
@@ -342,7 +357,6 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                                 else if (hitPose.rotation.x == 0 && hitPose.rotation.z == 0)
                                 {
                                     // Floor
-                                    //placedObject.transform.eulerAngles = new Vector3(0f, 0f, 0f);
                                 }
                                 else
                                 {
@@ -351,9 +365,18 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                                 break;
                         }
 
-                        placedObject.SetActive(true);
-                        LightList.Add(placedObject);
-                        placedObject = null;
+                        if (!needToDestroy)
+                        {
+                            placedObject.SetActive(true);
+                            LightList.Add(placedObject);
+                            placedObject = null;
+                        }
+                        else
+                        {
+                            ToastMessage.showToast(invalidString, 3);
+                            Destroy(placedObject);
+                        }
+
 
                         // Destroy the returned object from InventoryController.GetSelectedLight() since we dont need it anymore
                         Destroy(placedPrefab);
@@ -412,12 +435,17 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
         if (placedObject != null)
         {
             placedObject.transform.RotateAround(placedObject.transform.position, Vector3.forward, 180f);
-            //placedObject.transform.rotation = new Quaternion(
-            //    placedObject.transform.rotation.x, 
-            //    placedObject.transform.rotation.y, 
-            //    placedObject.transform.rotation.z - 180, 
-            //    placedObject.transform.rotation.w);
         }
+    }
+
+    /// <summary>
+    /// This method is called in RadialMenu.cs and is called when the radialMenu is deleting a specific
+    /// light. We call this method to insure that the list is also up to date
+    /// </summary>
+    /// <param name="lightToDelete"> Object to Destroy</param>
+    public static void DeleteLight(GameObject lightToDelete)
+    {
+        LightList.Remove(lightToDelete);
     }
 
 

@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 7376801836804503068}
   - component: {fileID: 5091697777152262532}
   - component: {fileID: 5091697777153393476}
-  - component: {fileID: 701894057657696250}
   - component: {fileID: -6901425561884586870}
   - component: {fileID: 4780024566302683719}
+  - component: {fileID: 6051948138087179911}
   m_Layer: 11
   m_Name: Circle_lamp_3 + Point Light 1
   m_TagString: Skinable
@@ -87,19 +87,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &701894057657696250
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5091697777155333508}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.2
-  m_Center: {x: 0.00000017881393, y: -0.9183437, z: 0}
 --- !u!114 &-6901425561884586870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,6 +107,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5091697777155333508}
   m_CullTransparentMesh: 0
+--- !u!65 &6051948138087179911
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5091697777155333508}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.35, y: 2.12, z: 2.43}
+  m_Center: {x: 0.00000017881393, y: -0.9183437, z: 0}
 --- !u!1 &7429135616348785129
 GameObject:
   m_ObjectHideFlags: 0

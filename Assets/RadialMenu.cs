@@ -156,6 +156,7 @@ public class RadialMenu : MonoBehaviour
     private void DestroyObject(GameObject ObjectToDestroy)
     {
         RadialMenuSpawner.instance.menuOpen = false;
+        PlacementWithDraggingDroppingController.DeleteLight(ObjectToDestroy);
         Destroy(ObjectToDestroy);
         Destroy(gameObject);
     }

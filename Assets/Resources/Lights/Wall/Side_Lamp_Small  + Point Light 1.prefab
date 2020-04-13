@@ -102,8 +102,9 @@ GameObject:
   - component: {fileID: 2786941165565492697}
   - component: {fileID: 2786941165562625529}
   - component: {fileID: 2786941165563592505}
-  - component: {fileID: 6249875106292222420}
   - component: {fileID: -2489391265275433295}
+  - component: {fileID: 8375056773611036118}
+  - component: {fileID: 6249875106292222420}
   m_Layer: 11
   m_Name: Side_Lamp_Small  + Point Light 1
   m_TagString: Skinable
@@ -172,19 +173,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &6249875106292222420
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2786941165565780473}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.2787219, y: 0.85698295, z: 0.49027038}
-  m_Center: {x: 0, y: 0, z: 0.23513159}
 --- !u!114 &-2489391265275433295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,3 +185,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21418116c7752ca4cb04b9067343f8be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!222 &8375056773611036118
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2786941165565780473}
+  m_CullTransparentMesh: 0
+--- !u!65 &6249875106292222420
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2786941165565780473}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.67, y: 2.44, z: 2.46}
+  m_Center: {x: 0, y: 0, z: 0.3378051}

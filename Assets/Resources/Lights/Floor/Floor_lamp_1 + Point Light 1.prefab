@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 5548333202130195647}
   - component: {fileID: 5548333202127295647}
   - component: {fileID: 5548333202128295519}
-  - component: {fileID: -6771577288947139447}
   - component: {fileID: 8033885449512650542}
+  - component: {fileID: 1341146488939789866}
   m_Layer: 11
   m_Name: Floor_lamp_1 + Point Light 1
   m_TagString: Untagged
@@ -81,20 +81,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &-6771577288947139447
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5548333202130487455}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.82297444
-  m_Height: 13.608502
-  m_Direction: 1
-  m_Center: {x: 0.0000038146973, y: 6.733008, z: 0.00000008940697}
 --- !u!114 &8033885449512650542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,6 +93,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21418116c7752ca4cb04b9067343f8be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &1341146488939789866
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5548333202130487455}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.36, y: 14.53, z: 3.36}
+  m_Center: {x: 0.0000038146973, y: 6.733008, z: 0.00000008940697}
 --- !u!1 &5757391750693829474
 GameObject:
   m_ObjectHideFlags: 0

@@ -28,7 +28,7 @@ Transform:
   m_LocalPosition: {x: -0.011, y: 0.037, z: 0.91}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 7443892062275465864}
+  m_Father: {fileID: 5605284074745794252}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &5119493632346200558
@@ -99,11 +99,12 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7443892062275465864}
+  - component: {fileID: 5605284074745794252}
   - component: {fileID: 7443892062278333096}
   - component: {fileID: 7443892062277234792}
-  - component: {fileID: -6507981048786279622}
   - component: {fileID: 8876282619026206542}
+  - component: {fileID: 3493959692824649223}
+  - component: {fileID: -6507981048786279622}
   m_Layer: 11
   m_Name: Side_lamp_Large  + Point Light 1
   m_TagString: Skinable
@@ -111,15 +112,15 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7443892062275465864
+--- !u!4 &5605284074745794252
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7443892062275038888}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.473616, y: 5.4114523, z: -11.115628}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.859001, y: 7.95, z: -7.8911457}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2832751281865097627}
@@ -172,19 +173,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &-6507981048786279622
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7443892062275038888}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 5.901004, y: 1.2311964, z: 0.7043538}
-  m_Center: {x: 0, y: 0, z: 0.3378051}
 --- !u!114 &8876282619026206542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,3 +185,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21418116c7752ca4cb04b9067343f8be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!222 &3493959692824649223
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7443892062275038888}
+  m_CullTransparentMesh: 0
+--- !u!65 &-6507981048786279622
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7443892062275038888}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.67, y: 2.44, z: 2.46}
+  m_Center: {x: 0, y: 0, z: 0.3378051}
