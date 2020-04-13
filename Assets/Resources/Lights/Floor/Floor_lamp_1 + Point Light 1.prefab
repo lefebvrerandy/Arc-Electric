@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 5548333202128295519}
   - component: {fileID: -6771577288947139447}
   - component: {fileID: 8033885449512650542}
-  m_Layer: 8
-  m_Name: Floorlamp1 + Point Light 1
+  m_Layer: 11
+  m_Name: Floor_lamp_1 + Point Light 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

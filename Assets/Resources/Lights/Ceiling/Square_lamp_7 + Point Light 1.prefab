@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 1335151715455022046}
   - component: {fileID: 3377035238896470790}
   - component: {fileID: 2606561162781311556}
-  m_Layer: 8
-  m_Name: Square_lamp7 + Point Light 1
+  m_Layer: 11
+  m_Name: Square_lamp_7 + Point Light 1
   m_TagString: Skinable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

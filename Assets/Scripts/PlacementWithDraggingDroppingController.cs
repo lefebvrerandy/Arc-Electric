@@ -273,9 +273,10 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                         placedPrefab.transform.localScale = new Vector3(1f, 1f, 1f);
                         placedObject = Instantiate(placedPrefab, hitPose.position, placedLocation);
                         placedObject.name = placedPrefab.name + amountOfPlacedLights;
+                        placedObject.layer = 8; // This is the Light Layer
 
                         // Determine if we are placing on the ceiling or floor
-                        switch(foundTupleLightFolder.Item2)
+                        switch (foundTupleLightFolder.Item2)
                         {
                             case "Ceiling":
                                 if (hitPose.rotation.y == 0 && hitPose.rotation.w == 0)
@@ -349,7 +350,6 @@ public class PlacementWithDraggingDroppingController : MonoBehaviour
                                 }
                                 break;
                         }
-
 
                         placedObject.SetActive(true);
                         LightList.Add(placedObject);

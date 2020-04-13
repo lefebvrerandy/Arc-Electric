@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 8129351227267423303}
   - component: {fileID: 4480726783324771576}
   - component: {fileID: 4784367689222824282}
-  m_Layer: 8
-  m_Name: Side_LampMedium + Point Light 1
+  m_Layer: 11
+  m_Name: Side_Lamp_Medium + Point Light 1
   m_TagString: Skinable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

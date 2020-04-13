@@ -265,8 +265,7 @@ public class InventoryController : MonoBehaviour
             newLight.name = stripClone[0];
 
             // Create that new GameObject and return it
-            GameObject newInstantiatedLight = Instantiate(newLight);
-            return new Tuple<GameObject, string>(newInstantiatedLight, folder);
+            return new Tuple<GameObject, string>(Instantiate(newLight), folder);
         }
         else
             return null;

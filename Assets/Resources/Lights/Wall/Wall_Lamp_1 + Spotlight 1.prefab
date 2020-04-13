@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 7889577610014872705}
   - component: {fileID: 6442153125068296224}
   - component: {fileID: 1288593087023406892}
-  m_Layer: 8
-  m_Name: Wall_Lamp2 + Spotlight 1
+  m_Layer: 11
+  m_Name: Wall_Lamp_1 + Spotlight 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

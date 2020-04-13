@@ -104,8 +104,8 @@ GameObject:
   - component: {fileID: 3737283037326520495}
   - component: {fileID: 5835867859096446664}
   - component: {fileID: 6292624605794731477}
-  m_Layer: 8
-  m_Name: Circlelamp2 + Point Light 1
+  m_Layer: 11
+  m_Name: Circle_lamp_2 + Point Light 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

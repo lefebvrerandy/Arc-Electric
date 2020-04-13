@@ -104,8 +104,8 @@ GameObject:
   - component: {fileID: 5903711723869402717}
   - component: {fileID: -2897592245759485534}
   - component: {fileID: 3081949605393347582}
-  m_Layer: 8
-  m_Name: Rectangular_lamp1  + Point Light 1
+  m_Layer: 11
+  m_Name: Rectangular_lamp_1  + Point Light 1
   m_TagString: Skinable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

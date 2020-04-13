@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 701894057657696250}
   - component: {fileID: -6901425561884586870}
   - component: {fileID: 4780024566302683719}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Circle_lamp_3 + Point Light 1
   m_TagString: Skinable
   m_Icon: {fileID: 0}
